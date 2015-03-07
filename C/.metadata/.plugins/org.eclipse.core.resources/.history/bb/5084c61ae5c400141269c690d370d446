@@ -1,0 +1,20 @@
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
+#include <stdio.h>
+
+#include "init.c"
+#include "io.h"
+
+int main() {
+
+	init_LED();
+
+	while(1) {
+		_delay_ms(500);
+		LED1_OFF;
+		_delay_ms(500);
+		LED1_ON;
+	}
+
+}

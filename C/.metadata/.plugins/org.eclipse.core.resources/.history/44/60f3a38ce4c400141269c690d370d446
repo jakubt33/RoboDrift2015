@@ -1,0 +1,14 @@
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
+#include <stdio.h>
+
+int main() {
+
+	init_LED();
+
+	while(1) {
+
+	}
+
+}

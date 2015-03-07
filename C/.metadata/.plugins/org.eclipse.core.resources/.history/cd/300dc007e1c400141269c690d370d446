@@ -1,0 +1,27 @@
+/*
+ * main.h
+ *
+ *  Created on: 7 mar 2015
+ *      Author: Kuba
+ */
+
+#ifndef MAIN_H_
+#define MAIN_H_
+
+#define LED1 PC1
+#define LED2 PC2
+#define LED3 PC3
+#define LED4 PC4
+#define LED5 PC5
+#define LED_BATT_GR PD0
+#define LED_BATT_RED PD1
+#define TSAL_ENABLE PB1
+#define LED_STRIPE PC7
+
+#define SWITCH_UP PD5
+#define SWITCH_OK PD6
+#define SWITCH_DOWN PD7
+
+#define TSOP_IN PD2
+
+#endif /* MAIN_H_ */
