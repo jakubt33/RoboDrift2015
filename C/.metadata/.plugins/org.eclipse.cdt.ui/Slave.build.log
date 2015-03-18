@@ -1,12 +1,30 @@
-17:23:13 **** Incremental Build of configuration Debug for project Slave ****
+21:34:04 **** Incremental Build of configuration Debug for project Slave ****
 make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
 Invoking: Print Size
 avr-size --format=avr --mcu=atmega8 Slave.elf
 AVR Memory Usage
 ----------------
 Device: atmega8
 
-Program:    4552 bytes (55.6% Full)
+Program:    3806 bytes (46.5% Full)
 (.text + .data + .bootloader)
 
 Data:          8 bytes (0.8% Full)
@@ -16,5 +34,5 @@ Data:          8 bytes (0.8% Full)
 Finished building: sizedummy
  
 
-17:23:13 Build Finished (took 190ms)
+21:34:05 Build Finished (took 930ms)
 

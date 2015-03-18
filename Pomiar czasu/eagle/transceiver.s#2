@@ -20435,7 +20435,7 @@ Simple 3.5mm common PCB mount audio jack. SKU: PRT-08032</description>
 <pinref part="IC3" gate="A1" pin="VI"/>
 </segment>
 </net>
-<net name="GND" class="0">
+<net name="$1S1" class="0">
 <segment>
 <pinref part="U$1" gate="G$1" pin="P$NEG"/>
 <pinref part="GND1" gate="1" pin="GND"/>

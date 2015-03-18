@@ -1,0 +1,52 @@
+/*
+ * init.c
+ *
+ *  Created on: 7 mar 2015
+ *      Author: Kuba
+ */
+
+#include <avr/io.h>
+#include "io.h"
+
+
+void init_LED() {
+	DDR_LED |= (1 << LED1);
+	DDR_LED |= (1 << LED2);
+	DDR_LED |= (1 << LED3);
+	DDR_LED |= (1 << LED4);
+	DDR_LED |= (1 << LED5);
+
+	DDR_LED_BATT |= (1 << LED_BATT_GR);
+	DDR_LED_BATT |= (1 << LED_BATT_RED);
+
+	//DDR_STRIPE |= (1 << LED_STRIPE);
+	DDR_TSAL |= (1 <<  TSAL_ENABLE);
+
+	DDR_SWITCH &= ~(1 << SWITCH_DOWN);
+	DDR_SWITCH &= ~(1 << SWITCH_OK);
+	DDR_SWITCH &= ~(1 << SWITCH_UP);
+
+	DDR_TSOP_IN &= ~(1 << TSOP_IN);
+
+	DDRB |= _BV(LED1);
+}
+
+void init_ADC() {
+	DDRC &=~ (1<<PC6);
+	ADMUX = (1<<MUX2)|(1<<MUX1); //ADC6
+
+	ADCSRA = (1<<ADEN); //ADEN: ADC Enable (uruchomienie przetwornika)
+	ADCSRA |= (1<<ADPS1) | (1<<ADPS0); //prescaler
+
+	ADMUX |= (1<<ADLAR); //left adjutment
+	ADMUX |= (1<<REFS0); //avcc with external capacitor at AREF pin
+
+}
+
+uint8_t check_ADC(){
+	ADCSRA |= (1<<ADSC);
+
+	while(ADCSRA & (1<<ADSC));
+
+	return ADCH;
+}

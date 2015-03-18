@@ -3531,8 +3531,10 @@ design rules under a new name.</description>
 <wire x1="25.4" y1="43.815" x2="26.3525" y2="42.8625" width="0.4064" layer="16"/>
 <wire x1="26.3525" y1="42.8625" x2="26.3525" y2="35.56" width="0.4064" layer="16"/>
 <contactref element="JP3" pad="SLEEVE"/>
+<contactref element="JP1" pad="SLEEVE"/>
 <wire x1="33.655" y1="35.56" x2="41.835" y2="46.43" width="0" layer="19" extent="16-16"/>
-<wire x1="-3.81" y1="-33.9725" x2="4.445" y2="2.54" width="0" layer="19" extent="1-1"/>
+<wire x1="-3.81" y1="-8.5725" x2="4.445" y2="2.54" width="0" layer="19" extent="1-1"/>
+<wire x1="-3.81" y1="-33.9725" x2="-3.81" y2="-8.5725" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="+5V">
 <contactref element="TSOP" pad="VCC"/>
@@ -4063,6 +4065,8 @@ design rules under a new name.</description>
 <via x="62.5475" y="10.16" extent="1-16" drill="0.6" diameter="1.6764" shape="square"/>
 <wire x1="62.8015" y1="13.0302" x2="62.5475" y2="12.7762" width="0.6096" layer="1"/>
 <wire x1="62.5475" y1="12.7762" x2="62.5475" y2="10.16" width="0.6096" layer="1"/>
+<contactref element="JP1" pad="RING"/>
+<wire x1="1.19" y1="-3.5725" x2="62.5475" y2="10.16" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="LED_STRIPE">
 <contactref element="IC1" pad="22"/>

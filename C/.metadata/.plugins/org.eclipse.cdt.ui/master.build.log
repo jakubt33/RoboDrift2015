@@ -1,0 +1,28 @@
+18:41:58 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+../init.c: In function 'init_LED':
+../init.c:12: error: 'LED1' undeclared (first use in this function)
+../init.c:12: error: (Each undeclared identifier is reported only once
+../init.c:12: error: for each function it appears in.)
+../init.c:13: error: 'LED2' undeclared (first use in this function)
+../init.c:14: error: 'LED3' undeclared (first use in this function)
+../init.c:15: error: 'LED4' undeclared (first use in this function)
+../init.c:16: error: 'LED5' undeclared (first use in this function)
+../init.c:18: error: 'DDR_LED_BATT' undeclared (first use in this function)
+../init.c:18: error: 'LED_BATT_GR' undeclared (first use in this function)
+../init.c:19: error: 'LED_BATT_RED' undeclared (first use in this function)
+../init.c:22: error: 'DDR_TSAL' undeclared (first use in this function)
+../init.c:22: error: 'TSAL_ENABLE' undeclared (first use in this function)
+../init.c:24: error: 'DDR_SWITCH' undeclared (first use in this function)
+../init.c:24: error: 'SWITCH_DOWN' undeclared (first use in this function)
+../init.c:25: error: 'SWITCH_OK' undeclared (first use in this function)
+../init.c:26: error: 'SWITCH_UP' undeclared (first use in this function)
+../init.c:28: error: 'DDR_TSOP_IN' undeclared (first use in this function)
+../init.c:28: error: 'TSOP_IN' undeclared (first use in this function)
+make: *** [init.o] Error 1
+
+18:41:59 Build Finished (took 340ms)
+
