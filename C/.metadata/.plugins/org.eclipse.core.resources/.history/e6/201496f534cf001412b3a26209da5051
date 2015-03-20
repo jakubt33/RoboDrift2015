@@ -10,10 +10,8 @@ volatile uint8_t TsalCounter=0;
 ISR(TIMER1_COMPA_vect){ //600us tsal is set, 600us tsal is down
 	if(TsalCounter<20){
 		TSAL_ON;
-		LED4_ON;
 	}else if(TsalCounter<40){
 		TSAL_OFF;
-		LED4_OFF;
 	}else{
 		TsalCounter=0;
 	}
@@ -33,8 +31,8 @@ ISR(INT0_vect){
 }
 
 volatile uint8_t ovf=0;
-ISR(TIMER2_OVF_vect){
-	if(ovf<3) {
+ISR(TIMER0_OVF_vect){
+	if(ovf<2) {
 		LED3_ON;
 	}
 	else if(ovf<5){
@@ -49,7 +47,7 @@ ISR(TIMER2_OVF_vect){
 int main() {
 
 	init_IO();
-	init_TSAL();
+	//init_TSAL();
 	_delay_ms(1);
 	init_TSOP();
 	_delay_ms(1);

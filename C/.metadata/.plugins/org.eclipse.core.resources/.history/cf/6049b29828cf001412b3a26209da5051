@@ -7,13 +7,11 @@
 #include "init.h"
 
 volatile uint8_t TsalCounter=0;
-ISR(TIMER1_COMPA_vect){ //600us tsal is set, 600us tsal is down
+ISR(TIMER1_COMPA_vect){
 	if(TsalCounter<20){
 		TSAL_ON;
-		LED4_ON;
 	}else if(TsalCounter<40){
 		TSAL_OFF;
-		LED4_OFF;
 	}else{
 		TsalCounter=0;
 	}
@@ -31,29 +29,19 @@ ISR(INT0_vect){
 		LED1_OFF;
 	}
 }
-
-volatile uint8_t ovf=0;
-ISR(TIMER2_OVF_vect){
-	if(ovf<3) {
-		LED3_ON;
-	}
-	else if(ovf<5){
-		LED3_OFF;
-	}
-	else{
-		ovf=0;
-	}
-	ovf++;
-}
+/*
+volatile uint8_t batt_level=0;
+ISR(TIMER0_OVF_vect){
+	batt_level++;
+	//if(batt_level % 2 == 1) LED1_ON;
+}*/
 
 int main() {
 
 	init_IO();
-	init_TSAL();
-	_delay_ms(1);
+	//init_ADC();
+	init_CTC();
 	init_TSOP();
-	_delay_ms(1);
-	init_batteries();
 
 	sei();
 

@@ -50,7 +50,7 @@ void init_TSAL(){
 }
 
 void init_batteries() {
-	ADMUX |= (1<<MUX2)|(1<<MUX1); //ADC6
+	ADMUX = (1<<MUX2)|(1<<MUX1); //ADC6
 
 	ADCSRA |= (1<<ADPS1) | (1<<ADPS0); //prescaler 8  100000/8=125khz adc
 
@@ -58,13 +58,8 @@ void init_batteries() {
 	ADMUX |= (1<<REFS0); //avcc with external capacitor at AREF pin
 
 	//init_batt timer
-    TCCR2 |= (1<<CS22)|(1<<CS21)|(1<<CS20); //prescaler 1024 - 1kHz, 1 OVF=0,25s
-    TCNT2 = 0;
-    TIMSK |= (1<<TOIE2); //overflow
-	/*
-    TCCR0 |= (1<<CS02)|(1<<CS00); //prescaler 1024 - 1kHz, 1 OVF=0,25s
-    TCNT0 = 0;
-    TIMSK |= (1<<TOIE0);  //overflow interrupt enable */
+    TCCR0 |= (1<<CS02)|(0<<CS01)|(1<<CS00); //prescaler 1024 - 1kHz, 1 OVF=0,25s
+    TIMSK |= (1<<TOIE0);  //overflow interrupt enable
 }
 
 uint8_t check_ADC(){

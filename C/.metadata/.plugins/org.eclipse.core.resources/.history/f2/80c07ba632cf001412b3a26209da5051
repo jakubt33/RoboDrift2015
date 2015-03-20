@@ -46,7 +46,7 @@ void init_TSAL(){
 	TCNT1 = 0;
 
     TIMSK |= (1<<OCIE1A); //Interrupt enable on comapre match
-    //TIFR |= (1<<OCF1A);
+    TIFR |= (1<<OCF1A)|(1<<TOV0);
 }
 
 void init_batteries() {
@@ -58,13 +58,8 @@ void init_batteries() {
 	ADMUX |= (1<<REFS0); //avcc with external capacitor at AREF pin
 
 	//init_batt timer
-    TCCR2 |= (1<<CS22)|(1<<CS21)|(1<<CS20); //prescaler 1024 - 1kHz, 1 OVF=0,25s
-    TCNT2 = 0;
-    TIMSK |= (1<<TOIE2); //overflow
-	/*
-    TCCR0 |= (1<<CS02)|(1<<CS00); //prescaler 1024 - 1kHz, 1 OVF=0,25s
-    TCNT0 = 0;
-    TIMSK |= (1<<TOIE0);  //overflow interrupt enable */
+    TCCR0 |= (1<<CS02)|(0<<CS01)|(1<<CS00); //prescaler 1024 - 1kHz, 1 OVF=0,25s
+    TIMSK |= (1<<TOIE0);  //overflow interrupt enable
 }
 
 uint8_t check_ADC(){

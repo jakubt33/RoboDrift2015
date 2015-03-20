@@ -12,7 +12,7 @@ uint8_t check_ADC();
 void init_batteries();
 void init_IO();
 void init_SPI();
-void init_TSAL();
+void init_CTC();
 void init_TSOP();
 
 #endif /* INIT_H_ */
