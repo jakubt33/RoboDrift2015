@@ -32,6 +32,9 @@ endif
 LSS += \
 master.lss \
 
+FLASH_IMAGE += \
+master.hex \
+
 SIZEDUMMY += \
 sizedummy \
 
@@ -53,6 +56,12 @@ master.lss: master.elf
 	@echo 'Finished building: $@'
 	@echo ' '
 
+master.hex: master.elf
+	@echo 'Create Flash image (ihex format)'
+	-avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
+	@echo 'Finished building: $@'
+	@echo ' '
+
 sizedummy: master.elf
 	@echo 'Invoking: Print Size'
 	-avr-size --format=avr --mcu=atmega8 master.elf
@@ -61,10 +70,10 @@ sizedummy: master.elf
 
 # Other Targets
 clean:
-	-$(RM) $(ELFS)$(OBJS)$(ASM_DEPS)$(S_DEPS)$(SIZEDUMMY)$(S_UPPER_DEPS)$(LSS)$(C_DEPS) master.elf
+	-$(RM) $(FLASH_IMAGE)$(ELFS)$(OBJS)$(ASM_DEPS)$(S_DEPS)$(SIZEDUMMY)$(S_UPPER_DEPS)$(LSS)$(C_DEPS) master.elf
 	-@echo ' '
 
-secondary-outputs: $(LSS) $(SIZEDUMMY)
+secondary-outputs: $(LSS) $(FLASH_IMAGE) $(SIZEDUMMY)
 
 .PHONY: all clean dependents
 .SECONDARY:

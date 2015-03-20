@@ -10,41 +10,31 @@
 #include <util/delay.h>
 #include <stdio.h>
 
+#include "communication.h"
 #include "io.h"
+#include "init.h"
 
 int main() {
 
 	init_LED();
+	init_USART(MYUBRR);
+	init_SPI();
+
+	sei();
+	unsigned char data=0;
+	while(1){
 
 	_delay_ms(200);
-	LED1S_ON;
-	LED2S_OFF;
-	LED3S_OFF;
-	LED4S_OFF;
-	LED5S_OFF;
+	data = 1;
+	USART_Transmit(data);
+
 	_delay_ms(200);
-	LED1S_OFF;
-	LED2S_ON;
-	LED3S_OFF;
-	LED4S_OFF;
-	LED5S_OFF;
-	_delay_ms(200);
-	LED1S_OFF;
-	LED2S_OFF;
-	LED3S_ON;
-	LED4S_OFF;
-	LED5S_OFF;
-	_delay_ms(200);
-	LED1S_OFF;
-	LED2S_OFF;
-	LED3S_OFF;
-	LED4S_ON;
-	LED5S_OFF;
-	_delay_ms(200);
-	LED1S_OFF;
-	LED2S_OFF;
-	LED3S_OFF;
-	LED4S_OFF;
-	LED5S_ON;
+	data = 2;
+	USART_Transmit(data);
+
+
+	}
+
+
 }
 

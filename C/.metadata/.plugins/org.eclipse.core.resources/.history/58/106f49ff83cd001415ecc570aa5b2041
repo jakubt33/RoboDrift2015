@@ -1,0 +1,26 @@
+/*
+ * usart.c
+ *
+ *  Created on: 18 mar 2015
+ *      Author: Kuba
+ */
+
+#include <avr/io.h>
+
+ISR(USART_RXC_vect)
+{
+    unsigned char data=0;
+    data=UDR;
+
+    return 0;
+
+}
+
+void USART_Transmit( unsigned char data)
+{
+    //wait for empty transmit buffer
+    while ( !(UCSRA & (1<<UDRE)) );
+
+    //put data into buffer, sends data
+    UDR = data;
+}

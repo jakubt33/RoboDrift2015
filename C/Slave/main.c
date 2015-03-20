@@ -6,50 +6,40 @@
 #include "io.h"
 #include "init.h"
 
+volatile uint8_t TsalCounter=0;
+ISR(TIMER1_COMPA_vect){
+	if(TsalCounter<20){
+		TSAL_ON;
+		LED1_ON;
+		LED2_OFF;
+	}else if(TsalCounter<40){
+		TSAL_OFF;
+		LED1_OFF;
+		LED2_ON;
+	}else{
+		TsalCounter=0;
+	}
+	TsalCounter++;
+
+}
 
 int main() {
 
-	init_LED();
-	init_ADC();
+	init_IO();
+	//init_ADC();
+	init_CTC();
 
-	while(1) {
-		_delay_ms(20);
-		uint8_t adc=check_ADC();
-		if( adc < 50){
-			LED1_ON;
-			LED2_ON;
-			LED3_OFF;
-			LED4_OFF;
-			LED5_OFF;
-		}
-		else if( adc < 100){
-			LED1_OFF;
-			LED2_ON;
-			LED3_OFF;
-			LED4_OFF;
-			LED5_OFF;
-		}
-		else if( adc < 150){
-			LED1_OFF;
-			LED2_OFF;
-			LED3_ON;
-			LED4_OFF;
-			LED5_OFF;
-		}
-		else if( adc < 200){
-			LED1_OFF;
-			LED2_OFF;
-			LED3_OFF;
-			LED4_ON;
-			LED5_OFF;
+	sei();
+
+	while(1){
+		if(bit_is_set(PIN_TSOP, TSOP)){
+			LED_BATT_GR_OFF;
+			LED_BATT_RED_ON;
 		}
 		else{
-			LED1_OFF;
-			LED2_OFF;
-			LED3_OFF;
-			LED4_OFF;
-			LED5_ON;
+			LED_BATT_GR_ON;
+			LED_BATT_RED_OFF;
 		}
 	}
-
+		;
 }

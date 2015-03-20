@@ -8,24 +8,44 @@
 #include "io.h"
 #include <avr/io.h>
 
+void init_SPI(){
+	DDR_SPI |= (1 << SCK)|(1 << SS)|(1 << MOSI); // wyjcie na tych pinach
+	PORT_SPI &= ~_BV(SS);
+	SPCR |= (1 << SPE); //spi enable
+	SPCR |= (1 << SPIE); //spi interrupt enable
+	SPCR |= (1 << MSTR); //atmega = master
+	SPCR |= (1 << SPR0); //Prescaler 16
+
+}
+
 void init_LED() {
-	DDR_LED |= (1 << LED1);
-	DDR_LED |= (1 << LED2);
-	DDR_LED |= (1 << LED3);
-	DDR_LED |= (1 << LED4);
-	DDR_LED |= (1 << LED5);
+	DDR_LED_Y |= (1 << LED1Y);
+	DDR_LED_Y |= (1 << LED2Y);
+	DDR_LED_Y |= (1 << LED3Y);
+	DDR_LED_Y |= (1 << LED4Y);
+	DDR_LED_Y |= (1 << LED5Y);
 
-	DDR_LED_BATT |= (1 << LED_BATT_GR);
-	DDR_LED_BATT |= (1 << LED_BATT_RED);
+	DDR_LED_S124 |= (1 << LED1S);
+	DDR_LED_S124 |= (1 << LED2S);
+	DDR_LED_S35 |= (1 << LED3S);
+	DDR_LED_S124 |= (1 << LED4S);
+	DDR_LED_S35 |= (1 << LED5S);
 
-	//DDR_STRIPE |= (1 << LED_STRIPE);
-	DDR_TSAL |= (1 <<  TSAL_ENABLE);
+	DDR_LED_FALSTART |= (1 << LED_FALSTART);
+	DDR_LED_GO |= (1 << LED_GO);
 
-	DDR_SWITCH &= ~(1 << SWITCH_DOWN);
-	DDR_SWITCH &= ~(1 << SWITCH_OK);
-	DDR_SWITCH &= ~(1 << SWITCH_UP);
+	DDR_LED_RED |= (1 << LED_RED);
+}
 
-	DDR_TSOP_IN &= ~(1 << TSOP_IN);
+void init_USART( unsigned char ubrr){
+    // Ustawienie prêdkoœci transmisji
+    UBRRH = (uint8_t)(ubrr >> 8);
+    UBRRL = (uint8_t)ubrr;
 
-	DDRB |= _BV(LED1);
+    // W³¹czenie odbiornika i nadajnika
+    UCSRB |= (1 << RXEN) | (1 << TXEN);
+    UCSRB |= (1 << RXCIE); //interrupt na receive
+
+    // Ustawienie formatu ramki: 8 bitów danych, 2 bit stopu
+    UCSRC = (1 << URSEL) | (1 << USBS) | (3<<UCSZ0);
 }

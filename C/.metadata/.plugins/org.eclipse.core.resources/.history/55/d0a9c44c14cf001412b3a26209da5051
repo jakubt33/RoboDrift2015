@@ -1,0 +1,19 @@
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
+#include <stdio.h>
+
+#include "io.h"
+#include "init.h"
+
+ISR(TIMER1_COMP_vect){
+
+}
+
+int main() {
+
+	init_IO();
+	//init_ADC();
+	init_CTC();
+	while(1);
+}

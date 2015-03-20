@@ -43,15 +43,22 @@
 
 //------------------------------------
 #define DDR_TSAL DDRB
-//#define DDR_STRIPE DDRC
+#define DDR_STRIPE DDRB
+#define PORT_TSAL PORTB
+#define PORT_STRIPE DDRB
+
+#define SWITCH_5V PC0
+#define DDR_5V DDRC
+#define PORT_5V PORTC
 
 #define TSAL_ENABLE PB1
-//#define LED_STRIPE PC7  doesn't exist. wtfhid?!!
+#define LED_STRIPE PB0
 
-#define TSAL_ENABLE_OFF PORTD &= ~_BV(TSAL_ENABLE);
-#define TSAL_ENABLE_ON PORTD |= _BV(TSAL_ENABLE);
-#define LED_STRIPE_OFF PORTD &= ~_BV(LED_STRIPE);
-#define LED_STRIPE_ON PORTD |= _BV(LED_STRIPE);
+#define TSAL_OFF PORT_TSAL &= ~_BV(TSAL_ENABLE);
+#define TSAL_ON PORT_TSAL |= _BV(TSAL_ENABLE);
+#define LED_STRIPE_OFF PORT_STRIPE &= ~_BV(LED_STRIPE);
+#define LED_STRIPE_ON PORT_STRIPE |= _BV(LED_STRIPE);
+
 //------------------------------------
 
 //------------------------------------
@@ -63,9 +70,17 @@
 //------------------------------------
 
 //------------------------------------
-#define DDR_TSOP_IN DDRD
+#define DDR_TSOP DDRD
+#define PIN_TSOP PIND
+#define TSOP PD2
+//------------------------------------
 
-#define TSOP_IN PD2
+//------------------------------------
+#define DDR_SPI DDRB
+#define PORT_SPI PORTB
+#define SS PB2
+#define SCK PB5
+#define MOSI PB3
 //------------------------------------
 
 #endif /* IO_H_ */

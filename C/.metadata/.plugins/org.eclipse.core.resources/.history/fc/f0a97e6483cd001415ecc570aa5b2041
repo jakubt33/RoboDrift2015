@@ -1,0 +1,66 @@
+/*
+ * main.c
+ *
+ *  Created on: 17 mar 2015
+ *      Author: Kuba
+ */
+
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
+#include <stdio.h>
+
+#include "io.h"
+#include "init.h"
+
+int main() {
+
+	init_LED();
+	init_USART();
+
+	while(1){
+	_delay_ms(200);
+	LED_GO_OFF;
+	LED_RED_OFF;
+	LED_FALSTART_OFF
+	LED1Y_ON;
+	LED2Y_OFF;
+	LED3Y_OFF;
+	LED4Y_OFF;
+	LED5Y_OFF;
+	_delay_ms(200);
+	LED1Y_OFF;
+	LED2Y_ON;
+	LED3Y_OFF;
+	LED4Y_OFF;
+	LED5Y_OFF;
+	_delay_ms(200);
+	LED1Y_OFF;
+	LED2Y_OFF;
+	LED3Y_ON;
+	LED4Y_OFF;
+	LED5Y_OFF;
+	_delay_ms(200);
+	LED1Y_OFF;
+	LED2Y_OFF;
+	LED3Y_OFF;
+	LED4Y_ON;
+	LED5Y_OFF;
+	_delay_ms(200);
+	LED1Y_OFF;
+	LED2Y_OFF;
+	LED3Y_OFF;
+	LED4Y_OFF;
+	LED5Y_ON;
+	_delay_ms(200);
+	LED_FALSTART_ON;
+	_delay_ms(200);
+	LED_GO_ON;
+	_delay_ms(200);
+	LED_RED_ON;
+
+	}
+
+
+}
+

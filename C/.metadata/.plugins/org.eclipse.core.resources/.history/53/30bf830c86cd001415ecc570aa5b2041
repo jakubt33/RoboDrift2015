@@ -1,0 +1,38 @@
+/*
+ * main.c
+ *
+ *  Created on: 17 mar 2015
+ *      Author: Kuba
+ */
+
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
+#include <stdio.h>
+
+#include "io.h"
+#include "init.h"
+#include "usart.h"
+
+int main() {
+
+	init_LED();
+	init_USART(MYUBRR);
+
+	unsigned char data=0;
+	while(1){
+
+	_delay_ms(200);
+	data = 1;
+	USART_Transmit(data);
+
+	_delay_ms(200);
+	data = 2;
+	USART_Transmit(data);
+
+
+	}
+
+
+}
+

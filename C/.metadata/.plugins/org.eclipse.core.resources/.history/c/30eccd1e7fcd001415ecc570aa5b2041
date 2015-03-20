@@ -1,0 +1,18 @@
+/*
+ * init.c
+ *
+ *  Created on: 17 mar 2015
+ *      Author: Kuba
+ */
+
+#include "io.h"
+#include <avr/io.h>
+
+void init_LED() {
+	DDR_LED_Y |= (1 << LED1Y);
+	DDR_LED_Y |= (1 << LED2Y);
+	DDR_LED_Y |= (1 << LED3Y);
+	DDR_LED_Y |= (1 << LED4Y);
+	DDR_LED_Y |= (1 << LED5Y);
+
+}

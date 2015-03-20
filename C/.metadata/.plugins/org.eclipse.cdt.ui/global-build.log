@@ -1543,3 +1543,3009 @@ Data:          8 bytes (0.8% Full)
 
 Finished building: sizedummy
  
+13:34:24 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+../init.c: In function 'init_LED':
+../init.c:12: error: 'LED1' undeclared (first use in this function)
+../init.c:12: error: (Each undeclared identifier is reported only once
+../init.c:12: error: for each function it appears in.)
+../init.c:13: error: 'LED2' undeclared (first use in this function)
+../init.c:14: error: 'LED3' undeclared (first use in this function)
+../init.c:15: error: 'LED4' undeclared (first use in this function)
+../init.c:16: error: 'LED5' undeclared (first use in this function)
+../init.c:18: error: 'DDR_LED_BATT' undeclared (first use in this function)
+../init.c:18: error: 'LED_BATT_GR' undeclared (first use in this function)
+../init.c:19: error: 'LED_BATT_RED' undeclared (first use in this function)
+../init.c:22: error: 'DDR_TSAL' undeclared (first use in this function)
+../init.c:22: error: 'TSAL_ENABLE' undeclared (first use in this function)
+../init.c:24: error: 'DDR_SWITCH' undeclared (first use in this function)
+../init.c:24: error: 'SWITCH_DOWN' undeclared (first use in this function)
+../init.c:25: error: 'SWITCH_OK' undeclared (first use in this function)
+../init.c:26: error: 'SWITCH_UP' undeclared (first use in this function)
+../init.c:28: error: 'DDR_TSOP_IN' undeclared (first use in this function)
+../init.c:28: error: 'TSOP_IN' undeclared (first use in this function)
+make: *** [init.o] Error 1
+13:36:32 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:10:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+../main.c: In function 'main':
+../main.c:17: warning: implicit declaration of function 'init_LED'
+Finished building: ../main.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./init.o ./main.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4466 bytes (54.5% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+13:36:45 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:10:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./init.o ./main.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4466 bytes (54.5% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+13:49:12 **** Incremental Build of configuration Debug for project master ****
+make all 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4466 bytes (54.5% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+13:51:27 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./init.o ./main.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4466 bytes (54.5% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+13:52:46 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./init.o ./main.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
+Finished building: master.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4466 bytes (54.5% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+14:32:44 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+../init.c: In function 'init_LED':
+../init.c:12: error: 'DDR_LED' undeclared (first use in this function)
+../init.c:12: error: (Each undeclared identifier is reported only once
+../init.c:12: error: for each function it appears in.)
+../init.c:12: error: 'LED1S' undeclared (first use in this function)
+../init.c:13: error: 'LED2S' undeclared (first use in this function)
+../init.c:14: error: 'LED3S' undeclared (first use in this function)
+../init.c:15: error: 'LED4S' undeclared (first use in this function)
+../init.c:16: error: 'LED5S' undeclared (first use in this function)
+make: *** [init.o] Error 1
+14:34:59 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+../init.c: In function 'init_LED':
+../init.c:12: error: 'DDR_LED' undeclared (first use in this function)
+../init.c:12: error: (Each undeclared identifier is reported only once
+../init.c:12: error: for each function it appears in.)
+../init.c:12: error: 'LED1S' undeclared (first use in this function)
+../init.c:13: error: 'LED2S' undeclared (first use in this function)
+../init.c:14: error: 'LED3S' undeclared (first use in this function)
+../init.c:15: error: 'LED4S' undeclared (first use in this function)
+../init.c:16: error: 'LED5S' undeclared (first use in this function)
+make: *** [init.o] Error 1
+14:35:31 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:10:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+../main.c: In function 'main':
+../main.c:25: error: 'LEDY_OFF' undeclared (first use in this function)
+../main.c:25: error: (Each undeclared identifier is reported only once
+../main.c:25: error: for each function it appears in.)
+make: *** [main.o] Error 1
+14:35:47 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:10:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./init.o ./main.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
+Finished building: master.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4466 bytes (54.5% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+14:37:44 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:10:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./init.o ./main.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
+Finished building: master.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    5214 bytes (63.6% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+14:38:40 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:10:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./init.o ./main.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
+Finished building: master.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    5188 bytes (63.3% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+15:57:39 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:10:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+../main.c: In function 'main':
+../main.c:19: warning: implicit declaration of function 'init_USART'
+Finished building: ../main.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./init.o ./main.o   
+./main.o: In function `main':
+../main.c:19: undefined reference to `init_USART'
+make: *** [master.elf] Error 1
+15:57:43 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:10:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./init.o ./main.o   
+./main.o: In function `main':
+../main.c:19: undefined reference to `init_USART'
+make: *** [master.elf] Error 1
+15:58:00 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./init.o ./main.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
+Finished building: master.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    5232 bytes (63.9% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+16:07:41 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+../init.c: In function 'init_LED':
+../init.c:18: error: 'LED1S' undeclared (first use in this function)
+../init.c:18: error: (Each undeclared identifier is reported only once
+../init.c:18: error: for each function it appears in.)
+../init.c:19: error: 'LED2S' undeclared (first use in this function)
+../init.c:20: error: 'LED3S' undeclared (first use in this function)
+../init.c:21: error: 'LED4S' undeclared (first use in this function)
+../init.c:22: error: 'LED5S' undeclared (first use in this function)
+make: *** [init.o] Error 1
+16:07:50 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+../init.c: In function 'init_LED':
+../init.c:18: error: 'DDR_LED_S' undeclared (first use in this function)
+../init.c:18: error: (Each undeclared identifier is reported only once
+../init.c:18: error: for each function it appears in.)
+make: *** [init.o] Error 1
+16:08:18 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:10:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./init.o ./main.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
+Finished building: master.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    5302 bytes (64.7% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+16:09:50 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:10:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./init.o ./main.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
+Finished building: master.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    5302 bytes (64.7% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+16:13:00 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:10:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./init.o ./main.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
+Finished building: master.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    5316 bytes (64.9% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+16:13:56 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:10:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./init.o ./main.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
+Finished building: master.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    5690 bytes (69.5% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+16:31:38 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:10:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building file: ../usart.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"usart.d" -MT"usart.d" -c -o "usart.o" "../usart.c"
+../usart.c:10: warning: return type defaults to 'int'
+../usart.c: In function 'ISR':
+../usart.c:10: warning: type of 'USART_RXC_vect' defaults to 'int'
+../usart.c:12: error: 'UDR' undeclared (first use in this function)
+../usart.c:12: error: (Each undeclared identifier is reported only once
+../usart.c:12: error: for each function it appears in.)
+../usart.c:14: warning: control reaches end of non-void function
+../usart.c: In function 'USART_Transmit':
+../usart.c:19: error: 'UCSRA' undeclared (first use in this function)
+../usart.c:19: error: 'UDRE' undeclared (first use in this function)
+../usart.c:22: error: 'UDR' undeclared (first use in this function)
+make: *** [usart.o] Error 1
+16:32:01 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../usart.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"usart.d" -MT"usart.d" -c -o "usart.o" "../usart.c"
+../usart.c:11: warning: return type defaults to 'int'
+../usart.c: In function 'ISR':
+../usart.c:11: warning: type of '__vector_11' defaults to 'int'
+../usart.c:15: warning: control reaches end of non-void function
+Finished building: ../usart.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./init.o ./main.o ./usart.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
+Finished building: master.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    5870 bytes (71.7% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+16:32:25 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../usart.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"usart.d" -MT"usart.d" -c -o "usart.o" "../usart.c"
+../usart.c:11: warning: return type defaults to 'int'
+../usart.c: In function 'ISR':
+../usart.c:11: warning: type of '__vector_11' defaults to 'int'
+Finished building: ../usart.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./init.o ./main.o ./usart.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
+Finished building: master.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    5868 bytes (71.6% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+16:32:36 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../usart.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"usart.d" -MT"usart.d" -c -o "usart.o" "../usart.c"
+../usart.c: In function 'ISR':
+../usart.c:11: warning: type of '__vector_11' defaults to 'int'
+Finished building: ../usart.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./init.o ./main.o ./usart.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
+Finished building: master.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    5868 bytes (71.6% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+16:32:48 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:10:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+In file included from ../main.c:15:
+../usart.h:15: error: two or more data types in declaration specifiers
+../usart.h:15: error: conflicting types for '__vector_11'
+../usart.h:15: error: previous declaration of '__vector_11' was here
+make: *** [main.o] Error 1
+16:32:56 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:10:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./init.o ./main.o ./usart.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
+Finished building: master.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    5868 bytes (71.6% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+16:33:01 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../usart.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"usart.d" -MT"usart.d" -c -o "usart.o" "../usart.c"
+../usart.c:11: warning: return type defaults to 'int'
+../usart.c: In function 'ISR':
+../usart.c:11: warning: type of '__vector_11' defaults to 'int'
+Finished building: ../usart.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./init.o ./main.o ./usart.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
+Finished building: master.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    5868 bytes (71.6% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+16:33:13 **** Incremental Build of configuration Debug for project master ****
+make all 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    5868 bytes (71.6% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+16:41:06 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../usart.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"usart.d" -MT"usart.d" -c -o "usart.o" "../usart.c"
+../usart.c:12: warning: return type defaults to 'int'
+../usart.c: In function 'ISR':
+../usart.c:12: warning: type of '__vector_11' defaults to 'int'
+Finished building: ../usart.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./init.o ./main.o ./usart.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
+Finished building: master.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    5990 bytes (73.1% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+16:41:48 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:10:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./init.o ./main.o ./usart.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
+Finished building: master.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    3834 bytes (46.8% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+16:46:12 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+../init.c: In function 'init_USART':
+../init.c:37: error: called object '8' is not a function
+make: *** [init.o] Error 1
+16:46:33 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:10:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building file: ../usart.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"usart.d" -MT"usart.d" -c -o "usart.o" "../usart.c"
+../usart.c:12: warning: return type defaults to 'int'
+../usart.c: In function 'ISR':
+../usart.c:12: warning: type of '__vector_11' defaults to 'int'
+Finished building: ../usart.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./init.o ./main.o ./usart.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
+Finished building: master.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    3822 bytes (46.7% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+16:47:15 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:10:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./init.o ./main.o ./usart.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
+Finished building: master.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    3824 bytes (46.7% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+17:19:12 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../usart.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"usart.d" -MT"usart.d" -c -o "usart.o" "../usart.c"
+../usart.c: In function '__vector_11':
+../usart.c:29: warning: 'return' with a value, in function returning void
+Finished building: ../usart.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./init.o ./main.o ./usart.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
+Finished building: master.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    3848 bytes (47.0% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+17:19:30 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../usart.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"usart.d" -MT"usart.d" -c -o "usart.o" "../usart.c"
+Finished building: ../usart.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./init.o ./main.o ./usart.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
+Finished building: master.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    3848 bytes (47.0% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+17:33:12 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../communication.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"communication.d" -MT"communication.d" -c -o "communication.o" "../communication.c"
+Finished building: ../communication.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:10:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./communication.o ./init.o ./main.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
+Finished building: master.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    3848 bytes (47.0% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+17:43:00 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../communication.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"communication.d" -MT"communication.d" -c -o "communication.o" "../communication.c"
+Finished building: ../communication.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:10:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./communication.o ./init.o ./main.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
+Finished building: master.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    3870 bytes (47.2% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+19:00:56 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../communication.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"communication.d" -MT"communication.d" -c -o "communication.o" "../communication.c"
+Finished building: ../communication.c
+ 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:10:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./communication.o ./init.o ./main.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
+Finished building: master.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    3954 bytes (48.3% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+19:13:09 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../communication.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"communication.d" -MT"communication.d" -c -o "communication.o" "../communication.c"
+Finished building: ../communication.c
+ 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:10:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./communication.o ./init.o ./main.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
+Finished building: master.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4084 bytes (49.9% Full)
+(.text + .data + .bootloader)
+
+Data:          9 bytes (0.9% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+19:13:49 **** Incremental Build of configuration Debug for project master ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:10:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./communication.o ./init.o ./main.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
+Finished building: master.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4086 bytes (49.9% Full)
+(.text + .data + .bootloader)
+
+Data:          9 bytes (0.9% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+11:40:16 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../communication.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"communication.d" -MT"communication.d" -c -o "communication.o" "../communication.c"
+../communication.c:10: warning: return type defaults to 'int'
+../communication.c: In function 'ISR':
+../communication.c:10: warning: type of 'SPI_STC_vect' defaults to 'int'
+../communication.c:11: error: 'SPDR' undeclared (first use in this function)
+../communication.c:11: error: (Each undeclared identifier is reported only once
+../communication.c:11: error: for each function it appears in.)
+../communication.c:12: error: 'spiDataReceived' undeclared (first use in this function)
+../communication.c:13: warning: control reaches end of non-void function
+../communication.c: In function 'spi_send':
+../communication.c:17: error: 'SPDR' undeclared (first use in this function)
+../communication.c:18: warning: implicit declaration of function 'bit_is_set'
+../communication.c:18: error: 'SPSR' undeclared (first use in this function)
+../communication.c:18: error: 'SPIF' undeclared (first use in this function)
+make: *** [communication.o] Error 1
+11:40:19 **** Build of configuration Debug for project master ****
+make all 
+Building file: ../communication.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"communication.d" -MT"communication.d" -c -o "communication.o" "../communication.c"
+Finished building: ../communication.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:10:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: master.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./communication.o ./init.o ./main.o   
+Finished building target: master.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S master.elf  >"master.lss"
+Finished building: master.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
+Finished building: master.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4086 bytes (49.9% Full)
+(.text + .data + .bootloader)
+
+Data:          9 bytes (0.9% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+11:40:51 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../communication.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"communication.d" -MT"communication.d" -c -o "communication.o" "../communication.c"
+../communication.c:10: warning: return type defaults to 'int'
+../communication.c: In function 'ISR':
+../communication.c:10: warning: type of 'SPI_STC_vect' defaults to 'int'
+../communication.c:11: error: 'SPDR' undeclared (first use in this function)
+../communication.c:11: error: (Each undeclared identifier is reported only once
+../communication.c:11: error: for each function it appears in.)
+../communication.c:12: error: 'spiDataReceived' undeclared (first use in this function)
+../communication.c:13: warning: control reaches end of non-void function
+../communication.c: In function 'spi_send':
+../communication.c:17: error: 'SPDR' undeclared (first use in this function)
+../communication.c:18: warning: implicit declaration of function 'bit_is_set'
+../communication.c:18: error: 'SPSR' undeclared (first use in this function)
+../communication.c:18: error: 'SPIF' undeclared (first use in this function)
+make: *** [communication.o] Error 1
+11:44:25 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../communication.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"communication.d" -MT"communication.d" -c -o "communication.o" "../communication.c"
+../communication.c:10: warning: return type defaults to 'int'
+../communication.c: In function 'ISR':
+../communication.c:10: warning: type of 'SPI_STC_vect' defaults to 'int'
+../communication.c:11: error: 'SPDR' undeclared (first use in this function)
+../communication.c:11: error: (Each undeclared identifier is reported only once
+../communication.c:11: error: for each function it appears in.)
+../communication.c:12: error: 'spiDataReceived' undeclared (first use in this function)
+../communication.c:13: warning: control reaches end of non-void function
+../communication.c: In function 'spi_send':
+../communication.c:17: error: 'SPDR' undeclared (first use in this function)
+../communication.c:18: warning: implicit declaration of function 'bit_is_set'
+../communication.c:18: error: 'SPSR' undeclared (first use in this function)
+../communication.c:18: error: 'SPIF' undeclared (first use in this function)
+make: *** [communication.o] Error 1
+11:44:26 **** Incremental Build of configuration Debug for project master ****
+make all 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4086 bytes (49.9% Full)
+(.text + .data + .bootloader)
+
+Data:          9 bytes (0.9% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+11:45:44 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../communication.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"communication.d" -MT"communication.d" -c -o "communication.o" "../communication.c"
+../communication.c: In function '__vector_10':
+../communication.c:15: error: 'spiDataReceived' undeclared (first use in this function)
+../communication.c:15: error: (Each undeclared identifier is reported only once
+../communication.c:15: error: for each function it appears in.)
+make: *** [communication.o] Error 1
+11:45:45 **** Incremental Build of configuration Debug for project master ****
+make all 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4086 bytes (49.9% Full)
+(.text + .data + .bootloader)
+
+Data:          9 bytes (0.9% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+11:46:25 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../communication.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"communication.d" -MT"communication.d" -c -o "communication.o" "../communication.c"
+Finished building: ../communication.c
+ 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4102 bytes (50.1% Full)
+(.text + .data + .bootloader)
+
+Data:          9 bytes (0.9% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+11:46:27 **** Incremental Build of configuration Debug for project master ****
+make all 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4086 bytes (49.9% Full)
+(.text + .data + .bootloader)
+
+Data:          9 bytes (0.9% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+11:46:56 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+../main.c: In function 'init_SPI':
+../main.c:10: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+../main.c:55: error: expected '{' at end of input
+make: *** [main.o] Error 1
+11:46:57 **** Incremental Build of configuration Debug for project master ****
+make all 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4086 bytes (49.9% Full)
+(.text + .data + .bootloader)
+
+Data:          9 bytes (0.9% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+11:46:59 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4102 bytes (50.1% Full)
+(.text + .data + .bootloader)
+
+Data:          9 bytes (0.9% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+11:47:00 **** Incremental Build of configuration Debug for project master ****
+make all 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4086 bytes (49.9% Full)
+(.text + .data + .bootloader)
+
+Data:          9 bytes (0.9% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+11:47:30 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4102 bytes (50.1% Full)
+(.text + .data + .bootloader)
+
+Data:          9 bytes (0.9% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+11:47:31 **** Incremental Build of configuration Debug for project master ****
+make all 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 master.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4086 bytes (49.9% Full)
+(.text + .data + .bootloader)
+
+Data:          9 bytes (0.9% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+10:14:45 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+../main.c:18:20: error: macro "bit_is_set" requires 2 arguments, but only 1 given
+../main.c: In function 'main':
+../main.c:18: error: 'bit_is_set' undeclared (first use in this function)
+../main.c:18: error: (Each undeclared identifier is reported only once
+../main.c:18: error: for each function it appears in.)
+make: *** [main.o] Error 1
+10:39:10 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../communication.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"communication.d" -MT"communication.d" -c -o "communication.o" "../communication.c"
+Finished building: ../communication.c
+ 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+../main.c: In function 'main':
+../main.c:16: error: expected expression before ')' token
+../main.c:19:20: error: macro "bit_is_set" requires 2 arguments, but only 1 given
+make: *** [main.o] Error 1
+10:41:30 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+../main.c: In function 'main':
+../main.c:16: error: expected expression before ')' token
+../main.c:19:20: error: macro "bit_is_set" requires 2 arguments, but only 1 given
+make: *** [main.o] Error 1
+10:41:50 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+../main.c: In function 'main':
+../main.c:17: error: called object '*53u' is not a function
+make: *** [main.o] Error 1
+10:42:49 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../communication.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"communication.d" -MT"communication.d" -c -o "communication.o" "../communication.c"
+Finished building: ../communication.c
+ 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4014 bytes (49.0% Full)
+(.text + .data + .bootloader)
+
+Data:         10 bytes (1.0% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+10:45:28 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4014 bytes (49.0% Full)
+(.text + .data + .bootloader)
+
+Data:         10 bytes (1.0% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+10:55:22 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4042 bytes (49.3% Full)
+(.text + .data + .bootloader)
+
+Data:         10 bytes (1.0% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+10:58:15 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4098 bytes (50.0% Full)
+(.text + .data + .bootloader)
+
+Data:         10 bytes (1.0% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+11:26:03 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4098 bytes (50.0% Full)
+(.text + .data + .bootloader)
+
+Data:         10 bytes (1.0% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+13:21:54 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../communication.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"communication.d" -MT"communication.d" -c -o "communication.o" "../communication.c"
+Finished building: ../communication.c
+ 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4056 bytes (49.5% Full)
+(.text + .data + .bootloader)
+
+Data:         10 bytes (1.0% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+14:01:29 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../communication.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"communication.d" -MT"communication.d" -c -o "communication.o" "../communication.c"
+Finished building: ../communication.c
+ 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4056 bytes (49.5% Full)
+(.text + .data + .bootloader)
+
+Data:         10 bytes (1.0% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+14:01:32 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    3846 bytes (46.9% Full)
+(.text + .data + .bootloader)
+
+Data:         10 bytes (1.0% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+14:18:20 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../communication.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"communication.d" -MT"communication.d" -c -o "communication.o" "../communication.c"
+Finished building: ../communication.c
+ 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    3816 bytes (46.6% Full)
+(.text + .data + .bootloader)
+
+Data:         10 bytes (1.0% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+14:18:43 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    3816 bytes (46.6% Full)
+(.text + .data + .bootloader)
+
+Data:         10 bytes (1.0% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+14:43:12 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    3984 bytes (48.6% Full)
+(.text + .data + .bootloader)
+
+Data:         10 bytes (1.0% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+14:44:15 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../communication.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"communication.d" -MT"communication.d" -c -o "communication.o" "../communication.c"
+Finished building: ../communication.c
+ 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    3816 bytes (46.6% Full)
+(.text + .data + .bootloader)
+
+Data:         10 bytes (1.0% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+15:46:22 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    3814 bytes (46.6% Full)
+(.text + .data + .bootloader)
+
+Data:          9 bytes (0.9% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+16:17:17 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    3802 bytes (46.4% Full)
+(.text + .data + .bootloader)
+
+Data:          9 bytes (0.9% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+16:17:54 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+../main.c:9: warning: 'TIMER1_COMP_vect' appears to be a misspelled signal handler
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:     716 bytes (8.7% Full)
+(.text + .data + .bootloader)
+
+Data:          1 bytes (0.1% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+16:18:02 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:     684 bytes (8.3% Full)
+(.text + .data + .bootloader)
+
+Data:          1 bytes (0.1% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+16:32:40 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:     696 bytes (8.5% Full)
+(.text + .data + .bootloader)
+
+Data:          1 bytes (0.1% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+16:36:43 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:     696 bytes (8.5% Full)
+(.text + .data + .bootloader)
+
+Data:          1 bytes (0.1% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+16:40:05 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:     704 bytes (8.6% Full)
+(.text + .data + .bootloader)
+
+Data:          1 bytes (0.1% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+16:42:05 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4002 bytes (48.9% Full)
+(.text + .data + .bootloader)
+
+Data:          9 bytes (0.9% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+16:56:49 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4002 bytes (48.9% Full)
+(.text + .data + .bootloader)
+
+Data:          9 bytes (0.9% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+17:01:15 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4002 bytes (48.9% Full)
+(.text + .data + .bootloader)
+
+Data:          9 bytes (0.9% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+17:01:24 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4002 bytes (48.9% Full)
+(.text + .data + .bootloader)
+
+Data:          9 bytes (0.9% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+17:04:36 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4002 bytes (48.9% Full)
+(.text + .data + .bootloader)
+
+Data:          9 bytes (0.9% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+17:04:57 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4002 bytes (48.9% Full)
+(.text + .data + .bootloader)
+
+Data:          9 bytes (0.9% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+17:05:18 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4002 bytes (48.9% Full)
+(.text + .data + .bootloader)
+
+Data:          9 bytes (0.9% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+17:18:36 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    4078 bytes (49.8% Full)
+(.text + .data + .bootloader)
+
+Data:          9 bytes (0.9% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+17:22:21 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:     780 bytes (9.5% Full)
+(.text + .data + .bootloader)
+
+Data:          1 bytes (0.1% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+17:35:05 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:     910 bytes (11.1% Full)
+(.text + .data + .bootloader)
+
+Data:          2 bytes (0.2% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+17:38:10 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:     968 bytes (11.8% Full)
+(.text + .data + .bootloader)
+
+Data:          2 bytes (0.2% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+17:38:56 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:     968 bytes (11.8% Full)
+(.text + .data + .bootloader)
+
+Data:          2 bytes (0.2% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+17:41:51 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:     970 bytes (11.8% Full)
+(.text + .data + .bootloader)
+
+Data:          2 bytes (0.2% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+17:41:59 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+../main.c:10: warning: 'TIMER1_COMP_vect' appears to be a misspelled signal handler
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:     970 bytes (11.8% Full)
+(.text + .data + .bootloader)
+
+Data:          2 bytes (0.2% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+17:42:10 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:     970 bytes (11.8% Full)
+(.text + .data + .bootloader)
+
+Data:          2 bytes (0.2% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+17:42:12 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+../main.c:10: warning: 'TIMER1A_COMP_vect' appears to be a misspelled signal handler
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:     970 bytes (11.8% Full)
+(.text + .data + .bootloader)
+
+Data:          2 bytes (0.2% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+17:42:42 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:     970 bytes (11.8% Full)
+(.text + .data + .bootloader)
+
+Data:          2 bytes (0.2% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+17:43:33 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+In file included from ../main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:     980 bytes (12.0% Full)
+(.text + .data + .bootloader)
+
+Data:          2 bytes (0.2% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 

@@ -10,6 +10,9 @@
 
 uint8_t check_ADC();
 void init_ADC();
-void init_LED();
+void init_IO();
+void init_TIM0_BATT();
+void init_SPI();
+void init_CTC();
 
 #endif /* INIT_H_ */

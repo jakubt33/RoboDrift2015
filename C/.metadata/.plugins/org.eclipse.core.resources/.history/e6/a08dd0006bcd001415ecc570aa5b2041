@@ -1,0 +1,15 @@
+/*
+ * init.h
+ *
+ *  Created on: 17 mar 2015
+ *      Author: Kuba
+ */
+
+#ifndef INIT_H_
+#define INIT_H_
+
+uint8_t check_ADC();
+void init_ADC();
+void init_LED();
+
+#endif /* INIT_H_ */

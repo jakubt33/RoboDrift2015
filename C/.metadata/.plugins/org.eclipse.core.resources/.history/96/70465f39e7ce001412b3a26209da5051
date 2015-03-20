@@ -1,0 +1,23 @@
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
+#include <stdio.h>
+
+#include "io.h"
+#include "init.h"
+
+
+int main() {
+
+	init_IO();
+	init_ADC();
+
+	while(1) {
+		_delay_ms(2000);
+		SWITCH_5V_enable;
+
+		_delay_ms(2000);
+		SWITCH_5V_disable;
+	}
+
+}

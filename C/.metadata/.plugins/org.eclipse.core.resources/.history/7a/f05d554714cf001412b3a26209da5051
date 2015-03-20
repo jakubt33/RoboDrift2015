@@ -1,0 +1,32 @@
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
+#include <stdio.h>
+
+#include "io.h"
+#include "init.h"
+
+ISR(TIMER1_COMP_vect){
+
+}
+
+int main() {
+
+	init_IO();
+	//init_ADC();
+	init_CTC();
+
+	TSAL_ON;
+	while(1) {
+		_delay_ms(20);
+		if(bit_is_set(PIN_TSOP, TSOP)){
+			LED1_ON;
+			LED2_OFF;
+		}
+		else {
+			LED1_OFF;
+			LED2_ON;
+		}
+	}
+
+}

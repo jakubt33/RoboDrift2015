@@ -1,0 +1,42 @@
+/*
+ * usart.c
+ *
+ *  Created on: 18 mar 2015
+ *      Author: Kuba
+ */
+
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include "io.h"
+
+
+ISR(USART_RXC_vect)
+{
+    unsigned char data=0;
+    data=UDR;
+
+    if(data == 1){
+    	LED1Y_ON;
+    	LED2Y_OFF;
+    	LED_RED_OFF;
+    }
+    else if(data==2){
+    	LED2Y_ON;
+    	LED1Y_OFF;
+    	LED_RED_OFF;
+    }
+    else {
+    	LED_RED_ON;
+    	LED1Y_OFF;
+    	LED2Y_OFF;
+    }
+}
+
+void USART_Transmit( unsigned char data)
+{
+    //wait for empty transmit buffer
+    while ( !(UCSRA & (1<<UDRE)) );
+
+    //put data into buffer, sends data
+    UDR = data;
+}
