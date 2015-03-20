@@ -20,11 +20,11 @@ ISR(TIMER1_COMPA_vect){
 
 ISR(INT0_vect){
 	_delay_us(10); //wait to be sure
-	if(bit_is_set(PIN_TSOP, TSOP)){ 	//TSAL----||----TSOP
+	if(bit_is_set(PIN_TSOP, TSOP)){
 		LED1_ON;
 		LED2_OFF;
 	}
-	else{ 								//TSAL -------- TSOP
+	else{
 		LED2_ON;
 		LED1_OFF;
 	}

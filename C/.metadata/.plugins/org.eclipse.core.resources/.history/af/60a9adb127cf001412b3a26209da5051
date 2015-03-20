@@ -68,8 +68,7 @@ uint8_t check_ADC(){
 	return ADCH;
 }
 void init_TSOP(){
-	MCUCR |= (0<<ISC01)|(1<<ISC00); //any logical change generates interrupt request
-	GICR |= (1<<INT0);
+	MCUCR |= (1<<ISC01)|(1<<ISC11);
 }
 /*
 void init_TIM0_BATT(){

@@ -1,4 +1,4 @@
-17:43:33 **** Incremental Build of configuration Debug for project Slave ****
+18:41:03 **** Incremental Build of configuration Debug for project Slave ****
 make all 
 Building file: ../main.c
 Invoking: AVR Compiler
@@ -26,15 +26,15 @@ AVR Memory Usage
 ----------------
 Device: atmega8
 
-Program:     980 bytes (12.0% Full)
+Program:    4550 bytes (55.5% Full)
 (.text + .data + .bootloader)
 
-Data:          2 bytes (0.2% Full)
+Data:         10 bytes (1.0% Full)
 (.data + .bss + .noinit)
 
 
 Finished building: sizedummy
  
 
-17:43:34 Build Finished (took 727ms)
+18:41:03 Build Finished (took 792ms)
 

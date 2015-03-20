@@ -14,6 +14,5 @@ void init_IO();
 void init_TIM0_BATT();
 void init_SPI();
 void init_CTC();
-void init_TSOP();
 
 #endif /* INIT_H_ */

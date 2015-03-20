@@ -67,10 +67,6 @@ uint8_t check_ADC(){
 	ADCSRA &= ~(1<<ADEN); //ADEN: ADC Enable (uruchomienie przetwornika)
 	return ADCH;
 }
-void init_TSOP(){
-	MCUCR |= (0<<ISC01)|(1<<ISC00); //any logical change generates interrupt request
-	GICR |= (1<<INT0);
-}
 /*
 void init_TIM0_BATT(){
 	TCCR0 |= (1<<CS00); //prescaler 1024 - 1kHz, 1 OVF=0,25s
