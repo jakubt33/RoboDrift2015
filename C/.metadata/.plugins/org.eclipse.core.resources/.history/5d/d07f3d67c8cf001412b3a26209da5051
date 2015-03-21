@@ -37,18 +37,12 @@ volatile uint8_t ADC_level=0;
 #define ADC_min 135
 #define ADC_max 172
 ISR(TIMER2_OVF_vect){
-	if( ovf < (ADC_level-ADC_min+4) ) { //getting result from 4 to 42;
+	//ADC_level-ADC_min; //getting result from 0 to 37;
+	if( ovf < (ADC_level-ADC_min) ) {
 		LED_BATT_GR_OFF;
-		LED_BATT_RED_OFF;
 	}
 	else {
-		if(ovf >= 4){
-			LED_BATT_GR_ON;
-		}
-		else{
-			LED_BATT_GR_OFF;
-			LED_BATT_RED_ON;
-		}
+		LED_BATT_GR_ON;
 		ovf=0;
 	}
 	ovf++;

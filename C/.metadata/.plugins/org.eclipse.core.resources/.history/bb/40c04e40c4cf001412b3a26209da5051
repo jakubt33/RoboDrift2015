@@ -33,22 +33,14 @@ ISR(INT0_vect){
 }
 
 volatile uint8_t ovf=0;
-volatile uint8_t ADC_level=0;
-#define ADC_min 135
-#define ADC_max 172
 ISR(TIMER2_OVF_vect){
-	if( ovf < (ADC_level-ADC_min+4) ) { //getting result from 4 to 42;
-		LED_BATT_GR_OFF;
-		LED_BATT_RED_OFF;
+	if(ovf<3) {
+		LED3_ON;
 	}
-	else {
-		if(ovf >= 4){
-			LED_BATT_GR_ON;
-		}
-		else{
-			LED_BATT_GR_OFF;
-			LED_BATT_RED_ON;
-		}
+	else if(ovf<5){
+		LED3_OFF;
+	}
+	else{
 		ovf=0;
 	}
 	ovf++;
@@ -58,13 +50,14 @@ int main() {
 
 	init_IO();
 	init_TSAL();
+	_delay_ms(1);
 	init_TSOP();
+	_delay_ms(1);
 	init_batteries();
 
 	sei();
 
 	while(1){
-		_delay_ms(20);
-		ADC_level=check_ADC();
+
 	}
 }
