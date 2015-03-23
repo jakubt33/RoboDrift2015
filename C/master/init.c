@@ -35,6 +35,9 @@ void init_LED() {
 	DDR_LED_GO |= (1 << LED_GO);
 
 	DDR_LED_RED |= (1 << LED_RED);
+
+	LED_GO_OFF;
+	LED_FALSTART_OFF;
 }
 
 void init_USART( unsigned char ubrr){

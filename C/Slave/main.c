@@ -7,17 +7,50 @@
 #include "init.h"
 
 volatile uint8_t TsalCounter=0;
-ISR(TIMER1_COMPA_vect){ //600us tsal is set, 600us tsal is down
-	if(TsalCounter<20){
-		TSAL_ON;
-		LED4_ON;
-	}else if(TsalCounter<40){
-		TSAL_OFF;
-		LED4_OFF;
-	}else{
-		TsalCounter=0;
+volatile uint8_t TsalGapCounter=0;
+#define BURST 7 //1 BURST~=103us
+#define GAP 7	//1 GAP~=103us
+#define BURST_L 3 //1 BURST_L=(BURST+GAP)*103us
+#define GAP_L 3
+ISR(TIMER1_COMPA_vect){
+	if(TsalGapCounter<BURST_L){//no gap
+		LED5_ON;
+		//........................600us tsal is set, 600us tsal is down
+		if(TsalCounter<BURST){
+			TSAL_ON;
+			LED4_ON;
+			TsalCounter++;
+		}else if(TsalCounter<BURST+GAP){
+			TSAL_OFF;
+			LED4_OFF;
+			TsalCounter++;
+			if(TsalCounter>=BURST+GAP){
+				TsalCounter=0;
+				TsalGapCounter++;
+				if(TsalGapCounter>=BURST_L+GAP_L){
+					TsalGapCounter=0;
+				}
+			}
+		}
+		//........................600us tsal is set, 600us tsal is down
 	}
-	TsalCounter++;
+	else if(TsalGapCounter<BURST_L+GAP_L){//gap
+		LED5_OFF;
+		TSAL_OFF;
+		if(TsalCounter<BURST){
+			TsalCounter++;
+		}else if(TsalCounter<BURST+GAP){
+			TsalCounter++;
+			if(TsalCounter>=BURST+GAP){
+				TsalGapCounter++;
+				TsalCounter=0;
+				if(TsalGapCounter>=BURST_L+GAP_L){
+					TsalGapCounter=0;
+				}
+			}
+		}
+
+	}
 }
 
 ISR(INT0_vect){
@@ -61,10 +94,10 @@ int main() {
 	init_TSOP();
 	init_batteries();
 
+	ADC_level=check_ADC();
 	sei();
 
 	while(1){
-		_delay_ms(20);
-		ADC_level=check_ADC();
+		;
 	}
 }

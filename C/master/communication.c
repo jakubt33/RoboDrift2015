@@ -7,30 +7,129 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <util/delay.h>
 #include "io.h"
+#include "communication.h"
 
-volatile uint8_t spiDataReceived;
+void ping(uint8_t numberOfSensors){
+	uint8_t counter=1;
+	for(counter=1;counter<=numberOfSensors;counter++){
+		_delay_ms(500);
+		if(counter!=100){
+			sensorPreview(counter);
+			USART_Transmit(counter);
+		}
+	}
+	_delay_ms(500);
+	sensorPreview(0);
+	USART_Transmit(0b11111111);
+}
 
-ISR(USART_RXC_vect)
-{
-    unsigned char data=0;
-    data=UDR;
+void stopRace(){
+	raceFlag=0;//stop sensors
+	LED_RED_OFF;
+	LED_FALSTART_OFF;
+	LED_GO_OFF;
+}
 
-    if(data == 1){
-    	LED1Y_ON;
-    	LED2Y_OFF;
-    	LED_RED_OFF;
-    }
-    else if(data==2){
-    	LED2Y_ON;
-    	LED1Y_OFF;
-    	LED_RED_OFF;
-    }
-    else {
-    	LED_RED_ON;
-    	LED1Y_OFF;
-    	LED2Y_OFF;
-    }
+void sensorPreview(uint8_t SensorNumber){
+	switch(SensorNumber){
+	case 0:
+		LED1S_OFF;
+		LED2S_OFF;
+		LED3S_OFF;
+		LED4S_OFF;
+		LED5S_OFF;
+		break;
+	case 1:
+		LED1S_ON;
+		LED2S_OFF;
+		LED3S_OFF;
+		LED4S_OFF;
+		LED5S_OFF;
+		break;
+	case 2:
+		LED1S_OFF;
+		LED2S_ON;
+		LED3S_OFF;
+		LED4S_OFF;
+		LED5S_OFF;
+		break;
+	case 3:
+		LED1S_OFF;
+		LED2S_OFF;
+		LED3S_ON;
+		LED4S_OFF;
+		LED5S_OFF;
+		break;
+	case 4:
+		LED1S_OFF;
+		LED2S_OFF;
+		LED3S_OFF;
+		LED4S_ON;
+		LED5S_OFF;
+		break;
+	case 5:
+		LED1S_OFF;
+		LED2S_OFF;
+		LED3S_OFF;
+		LED4S_OFF;
+		LED5S_ON;
+		break;
+	default:
+		LED1S_ON;
+		LED2S_ON;
+		LED3S_ON;
+		LED4S_ON;
+		LED5S_ON;
+		break;
+	}
+
+}
+
+void startCounter(uint8_t number){
+	switch (number){
+	case 1:
+		LED1Y_ON;
+		raceFlag=0;
+		break;
+	case 2:
+		LED2Y_ON;
+		raceFlag=0;
+		break;
+	case 3:
+		LED3Y_ON;
+		raceFlag=0;
+		break;
+	case 4:
+		LED4Y_ON;
+		raceFlag=0;
+		break;
+	case 5:
+		LED5Y_ON;
+		raceFlag=0;
+		break;
+	case 0:
+		LED1Y_OFF;
+		LED2Y_OFF;
+		LED3Y_OFF;
+		LED4Y_OFF;
+		LED5Y_OFF;
+		LED_GO_ON;
+		LED_FALSTART_OFF;
+		raceFlag=1;
+		break;
+	case 15:
+		LED1Y_OFF;
+		LED2Y_OFF;
+		LED3Y_OFF;
+		LED4Y_OFF;
+		LED5Y_OFF;
+		LED_GO_OFF;
+		LED_FALSTART_ON;
+		raceFlag=0;
+		break;
+	}
 }
 
 ISR(SPI_STC_vect)
@@ -46,7 +145,7 @@ void spi_send(char data)
     while( ! bit_is_set( SPSR, SPIF ) );        //Oczekujemy na zakoñczenie transmisji ( do ustawienia SPIF ) przez sprzêt
 }
 
-void USART_Transmit( unsigned char data)
+void USART_Transmit(unsigned char data)
 {
     //wait for empty transmit buffer
     while ( !(UCSRA & (1<<UDRE)) );

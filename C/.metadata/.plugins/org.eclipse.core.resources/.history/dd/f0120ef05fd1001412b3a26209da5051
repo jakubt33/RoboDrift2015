@@ -1,0 +1,38 @@
+/*
+ * usart.c
+ *
+ *  Created on: 18 mar 2015
+ *      Author: Kuba
+ */
+
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include "io.h"
+
+volatile uint8_t spiDataReceived;
+int ping(){
+	_delay_ms(1000);
+	return 1; //ok
+}
+
+ISR(SPI_STC_vect)
+{
+    char dataReceived = SPDR; //Pobieramy wartoœæ wys³an¹ przez Master
+    spiDataReceived = dataReceived;
+    //do sth
+}
+
+void spi_send(char data)
+{
+    SPDR = data;  //Wysy³amy zawartoœæ zmiennej bajt
+    while( ! bit_is_set( SPSR, SPIF ) );        //Oczekujemy na zakoñczenie transmisji ( do ustawienia SPIF ) przez sprzêt
+}
+
+void USART_Transmit( unsigned char data)
+{
+    //wait for empty transmit buffer
+    while ( !(UCSRA & (1<<UDRE)) );
+
+    //put data into buffer, sends data
+    UDR = data;
+}
