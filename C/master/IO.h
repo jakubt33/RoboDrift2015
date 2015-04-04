@@ -8,6 +8,7 @@
 #ifndef IO_H_
 #define IO_H_
 
+
 //------------------------------------
 #define DDR_LED_Y DDRC
 #define DDR_LED_FALSTART DDRC
@@ -77,6 +78,6 @@
 #define SS PB2
 #define SCK PB5
 #define MOSI PB3
-
+#define MISO PB4
 
 #endif /* IO_H_ */

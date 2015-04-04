@@ -1,0 +1,14 @@
+/*
+ * communication.h
+ *
+ *  Created on: 19 mar 2015
+ *      Author: Kuba
+ */
+
+#ifndef COMMUNICATION_H_
+#define COMMUNICATION_H_
+
+void spi_send(char);
+void showID(uint8_t);
+
+#endif /* COMMUNICATION_H_ */

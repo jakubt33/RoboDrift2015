@@ -1,0 +1,158 @@
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
+#include <stdio.h>
+
+#include "main.h"
+#include "io.h"
+#include "init.h"
+#include "communication.h"
+#include "RFM69.h"
+#include "RFM69registers.h"
+
+ISR(TIMER1_COMPA_vect){
+	if(RaceStart){
+		if(TsalGapCounter<BURST_L){//no gap
+			//LED5_ON;
+			//........................600us tsal is set, 600us tsal is down
+			if(TsalCounter<BURST){
+				TSAL_ON;
+				//LED4_ON;
+				TsalCounter++;
+			}else if(TsalCounter<BURST+GAP){
+				TSAL_OFF;
+				//LED4_OFF;
+				TsalCounter++;
+				if(TsalCounter>=BURST+GAP){
+					TsalCounter=0;
+					TsalGapCounter++;
+					if(TsalGapCounter>=BURST_L+GAP_L){
+						TsalGapCounter=0;
+					}
+				}
+			}
+			//........................600us tsal is set, 600us tsal is down
+		}
+		else if(TsalGapCounter<BURST_L+GAP_L){//gap
+			//LED5_OFF;
+			TSAL_OFF;
+			if(TsalCounter<BURST){
+				TsalCounter++;
+			}else if(TsalCounter<BURST+GAP){
+				TsalCounter++;
+				if(TsalCounter>=BURST+GAP){
+					TsalGapCounter++;
+					TsalCounter=0;
+					if(TsalGapCounter>=BURST_L+GAP_L){
+						TsalGapCounter=0;
+					}
+				}
+			}
+		}
+	}
+	else{
+		TSAL_OFF;
+	}
+}
+
+ISR(INT0_vect){
+	_delay_us(3); //wait to be sure
+	if(bit_is_set(PIN_TSOP, TSOP)){ 	//TSAL----||----TSOP
+		;//LED1_ON;
+		//LED2_OFF;
+	}
+	else{ 								//TSAL -------- TSOP
+		;//LED2_ON;
+		//LED1_OFF;
+	}
+}
+
+ISR(TIMER2_OVF_vect){
+	if( ovf < (ADC_level-ADC_min+4) ) { //getting result from 4 to 42;
+		LED_BATT_GR_OFF;
+		LED_BATT_RED_OFF;
+	}
+	else {
+		if(ovf >= 4){
+			LED_BATT_GR_ON;
+		}
+		else{
+			LED_BATT_GR_OFF;
+			LED_BATT_RED_ON;
+		}
+		ovf=0;
+	}
+	ovf++;
+}
+
+int main() {
+
+	init_IO();
+	init_TSAL();
+	init_TSOP();
+	init_batteries();
+	init_SPI_master();
+	init_RFM69();
+
+	_delay_ms(20);
+	ADC_level=check_ADC();
+	SensorID=0;
+	sei();
+
+	setMode(RF69_MODE_RX);
+	//uint8_t sensor=1;
+	while(1){
+
+		if (mode == RF69_MODE_RX && (readReg(REG_IRQFLAGS2) & RF_IRQFLAGS2_PAYLOADREADY)){
+		    setMode(RF69_MODE_STANDBY);
+		    select();
+		    spi_send(REG_FIFO & 0x7F);
+		    char toAddress = spi_send(0);
+		    char senderID = spi_send(0);
+		    char data = spi_send(0);
+		    if( toAddress == 51 && senderID == 50){
+		    	showID(data);
+		    }
+		}
+
+		/*
+		if(SPSR & (1<<SPIF)){ //if message received
+			switch(SPDR){
+			case 1:
+				RaceStart=1;//race on
+				SPDR=5;
+				break;
+			case 2:
+				RaceStart=0;//race off
+				SPDR = 3;
+				break;
+			default:
+				break;
+			}
+		}
+		if(RaceStart){
+
+		}
+		else{
+			sensor=1;
+			checkButtons();
+		}*/
+
+		//.............................SPI
+		/*while(!(SPSR & (1<<SPIF)));
+		switch(SPDR){
+		case 1:
+			RaceStart=1;//race on
+			SPDR=5;
+			break;
+		case 2:
+			RaceStart=0;//race off
+			SPDR = 4;
+			break;
+		default:
+			SPDR=3;
+			break;
+		}*/
+		//..............................SPI
+	}
+}

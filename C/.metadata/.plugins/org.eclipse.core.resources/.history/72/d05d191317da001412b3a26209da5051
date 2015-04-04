@@ -1,0 +1,85 @@
+/*
+ * init.c
+ *
+ *  Created on: 17 mar 2015
+ *      Author: Kuba
+ */
+
+#include "io.h"
+#include <avr/io.h>
+#include <avr/delay.h>
+#include "RFM69.h"
+#include "RFM69registers.h"
+
+void init_SPI_master(){
+	DDR_SPI |= (1 << SCK)|(1 << SS)|(1 << MOSI); // wyjcie na tych pinach
+	SPCR = ( 1 << SPE ) | ( 1 << MSTR ) | ( 1 << SPR0 ); //spi enable, atmega = master, Prescaler 16
+	//SPCR |= (1 << SPIE); //spi interrupt enable
+}
+
+void init_RFM69(){
+	writeReg(REG_OPMODE, RF_OPMODE_STANDBY); //default, standby
+	writeReg(REG_DATAMODUL, RF_DATAMODUL_DATAMODE_PACKET | RF_DATAMODUL_MODULATIONTYPE_FSK | RF_DATAMODUL_MODULATIONSHAPING_00);//no shaping
+	writeReg(REG_BITRATEMSB, RF_BITRATEMSB_4800); //by default: 4.8 KBPS
+    writeReg(REG_BITRATELSB, RF_BITRATELSB_4800);
+    writeReg(REG_FDEVMSB, RF_FDEVMSB_50000); // default: 5KHz, (FDEV + BitRate / 2 <= 500KHz)
+    writeReg(REG_FDEVLSB, RF_FDEVLSB_50000); //frequency diviation
+
+    writeReg(REG_FRFMSB, (uint8_t) (RF_FRFMSB_434));
+	writeReg(REG_FRFMID, (uint8_t) (RF_FRFMID_434));
+	writeReg(REG_FRFLSB, (uint8_t) (RF_FRFLSB_434));
+
+	writeReg(REG_RXBW, RF_RXBW_DCCFREQ_010 | RF_RXBW_MANT_24 | RF_RXBW_EXP_5); //not sure about this
+
+
+	writeReg(REG_SYNCCONFIG, RF_SYNC_SIZE_2); //sync word size 2bytes
+	writeReg(REG_DIOMAPPING1, RF_DIOMAPPING1_DIO0_10); //dio0 high when fifo not empty
+	writeReg(REG_PACKETCONFIG1, RF_PACKET1_FORMAT_FIXED ); //pocket mode
+	writeReg(REG_PAYLOADLENGTH, 1); //payloadlengh = 1; only 1 data(or address) byte
+	//initialize(FREQUENCY,NODEID,NETWORKID);
+}
+/*
+void init_SPI_slave(){
+	DDR_SPI |= (1<<MISO);
+	DDR_SPI &= ~(1 << SS);
+	DDR_SPI &= ~(1 << SCK);
+	DDR_SPI &= ~(1 << MOSI);
+	SPCR = (1 << SPIE)|(1 << SPE); //spi interrupt enable
+}*/
+
+void init_LED() {
+	DDR_LED_Y |= (1 << LED1Y);
+	DDR_LED_Y |= (1 << LED2Y);
+	DDR_LED_Y |= (1 << LED3Y);
+	DDR_LED_Y |= (1 << LED4Y);
+	DDR_LED_Y |= (1 << LED5Y);
+
+	DDR_LED_S124 |= (1 << LED1S);
+	DDR_LED_S124 |= (1 << LED2S);
+	DDR_LED_S35 |= (1 << LED3S);
+	DDR_LED_S124 |= (1 << LED4S);
+	DDR_LED_S35 |= (1 << LED5S);
+
+	DDR_LED_FALSTART |= (1 << LED_FALSTART);
+	DDR_LED_GO |= (1 << LED_GO);
+
+	DDR_LED_RED |= (1 << LED_RED);
+
+	LED_GO_OFF;
+	LED_FALSTART_OFF;
+
+}
+
+/*
+void init_USART( unsigned char ubrr){
+    // Ustawienie prêdkoœci transmisji
+    UBRRH = (uint8_t)(ubrr >> 8);
+    UBRRL = (uint8_t)ubrr;
+
+    // W³¹czenie odbiornika i nadajnika
+    UCSRB |= (1 << RXEN) | (1 << TXEN);
+    UCSRB |= (1 << RXCIE); //interrupt na receive
+
+    // Ustawienie formatu ramki: 8 bitów danych, 2 bit stopu
+    UCSRC = (1 << URSEL) | (1 << USBS) | (3<<UCSZ0);
+}*/

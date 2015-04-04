@@ -15,9 +15,10 @@
 
 volatile uint8_t spiDataReceived;
 volatile uint8_t raceFlag;
+volatile uint8_t race;
 
 void USART_Transmit(unsigned char);
-void spi_send(char);
+char spi_send(char);
 void ping(uint8_t);
 void startCounter(uint8_t);
 void stopRace();

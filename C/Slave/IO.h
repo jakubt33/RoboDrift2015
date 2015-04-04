@@ -63,10 +63,11 @@
 
 //------------------------------------
 #define DDR_SWITCH DDRD
+#define PIN_SWITCH PIND
 
-#define SWITCH_UP PD5
+#define SWITCH_UP PD7
 #define SWITCH_OK PD6
-#define SWITCH_DOWN PD7
+#define SWITCH_DOWN PD5
 //------------------------------------
 
 //------------------------------------
@@ -81,6 +82,7 @@
 #define SS PB2
 #define SCK PB5
 #define MOSI PB3
+#define MISO PB4
 //------------------------------------
 
 #endif /* IO_H_ */

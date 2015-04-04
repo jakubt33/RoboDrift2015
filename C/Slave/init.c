@@ -7,14 +7,22 @@
 
 #include <avr/io.h>
 #include "io.h"
+#include "main.h"
+#include "RFM69registers.h"
+#include "RFM69.h"
 
-void init_SPI(){
+void init_SPI_slave(){/*
+	DDR_SPI |= (1<<MISO);
+	DDR_SPI &= ~(1 << SS);
+	DDR_SPI &= ~(1 << SCK);
+	DDR_SPI &= ~(1 << MOSI);
+	SPCR = (1 << SPIE)|(1 << SPE); //spi interrupt enable*/
+}
+
+void init_SPI_master(){
 	DDR_SPI |= (1 << SCK)|(1 << SS)|(1 << MOSI); // wyjcie na tych pinach
-	PORT_SPI &= ~_BV(SS);
-	SPCR |= (1 << SPE); //spi enable
-	SPCR |= (1 << SPIE); //spi interrupt enable
-	SPCR |= (1 << MSTR); //atmega = master
-	SPCR |= (1 << SPR0); //Prescaler 16
+	SPCR = ( 1 << SPE ) | ( 1 << MSTR ) | ( 1 << SPR0 ); //spi enable, atmega = master, Prescaler 16
+	//SPCR |= (1 << SPIE); //spi interrupt enable
 }
 
 void init_IO() {
@@ -35,14 +43,22 @@ void init_IO() {
 	DDR_SWITCH &= ~(1 << SWITCH_UP);
 
 	DDR_TSOP &= ~(_BV(TSOP));
+
+
+	SensorID=0;
+	RaceStart=0;
+
+	TsalCounter=0;
+	TsalGapCounter=0;
+
+	ovf=0;
+	ADC_level=0;
 }
 
 void init_TSAL(){
-	DDRB |= (1<<PB1); //wyjscie na tsal
-
 	TCCR1B |= (1<<WGM12)|(1<<CS10); //CTC max OCR1A, prescaler1
 	TCCR1A |= (1<<COM1A0); //toggle PB1 on compare match
-	OCR1A = 12; //to get f~38khz
+	OCR1A = 12; //to get f~38khz 12
 	TCNT1 = 0;
 
     TIMSK |= (1<<OCIE1A); //Interrupt enable on comapre match

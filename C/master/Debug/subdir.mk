@@ -4,16 +4,19 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../RFM69.c \
 ../communication.c \
 ../init.c \
 ../main.c 
 
 OBJS += \
+./RFM69.o \
 ./communication.o \
 ./init.o \
 ./main.o 
 
 C_DEPS += \
+./RFM69.d \
 ./communication.d \
 ./init.d \
 ./main.d 

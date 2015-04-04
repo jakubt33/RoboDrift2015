@@ -12,17 +12,21 @@
 #include "communication.h"
 
 void ping(uint8_t numberOfSensors){
+	/*
 	uint8_t counter=1;
 	for(counter=1;counter<=numberOfSensors;counter++){
 		_delay_ms(500);
-		if(counter!=100){
+		if( ((counter==3)&&((race+1)==3)) || ((counter==4)&&((race+1)==3)) ){
+			;
+		}
+		else{
 			sensorPreview(counter);
 			USART_Transmit(counter);
 		}
 	}
 	_delay_ms(500);
 	sensorPreview(0);
-	USART_Transmit(0b11111111);
+	USART_Transmit(0b11111111);*/
 }
 
 void stopRace(){
@@ -118,6 +122,8 @@ void startCounter(uint8_t number){
 		LED_GO_ON;
 		LED_FALSTART_OFF;
 		raceFlag=1;
+		race++;
+		if(race>3) race=1;
 		break;
 	case 15:
 		LED1Y_OFF;
@@ -132,17 +138,11 @@ void startCounter(uint8_t number){
 	}
 }
 
-ISR(SPI_STC_vect)
-{
-    char dataReceived = SPDR; //Pobieramy wartoœæ wys³an¹ przez Master
-    spiDataReceived = dataReceived;
-    //do sth
-}
-
-void spi_send(char data)
+char spi_send(char data)
 {
     SPDR = data;  //Wysy³amy zawartoœæ zmiennej bajt
-    while( ! bit_is_set( SPSR, SPIF ) );        //Oczekujemy na zakoñczenie transmisji ( do ustawienia SPIF ) przez sprzêt
+    while(!(SPSR & (1<<SPIF)));   //Oczekujemy na zakoñczenie transmisji ( do ustawienia SPIF ) przez sprzêt
+    return SPDR;
 }
 
 void USART_Transmit(unsigned char data)

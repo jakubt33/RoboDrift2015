@@ -7,16 +7,23 @@
 
 #include "io.h"
 #include <avr/io.h>
+#include <avr/delay.h>
 
-void init_SPI(){
+
+void init_SPI_master(){
 	DDR_SPI |= (1 << SCK)|(1 << SS)|(1 << MOSI); // wyjcie na tych pinach
-	PORT_SPI &= ~_BV(SS);
-	SPCR |= (1 << SPE); //spi enable
-	SPCR |= (1 << SPIE); //spi interrupt enable
-	SPCR |= (1 << MSTR); //atmega = master
-	SPCR |= (1 << SPR0); //Prescaler 16
-
+	SPCR = ( 1 << SPE ) | ( 1 << MSTR ) | ( 1 << SPR0 ); //spi enable, atmega = master, Prescaler 16
+	//SPCR |= (1 << SPIE); //spi interrupt enable
 }
+
+/*
+void init_SPI_slave(){
+	DDR_SPI |= (1<<MISO);
+	DDR_SPI &= ~(1 << SS);
+	DDR_SPI &= ~(1 << SCK);
+	DDR_SPI &= ~(1 << MOSI);
+	SPCR = (1 << SPIE)|(1 << SPE); //spi interrupt enable
+}*/
 
 void init_LED() {
 	DDR_LED_Y |= (1 << LED1Y);
@@ -38,7 +45,9 @@ void init_LED() {
 
 	LED_GO_OFF;
 	LED_FALSTART_OFF;
+
 }
+
 
 void init_USART( unsigned char ubrr){
     // Ustawienie prêdkoœci transmisji

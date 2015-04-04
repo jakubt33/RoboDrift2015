@@ -1,0 +1,65 @@
+/*
+ * communication.c
+ *
+ *  Created on: 19 mar 2015
+ *      Author: Kuba
+ */
+
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include "io.h"
+
+volatile uint8_t spiDataReceived;
+
+void spi_send(char data)
+{
+    SPDR = data;  //Wysy³amy zawartoœæ zmiennej bajt
+    while( ! bit_is_set( SPSR, SPIF ) );        //Oczekujemy na zakoñczenie transmisji ( do ustawienia SPIF ) przez sprzêt
+}
+
+void showID(uint8_t ID){
+	switch (ID){
+	case 1:
+		LED1_ON;
+		LED2_OFF;
+		LED3_OFF;
+		LED4_OFF;
+		LED5_OFF;
+		break;
+	case 2:
+		LED1_OFF;
+		LED2_ON;
+		LED3_OFF;
+		LED4_OFF;
+		LED5_OFF;
+		break;
+	case 3:
+		LED1_OFF;
+		LED2_OFF;
+		LED3_ON;
+		LED4_OFF;
+		LED5_OFF;
+		break;
+	case 4:
+		LED1_OFF;
+		LED2_OFF;
+		LED3_OFF;
+		LED4_ON;
+		LED5_OFF;
+		break;
+	case 5:
+		LED1_OFF;
+		LED2_OFF;
+		LED3_OFF;
+		LED4_OFF;
+		LED5_ON;
+		break;
+	case 0:
+		LED1_OFF;
+		LED2_OFF;
+		LED3_OFF;
+		LED4_OFF;
+		LED5_OFF;
+		break;
+	}
+}
