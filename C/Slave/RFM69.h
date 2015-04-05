@@ -48,7 +48,7 @@
 #define RF69_868MHZ            86
 #define RF69_915MHZ            91
 
-#define KEY         "thisIsEncryptKey"
+#define KEY         "Robo_Drift_2015"
 #define NODEID      51
 #define NETWORKID   100
 #define GATEWAYID   1

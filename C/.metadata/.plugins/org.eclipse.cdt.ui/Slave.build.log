@@ -1,9 +1,21 @@
-14:56:29 **** Incremental Build of configuration Debug for project Slave ****
+15:06:00 **** Incremental Build of configuration Debug for project Slave ****
 make all 
 Building file: ../RFM69.c
 Invoking: AVR Compiler
 avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"RFM69.d" -MT"RFM69.d" -c -o "RFM69.o" "../RFM69.c"
 Finished building: ../RFM69.c
+ 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+../main.c: In function 'main':
+../main.c:105: warning: unused variable 'counter'
+Finished building: ../main.c
  
 Building target: Slave.elf
 Invoking: AVR C Linker
@@ -24,15 +36,15 @@ AVR Memory Usage
 ----------------
 Device: atmega8
 
-Program:    2554 bytes (31.2% Full)
+Program:    2552 bytes (31.2% Full)
 (.text + .data + .bootloader)
 
-Data:        147 bytes (14.4% Full)
+Data:        145 bytes (14.2% Full)
 (.data + .bss + .noinit)
 
 
 Finished building: sizedummy
  
 
-14:56:34 Build Finished (took 5s.399ms)
+15:06:01 Build Finished (took 1s.288ms)
 
