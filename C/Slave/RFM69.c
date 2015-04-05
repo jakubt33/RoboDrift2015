@@ -100,11 +100,11 @@ uint8_t init_RFM69(){
 	  return true;
 }
 
-void sendFrame(uint8_t toAddress, const void* buffer, uint8_t bufferSize, uint8_t requestACK, uint8_t sendACK){
-	 setMode(RF69_MODE_STANDBY); // turn off receiver to prevent reception while filling fifo
+void sendFrame(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_t requestACK, uint8_t sendACK){
+	  setMode(RF69_MODE_STANDBY); // turn off receiver to prevent reception while filling fifo
 	  while ((readReg(REG_IRQFLAGS1) & RF_IRQFLAGS1_MODEREADY) == 0x00); // wait for ModeReady
 
-	  writeReg(REG_DIOMAPPING1, RF_DIOMAPPING1_DIO0_00); // DIO0 is "Packet Sent"
+		  writeReg(REG_DIOMAPPING1, RF_DIOMAPPING1_DIO0_00); // DIO0 is "Packet Sent"
 	  if (bufferSize > RF69_MAX_DATA_LEN) bufferSize = RF69_MAX_DATA_LEN;
 
 	  // control byte
@@ -114,23 +114,32 @@ void sendFrame(uint8_t toAddress, const void* buffer, uint8_t bufferSize, uint8_
 	  else if (requestACK)
 	    CTLbyte = 0x40;
 
+	  writeReg(REG_IRQFLAGS2, RF_IRQFLAGS2_FIFOOVERRUN); //clear buffer
 	  // write to FIFO
 	  select();
 	  spi_send(REG_FIFO | 0x80);
-	  spi_send(bufferSize + 3);
+	  //spi_send(bufferSize + 4);
 	  spi_send(toAddress);
-	  spi_send(NODEID);
+	  spi_send(myAddress);
 	  spi_send(CTLbyte);
 
-	  for (uint8_t i = 0; i < bufferSize; i++)
-		  spi_send(((uint8_t*) buffer)[i]);
+	  spi_send((uint8_t) buffer);
+
+	  /*for (uint8_t i = 0; i < bufferSize; i++)
+		  spi_send(((uint8_t*) buffer)[i]); */
 	  unselect();
 
 	  // no need to wait for transmit mode to be ready since its handled by the radio
 	  setMode(RF69_MODE_TX);
+	  _delay_ms(5);
 	  //while (digitalRead(_interruptPin) == 0); // wait for DIO0 to turn HIGH signalling transmission finish
 	  while ( (readReg(REG_IRQFLAGS2) & RF_IRQFLAGS2_PACKETSENT) == 0x00); // wait for ModeReady
 	  setMode(RF69_MODE_STANDBY);
+}
+
+void promiscuous(uint8_t onOff) {
+  promiscuousMode = onOff;
+  writeReg(REG_PACKETCONFIG1, (readReg(REG_PACKETCONFIG1) & 0xF9) | (onOff ? RF_PACKET1_ADRSFILTERING_OFF : RF_PACKET1_ADRSFILTERING_NODEBROADCAST));
 }
 
 void setMode(uint8_t newMode)
@@ -174,7 +183,7 @@ uint8_t readReg(uint8_t addr)
 {
   select();
   spi_send(addr & 0x7F);
-  uint8_t regval = spi_send(0);
+  uint8_t regval = (uint8_t)spi_send(0);
   unselect();
   return regval;
 }
@@ -220,13 +229,6 @@ void encrypt(const char* key) {
   writeReg(REG_PACKETCONFIG2, (readReg(REG_PACKETCONFIG2) & 0xFE) | (key ? 1 : 0));
 }
 
-// ON  = disable filtering to capture all frames on network
-// OFF = enable node/broadcast filtering to capture only frames sent to this/broadcast address
-void promiscuous(uint8_t onOff) {
-  promiscuousMode = onOff;
-  writeReg(REG_PACKETCONFIG1, (readReg(REG_PACKETCONFIG1) & 0xF9) | (onOff ? RF_PACKET1_ADRSFILTERING_OFF : RF_PACKET1_ADRSFILTERING_NODEBROADCAST));
-}
-
 void setHighPower(uint8_t onOff) {
   writeReg(REG_OCP, (isRFM69HW&onOff) ? RF_OCP_OFF : RF_OCP_ON);
   if (isRFM69HW) // turning ON
@@ -235,14 +237,28 @@ void setHighPower(uint8_t onOff) {
     writeReg(REG_PALEVEL, RF_PALEVEL_PA0_ON | RF_PALEVEL_PA1_OFF | RF_PALEVEL_PA2_OFF | powerLevel); // enable P0 only
 }
 
-/*void sleep() {
-  setMode(RF69_MODE_SLEEP);
+void setNodeAddress(uint8_t addr)
+{
+	myAddress = addr;
+	writeReg(REG_NODEADRS, myAddress);
 }
 
-void setAddress(uint8_t addr)
-{
-  address = addr;
-  writeReg(REG_NODEADRS, address);
+void receiveBegin() {
+  DATALEN = 0;
+  SENDERID = 0;
+  TARGETID = 0;
+  PAYLOADLEN = 0;
+  ACK_REQUESTED = 0;
+  ACK_RECEIVED = 0;
+  //RSSI = 0;
+  if (readReg(REG_IRQFLAGS2) & RF_IRQFLAGS2_PAYLOADREADY)
+    writeReg(REG_PACKETCONFIG2, (readReg(REG_PACKETCONFIG2) & 0xFB) | RF_PACKET2_RXRESTART); // avoid RX deadlocks
+  writeReg(REG_DIOMAPPING1, RF_DIOMAPPING1_DIO0_01); // set DIO0 to "PAYLOADREADY" in receive mode
+  setMode(RF69_MODE_RX);
+}
+
+/*void sleep() {
+  setMode(RF69_MODE_SLEEP);
 }
 
 void setNetwork(uint8_t networkID)
@@ -377,20 +393,8 @@ void sendACK(const void* buffer, uint8_t bufferSize) {
 
 //void isr0() { selfPointer->interruptHandler(); }
 
-void receiveBegin() {
-  DATALEN = 0;
-  SENDERID = 0;
-  TARGETID = 0;
-  PAYLOADLEN = 0;
-  ACK_REQUESTED = 0;
-  ACK_RECEIVED = 0;
-  RSSI = 0;
-  if (readReg(REG_IRQFLAGS2) & RF_IRQFLAGS2_PAYLOADREADY)
-    writeReg(REG_PACKETCONFIG2, (readReg(REG_PACKETCONFIG2) & 0xFB) | RF_PACKET2_RXRESTART); // avoid RX deadlocks
-  writeReg(REG_DIOMAPPING1, RF_DIOMAPPING1_DIO0_01); // set DIO0 to "PAYLOADREADY" in receive mode
-  setMode(RF69_MODE_RX);
-}
 
+/*
 uint8_t receiveDone() {
 //ATOMIC_BLOCK(ATOMIC_FORCEON)
 //{
@@ -408,8 +412,7 @@ uint8_t receiveDone() {
   receiveBegin();
   return false;
 //}
-}
-
+}*/
 
 /*
 int16_t readRSSI(*/ /*uint8_t forceTrigger*/ /*) {
@@ -424,3 +427,4 @@ int16_t readRSSI(*/ /*uint8_t forceTrigger*/ /*) {
   rssi >>= 1;
   return rssi;
 }*/
+

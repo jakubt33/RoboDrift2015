@@ -1,4 +1,4 @@
-15:05:17 **** Incremental Build of configuration Debug for project master ****
+19:07:55 **** Incremental Build of configuration Debug for project master ****
 make all 
 Building file: ../RFM69.c
 Invoking: AVR Compiler
@@ -6,16 +6,6 @@ avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-
 In file included from ../RFM69.c:32:
 c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
 Finished building: ../RFM69.c
- 
-Building file: ../main.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
-In file included from ../main.c:10:
-c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
-../main.c: In function 'main':
-../main.c:68: warning: unused variable 'counter'
-../main.c:67: warning: unused variable 'data'
-Finished building: ../main.c
  
 Building target: master.elf
 Invoking: AVR C Linker
@@ -36,15 +26,15 @@ AVR Memory Usage
 ----------------
 Device: atmega8
 
-Program:    6336 bytes (77.3% Full)
+Program:    6452 bytes (78.8% Full)
 (.text + .data + .bootloader)
 
-Data:         82 bytes (8.0% Full)
+Data:        219 bytes (21.4% Full)
 (.data + .bss + .noinit)
 
 
 Finished building: sizedummy
  
 
-15:05:18 Build Finished (took 1s.98ms)
+19:07:56 Build Finished (took 1s.81ms)
 

@@ -20,7 +20,7 @@ uint8_t spi_send(uint8_t data)
 }
 
 void checkButtons(){
-	if( (RaceStart==0) && (bit_is_clear(PIN_SWITCH, SWITCH_OK)) ){ //only accessible when race has not started yet
+	if( (bit_is_clear(PIN_SWITCH, SWITCH_OK)) ){ //only accessible when race has not started yet
 		LED1_ON;
 		LED2_ON;
 		LED3_ON;

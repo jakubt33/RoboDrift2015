@@ -104,18 +104,21 @@ int main() {
 	//uint8_t sensor=1;
 	uint8_t counter = 0;
 	uint8_t dataReceived=0;
+	//RaceStart=1;
 
+	//myAddress = SENSOR1;
+	//writeReg(REG_SYNCVALUE3, myAddress);
 
 	while(1){
 
 		receiveBegin();
 		ADC_level=check_ADC();
-		_delay_ms(30);
+		_delay_ms(5);
 		if ( (mode == RF69_MODE_RX) && (readReg(REG_IRQFLAGS2) & RF_IRQFLAGS2_PAYLOADREADY) ) {
-			//showID(2);
+			select(); //cli and ss down
+
 		    setMode(RF69_MODE_STANDBY);
-		    select();
-		    spi_send(REG_FIFO & 0x7F);
+		    spi_send(REG_FIFO & 0x7F); //read from FIFO
 		    //PAYLOADLEN = spi_send(0);
 		    //PAYLOADLEN = PAYLOADLEN > 66 ? 66 : PAYLOADLEN; // precaution
 		    TARGETID = spi_send(0);
@@ -132,32 +135,21 @@ int main() {
 				//DATA[counter] = spi_send(0);
 			//}
 			//if (DATALEN < RF69_MAX_DATA_LEN) DATA[DATALEN] = 0; // add null at end of string */
-			unselect();
 		    if(dataReceived == '1'){
 		    	showID(1);
 		    }
-		    else if(dataReceived=='2'){
+		    else if(dataReceived =='2'){
 		    	showID(2);
-		    }
-		    else if(SENDERID==50){
-		    	showID(3);
-		    }
-		    else if(TARGETID==51){
-		    	showID(4);
-		    }
-		    else if(dataReceived<56){
-		    	showID(5);
 		    }
 		    else showID(6);
 
-		    if(!(promiscuousMode || TARGETID == NODEID || TARGETID == RF69_BROADCAST_ADDR) // match this node's address, or broadcast address or anything in promiscuous mode
+		    /*if(!(promiscuousMode || TARGETID == myAddress || TARGETID == RF69_BROADCAST_ADDR) // match this node's address, or broadcast address or anything in promiscuous mode
 		       || PAYLOADLEN < 3) { // address situation could receive packets that are malformed and don't fit this libraries extra fields
-		    	//showID(1);
 		        PAYLOADLEN = 0;
 		        unselect();
 		        receiveBegin();
 		    }
-		    else {
+		    else */{
 		    	/*
 				DATALEN = PAYLOADLEN - 3;
 				SENDERID = spi_send(0);
@@ -173,9 +165,11 @@ int main() {
 				unselect();
 			}
 			//RSSI = readRSSI(); */
-		    writeReg(REG_IRQFLAGS2, RF_IRQFLAGS2_FIFOOVERRUN);
 		}
-		//else showID(1);
+		else if(!RaceStart){
+			;//checkButtons();
+		}
+		writeReg(REG_IRQFLAGS2, RF_IRQFLAGS2_FIFOOVERRUN);
 	}
 
 
@@ -201,21 +195,4 @@ int main() {
 			sensor=1;
 			checkButtons();
 		}*/
-
-		//.............................SPI
-		/*while(!(SPSR & (1<<SPIF)));
-		switch(SPDR){
-		case 1:
-			RaceStart=1;//race on
-			SPDR=5;
-			break;
-		case 2:
-			RaceStart=0;//race off
-			SPDR = 4;
-			break;
-		default:
-			SPDR=3;
-			break;
-		}*/
-		//..............................SPI
 }
