@@ -11,7 +11,6 @@
 #include "io.h"
 #include "main.h"
 #include "communication.h"
-#include "RFM69.h"
 
 uint8_t spi_send(uint8_t data)
 {
@@ -66,7 +65,7 @@ void checkButtons(){
 				LED3_OFF;
 				LED4_OFF;
 				LED5_OFF;
-				setAddress(SensorID+50);
+				setAddress(SensorID);
 				showID(SensorID);
 				wait=0;
 			}

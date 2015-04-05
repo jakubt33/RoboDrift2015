@@ -66,7 +66,7 @@ void checkButtons(){
 				LED3_OFF;
 				LED4_OFF;
 				LED5_OFF;
-				setAddress(SensorID+50);
+				setAddress(SensorID);
 				showID(SensorID);
 				wait=0;
 			}

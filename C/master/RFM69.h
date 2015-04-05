@@ -48,16 +48,19 @@
 #define RF69_868MHZ            86
 #define RF69_915MHZ            91
 
-volatile uint8_t 	myAddress;
-#define isMASTER 	true 			//true or false, change if you need;
-#define MASTERID    50
-#define isRFM69HW	true
 #define KEY         "Robo_Drift_2015"
-#define NETWORKID   165 			//non trivial number
-//#define GATEWAYID   1
+#define NODEID      50
+#define NETWORKID   100
+#define GATEWAYID   1
 #define FREQUENCY   RF69_433MHZ //Match this with the version of your Moteino! (others: RF69_433MHZ, RF69_868MHZ)
-#define SENSOR1		51
-#define SENSOR2		52
+#define SENSOR1 	51 //non trivial numbers
+#define SENSOR2 	52
+#define SENSOR3 	53
+#define SENSOR4 	54
+#define SENSOR5 	55
+#define isRFM69HW	true
+
+
 
 #define false				  0
 #define true				  1
@@ -68,7 +71,7 @@ volatile uint8_t 	myAddress;
 #define RF69_TX_LIMIT_MS   1000
 //#define RF69_FSTEP  61.03515625 // == FXOSC / 2^19 = 32MHz / 2^19 (p13 in datasheet)
 
-
+/*
 static volatile uint8_t DATA[RF69_MAX_DATA_LEN]; // recv/xmit buf, including header & crc bytes
 static volatile uint8_t DATALEN;
 static volatile uint8_t SENDERID;
@@ -76,16 +79,18 @@ static volatile uint8_t TARGETID; // should match _address
 static volatile uint8_t PAYLOADLEN;
 static volatile uint8_t ACK_REQUESTED;
 static volatile uint8_t ACK_RECEIVED; // should be polled immediately after sending a packet with ACK request
-static volatile int16_t RSSI; // most accurate RSSI during reception (closest to the reception)
-
+//static volatile int16_t RSSI; // most accurate RSSI during reception (closest to the reception)
+*/
 volatile uint8_t mode; // should be protected?
 
 volatile uint8_t slaveSelectPin;
+volatile uint8_t interruptPin;
+
+volatile uint8_t interruptNum;
 volatile uint8_t promiscuousMode;
 volatile uint8_t powerLevel;
 
-void promiscuous(uint8_t onOff);
-void setNodeAddress(uint8_t addr);
+void setAddress(uint8_t addr);
 void setNetwork(uint8_t networkID);
 uint8_t canSend();
 void send(uint8_t toAddress, const void* buffer, uint8_t bufferSize, uint8_t requestACK);
@@ -94,8 +99,12 @@ uint8_t receiveDone();
 //uint8_t ACKReceived(uint8_t fromNodeID);
 //uint8_t ACKRequested();
 //void sendACK(const void* buffer, uint8_t bufferSize);
+//uint32_t getFrequency();
+//void setFrequency(uint32_t freqHz);
 void encrypt(const char* key);
+//void setCS(uint8_t newSPISlaveSelect);
 //int16_t readRSSI(/*uint8_t forceTrigger*/);
+void promiscuous(uint8_t onOff);
 void setHighPower(uint8_t onOFF); // has to be called after initialize() for RFM69HW
 void setPowerLevel(uint8_t level); // reduce/increase transmit power level
 void sleep();
@@ -106,6 +115,10 @@ void sleep();
 uint8_t readReg(uint8_t addr);
 void writeReg(uint8_t addr, uint8_t val);
 void readAllRegs();
+
+
+//static void isr0();
+//void virtual interruptHandler();
 void sendFrame(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_t requestACK, uint8_t sendACK);
 uint8_t init_RFM69();
 void receiveBegin();

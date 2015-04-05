@@ -1,8 +1,65 @@
-16:34:27 **** Clean-only build of configuration Debug for project master ****
+19:19:21 **** Clean-only build of configuration Debug for project Slave ****
 make clean 
-rm -rf  master.hex  ./RFM69.o ./communication.o ./init.o ./main.o  sizedummy  master.lss  ./RFM69.d ./communication.d ./init.d ./main.d  master.elf
+rm -rf  Slave.hex  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./RFM69.o ./communication.o ./init.o ./main.o  sizedummy  Slave.lss  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.d  ./RFM69.d ./communication.d ./init.d ./main.d  Slave.elf
  
-16:34:29 **** Build of configuration Debug for project master ****
+19:19:24 **** Build of configuration Debug for project Slave ****
+make all 
+Building file: ../.metadata/.plugins/org.eclipse.cdt.make.core/specs.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF".metadata/.plugins/org.eclipse.cdt.make.core/specs.d" -MT".metadata/.plugins/org.eclipse.cdt.make.core/specs.d" -c -o ".metadata/.plugins/org.eclipse.cdt.make.core/specs.o" "../.metadata/.plugins/org.eclipse.cdt.make.core/specs.c"
+Finished building: ../.metadata/.plugins/org.eclipse.cdt.make.core/specs.c
+ 
+Building file: ../RFM69.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"RFM69.d" -MT"RFM69.d" -c -o "RFM69.o" "../RFM69.c"
+Finished building: ../RFM69.c
+ 
+Building file: ../communication.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"communication.d" -MT"communication.d" -c -o "communication.o" "../communication.c"
+Finished building: ../communication.c
+ 
+Building file: ../init.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
+Finished building: ../init.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+../main.c: In function 'main':
+../main.c:105: warning: unused variable 'counter'
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./RFM69.o ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    2552 bytes (31.2% Full)
+(.text + .data + .bootloader)
+
+Data:        145 bytes (14.2% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+19:20:41 **** Incremental Build of configuration Debug for project master ****
 make all 
 Building file: ../RFM69.c
 Invoking: AVR Compiler
@@ -57,70 +114,16 @@ AVR Memory Usage
 ----------------
 Device: atmega8
 
-Program:    6382 bytes (77.9% Full)
+Program:    6336 bytes (77.3% Full)
 (.text + .data + .bootloader)
 
-Data:        219 bytes (21.4% Full)
+Data:         82 bytes (8.0% Full)
 (.data + .bss + .noinit)
 
 
 Finished building: sizedummy
  
-16:35:38 **** Incremental Build of configuration Debug for project Slave ****
-make all 
-Building file: ../main.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
-../main.c: In function 'main':
-../main.c:105: warning: unused variable 'counter'
-Finished building: ../main.c
- 
-Building target: Slave.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./RFM69.o ./communication.o ./init.o ./main.o   
-Finished building target: Slave.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S Slave.elf  >"Slave.lss"
-Finished building: Slave.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
-Finished building: Slave.hex
- 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 Slave.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    2386 bytes (29.1% Full)
-(.text + .data + .bootloader)
-
-Data:         86 bytes (8.4% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-16:38:14 **** Incremental Build of configuration Debug for project Slave ****
-make all 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 Slave.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    2386 bytes (29.1% Full)
-(.text + .data + .bootloader)
-
-Data:         86 bytes (8.4% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-16:38:14 **** Incremental Build of configuration Debug for project master ****
+22:13:52 **** Incremental Build of configuration Debug for project master ****
 make all 
 Building file: ../RFM69.c
 Invoking: AVR Compiler
@@ -148,612 +151,16 @@ AVR Memory Usage
 ----------------
 Device: atmega8
 
-Program:    6382 bytes (77.9% Full)
+Program:    6344 bytes (77.4% Full)
 (.text + .data + .bootloader)
 
-Data:        219 bytes (21.4% Full)
+Data:         84 bytes (8.2% Full)
 (.data + .bss + .noinit)
 
 
 Finished building: sizedummy
  
-16:38:43 **** Incremental Build of configuration Debug for project master ****
-make all 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 master.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    6382 bytes (77.9% Full)
-(.text + .data + .bootloader)
-
-Data:        219 bytes (21.4% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-16:41:27 **** Incremental Build of configuration Debug for project Slave ****
-make all 
-Building file: ../RFM69.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"RFM69.d" -MT"RFM69.d" -c -o "RFM69.o" "../RFM69.c"
-Finished building: ../RFM69.c
- 
-Building target: Slave.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./RFM69.o ./communication.o ./init.o ./main.o   
-Finished building target: Slave.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S Slave.elf  >"Slave.lss"
-Finished building: Slave.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
-Finished building: Slave.hex
- 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 Slave.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    2392 bytes (29.2% Full)
-(.text + .data + .bootloader)
-
-Data:         86 bytes (8.4% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-16:42:37 **** Incremental Build of configuration Debug for project Slave ****
-make all 
-Building file: ../main.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
-../main.c: In function 'main':
-../main.c:105: warning: unused variable 'counter'
-Finished building: ../main.c
- 
-Building target: Slave.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./RFM69.o ./communication.o ./init.o ./main.o   
-Finished building target: Slave.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S Slave.elf  >"Slave.lss"
-Finished building: Slave.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
-Finished building: Slave.hex
- 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 Slave.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    2398 bytes (29.3% Full)
-(.text + .data + .bootloader)
-
-Data:         86 bytes (8.4% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-16:50:32 **** Incremental Build of configuration Debug for project master ****
-make all 
-Building file: ../RFM69.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"RFM69.d" -MT"RFM69.d" -c -o "RFM69.o" "../RFM69.c"
-In file included from ../RFM69.c:32:
-c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
-Finished building: ../RFM69.c
- 
-Building target: master.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./RFM69.o ./communication.o ./init.o ./main.o   
-Finished building target: master.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S master.elf  >"master.lss"
-Finished building: master.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
-Finished building: master.hex
- 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 master.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    6384 bytes (77.9% Full)
-(.text + .data + .bootloader)
-
-Data:        219 bytes (21.4% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-16:54:25 **** Incremental Build of configuration Debug for project master ****
-make all 
-Building file: ../RFM69.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"RFM69.d" -MT"RFM69.d" -c -o "RFM69.o" "../RFM69.c"
-In file included from ../RFM69.c:32:
-c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
-Finished building: ../RFM69.c
- 
-Building target: master.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./RFM69.o ./communication.o ./init.o ./main.o   
-Finished building target: master.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S master.elf  >"master.lss"
-Finished building: master.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
-Finished building: master.hex
- 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 master.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    6388 bytes (78.0% Full)
-(.text + .data + .bootloader)
-
-Data:        219 bytes (21.4% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-17:02:57 **** Incremental Build of configuration Debug for project master ****
-make all 
-Building file: ../RFM69.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"RFM69.d" -MT"RFM69.d" -c -o "RFM69.o" "../RFM69.c"
-In file included from ../RFM69.c:32:
-c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
-Finished building: ../RFM69.c
- 
-Building target: master.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./RFM69.o ./communication.o ./init.o ./main.o   
-Finished building target: master.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S master.elf  >"master.lss"
-Finished building: master.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
-Finished building: master.hex
- 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 master.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    6388 bytes (78.0% Full)
-(.text + .data + .bootloader)
-
-Data:        219 bytes (21.4% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-17:03:30 **** Incremental Build of configuration Debug for project Slave ****
-make all 
-Building file: ../RFM69.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"RFM69.d" -MT"RFM69.d" -c -o "RFM69.o" "../RFM69.c"
-Finished building: ../RFM69.c
- 
-Building target: Slave.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./RFM69.o ./communication.o ./init.o ./main.o   
-Finished building target: Slave.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S Slave.elf  >"Slave.lss"
-Finished building: Slave.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
-Finished building: Slave.hex
- 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 Slave.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    2398 bytes (29.3% Full)
-(.text + .data + .bootloader)
-
-Data:         86 bytes (8.4% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-17:05:54 **** Incremental Build of configuration Debug for project Slave ****
-make all 
-Building file: ../main.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
-../main.c: In function 'main':
-../main.c:105: warning: unused variable 'counter'
-Finished building: ../main.c
- 
-Building target: Slave.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./RFM69.o ./communication.o ./init.o ./main.o   
-Finished building target: Slave.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S Slave.elf  >"Slave.lss"
-Finished building: Slave.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
-Finished building: Slave.hex
- 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 Slave.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    2408 bytes (29.4% Full)
-(.text + .data + .bootloader)
-
-Data:         86 bytes (8.4% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-17:06:59 **** Incremental Build of configuration Debug for project master ****
-make all 
-Building file: ../RFM69.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"RFM69.d" -MT"RFM69.d" -c -o "RFM69.o" "../RFM69.c"
-In file included from ../RFM69.c:32:
-c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
-Finished building: ../RFM69.c
- 
-Building target: master.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./RFM69.o ./communication.o ./init.o ./main.o   
-Finished building target: master.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S master.elf  >"master.lss"
-Finished building: master.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
-Finished building: master.hex
- 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 master.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    6382 bytes (77.9% Full)
-(.text + .data + .bootloader)
-
-Data:        219 bytes (21.4% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-17:08:15 **** Incremental Build of configuration Debug for project master ****
-make all 
-Building file: ../RFM69.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"RFM69.d" -MT"RFM69.d" -c -o "RFM69.o" "../RFM69.c"
-In file included from ../RFM69.c:32:
-c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
-Finished building: ../RFM69.c
- 
-Building target: master.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./RFM69.o ./communication.o ./init.o ./main.o   
-Finished building target: master.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S master.elf  >"master.lss"
-Finished building: master.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
-Finished building: master.hex
- 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 master.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    6388 bytes (78.0% Full)
-(.text + .data + .bootloader)
-
-Data:        219 bytes (21.4% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-18:35:32 **** Incremental Build of configuration Debug for project master ****
-make all 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 master.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    6388 bytes (78.0% Full)
-(.text + .data + .bootloader)
-
-Data:        219 bytes (21.4% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-18:37:31 **** Incremental Build of configuration Debug for project Slave ****
-make all 
-Building file: ../RFM69.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"RFM69.d" -MT"RFM69.d" -c -o "RFM69.o" "../RFM69.c"
-Finished building: ../RFM69.c
- 
-Building target: Slave.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./RFM69.o ./communication.o ./init.o ./main.o   
-Finished building target: Slave.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S Slave.elf  >"Slave.lss"
-Finished building: Slave.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
-Finished building: Slave.hex
- 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 Slave.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    2408 bytes (29.4% Full)
-(.text + .data + .bootloader)
-
-Data:         86 bytes (8.4% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-18:39:44 **** Incremental Build of configuration Debug for project Slave ****
-make all 
-Building file: ../main.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
-../main.c: In function 'main':
-../main.c:105: warning: unused variable 'counter'
-Finished building: ../main.c
- 
-Building target: Slave.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./RFM69.o ./communication.o ./init.o ./main.o   
-Finished building target: Slave.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S Slave.elf  >"Slave.lss"
-Finished building: Slave.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
-Finished building: Slave.hex
- 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 Slave.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    2400 bytes (29.3% Full)
-(.text + .data + .bootloader)
-
-Data:         86 bytes (8.4% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-18:42:23 **** Incremental Build of configuration Debug for project Slave ****
-make all 
-Building file: ../RFM69.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"RFM69.d" -MT"RFM69.d" -c -o "RFM69.o" "../RFM69.c"
-Finished building: ../RFM69.c
- 
-Building target: Slave.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./RFM69.o ./communication.o ./init.o ./main.o   
-Finished building target: Slave.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S Slave.elf  >"Slave.lss"
-Finished building: Slave.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
-Finished building: Slave.hex
- 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 Slave.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    2402 bytes (29.3% Full)
-(.text + .data + .bootloader)
-
-Data:         88 bytes (8.6% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-18:43:49 **** Incremental Build of configuration Debug for project Slave ****
-make all 
-Building file: ../RFM69.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"RFM69.d" -MT"RFM69.d" -c -o "RFM69.o" "../RFM69.c"
-Finished building: ../RFM69.c
- 
-Building target: Slave.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./RFM69.o ./communication.o ./init.o ./main.o   
-Finished building target: Slave.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S Slave.elf  >"Slave.lss"
-Finished building: Slave.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
-Finished building: Slave.hex
- 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 Slave.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    2402 bytes (29.3% Full)
-(.text + .data + .bootloader)
-
-Data:         88 bytes (8.6% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-18:45:43 **** Incremental Build of configuration Debug for project master ****
-make all 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 master.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    6388 bytes (78.0% Full)
-(.text + .data + .bootloader)
-
-Data:        219 bytes (21.4% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-18:47:07 **** Incremental Build of configuration Debug for project master ****
-make all 
-Building file: ../RFM69.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"RFM69.d" -MT"RFM69.d" -c -o "RFM69.o" "../RFM69.c"
-In file included from ../RFM69.c:32:
-c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
-Finished building: ../RFM69.c
- 
-Building target: master.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./RFM69.o ./communication.o ./init.o ./main.o   
-Finished building target: master.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S master.elf  >"master.lss"
-Finished building: master.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
-Finished building: master.hex
- 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 master.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    6386 bytes (78.0% Full)
-(.text + .data + .bootloader)
-
-Data:        221 bytes (21.6% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-18:48:07 **** Incremental Build of configuration Debug for project master ****
-make all 
-Building file: ../RFM69.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"RFM69.d" -MT"RFM69.d" -c -o "RFM69.o" "../RFM69.c"
-In file included from ../RFM69.c:32:
-c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
-Finished building: ../RFM69.c
- 
-Building target: master.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./RFM69.o ./communication.o ./init.o ./main.o   
-Finished building target: master.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S master.elf  >"master.lss"
-Finished building: master.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
-Finished building: master.hex
- 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 master.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    6378 bytes (77.9% Full)
-(.text + .data + .bootloader)
-
-Data:        219 bytes (21.4% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-18:49:37 **** Incremental Build of configuration Debug for project Slave ****
+22:16:09 **** Incremental Build of configuration Debug for project Slave ****
 make all 
 Building file: ../RFM69.c
 Invoking: AVR Compiler
@@ -786,446 +193,45 @@ AVR Memory Usage
 ----------------
 Device: atmega8
 
-Program:    2392 bytes (29.2% Full)
+Program:    2566 bytes (31.3% Full)
 (.text + .data + .bootloader)
 
-Data:         86 bytes (8.4% Full)
+Data:        147 bytes (14.4% Full)
 (.data + .bss + .noinit)
 
 
 Finished building: sizedummy
  
-18:51:10 **** Incremental Build of configuration Debug for project Slave ****
+22:16:23 **** Incremental Build of configuration Debug for project Slave ****
 make all 
-Building file: ../main.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
-../main.c: In function 'main':
-../main.c:105: warning: unused variable 'counter'
-Finished building: ../main.c
- 
-Building target: Slave.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./RFM69.o ./communication.o ./init.o ./main.o   
-Finished building target: Slave.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S Slave.elf  >"Slave.lss"
-Finished building: Slave.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
-Finished building: Slave.hex
- 
 Invoking: Print Size
 avr-size --format=avr --mcu=atmega8 Slave.elf
 AVR Memory Usage
 ----------------
 Device: atmega8
 
-Program:    2402 bytes (29.3% Full)
+Program:    2566 bytes (31.3% Full)
 (.text + .data + .bootloader)
 
-Data:         86 bytes (8.4% Full)
+Data:        147 bytes (14.4% Full)
 (.data + .bss + .noinit)
 
 
 Finished building: sizedummy
  
-18:51:51 **** Incremental Build of configuration Debug for project Slave ****
-make all 
-Building file: ../main.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
-../main.c: In function 'main':
-../main.c:105: warning: unused variable 'counter'
-Finished building: ../main.c
- 
-Building target: Slave.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./RFM69.o ./communication.o ./init.o ./main.o   
-Finished building target: Slave.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S Slave.elf  >"Slave.lss"
-Finished building: Slave.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
-Finished building: Slave.hex
- 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 Slave.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    2406 bytes (29.4% Full)
-(.text + .data + .bootloader)
-
-Data:         86 bytes (8.4% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-18:52:51 **** Incremental Build of configuration Debug for project Slave ****
-make all 
-Building file: ../main.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
-../main.c: In function 'main':
-../main.c:105: warning: unused variable 'counter'
-Finished building: ../main.c
- 
-Building target: Slave.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./RFM69.o ./communication.o ./init.o ./main.o   
-Finished building target: Slave.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S Slave.elf  >"Slave.lss"
-Finished building: Slave.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
-Finished building: Slave.hex
- 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 Slave.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    2406 bytes (29.4% Full)
-(.text + .data + .bootloader)
-
-Data:         86 bytes (8.4% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-18:56:10 **** Incremental Build of configuration Debug for project Slave ****
-make all 
-Building file: ../main.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
-../main.c: In function 'main':
-../main.c:105: warning: unused variable 'counter'
-Finished building: ../main.c
- 
-Building target: Slave.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./RFM69.o ./communication.o ./init.o ./main.o   
-Finished building target: Slave.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S Slave.elf  >"Slave.lss"
-Finished building: Slave.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
-Finished building: Slave.hex
- 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 Slave.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    2358 bytes (28.8% Full)
-(.text + .data + .bootloader)
-
-Data:         85 bytes (8.3% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-19:00:19 **** Incremental Build of configuration Debug for project Slave ****
+22:21:41 **** Incremental Build of configuration Debug for project Slave ****
 make all 
 Building file: ../RFM69.c
 Invoking: AVR Compiler
 avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"RFM69.d" -MT"RFM69.d" -c -o "RFM69.o" "../RFM69.c"
 Finished building: ../RFM69.c
  
-Building target: Slave.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./RFM69.o ./communication.o ./init.o ./main.o   
-Finished building target: Slave.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S Slave.elf  >"Slave.lss"
-Finished building: Slave.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
-Finished building: Slave.hex
- 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 Slave.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    2358 bytes (28.8% Full)
-(.text + .data + .bootloader)
-
-Data:         85 bytes (8.3% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-19:02:53 **** Incremental Build of configuration Debug for project master ****
-make all 
-Building file: ../RFM69.c
+Building file: ../communication.c
 Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"RFM69.d" -MT"RFM69.d" -c -o "RFM69.o" "../RFM69.c"
-In file included from ../RFM69.c:32:
-c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
-Finished building: ../RFM69.c
- 
-Building target: master.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./RFM69.o ./communication.o ./init.o ./main.o   
-Finished building target: master.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S master.elf  >"master.lss"
-Finished building: master.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
-Finished building: master.hex
- 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 master.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    6378 bytes (77.9% Full)
-(.text + .data + .bootloader)
-
-Data:        219 bytes (21.4% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-19:04:14 **** Incremental Build of configuration Debug for project master ****
-make all 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 master.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    6378 bytes (77.9% Full)
-(.text + .data + .bootloader)
-
-Data:        219 bytes (21.4% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-19:06:04 **** Incremental Build of configuration Debug for project master ****
-make all 
-Building file: ../RFM69.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"RFM69.d" -MT"RFM69.d" -c -o "RFM69.o" "../RFM69.c"
-In file included from ../RFM69.c:32:
-c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
-../RFM69.c: In function 'init_RFM69':
-../RFM69.c:99: warning: implicit declaration of function 'promiscuous'
-../RFM69.c: In function 'sendFrame':
-../RFM69.c:123: error: 'NODEID' undeclared (first use in this function)
-../RFM69.c:123: error: (Each undeclared identifier is reported only once
-../RFM69.c:123: error: for each function it appears in.)
-../RFM69.c: At top level:
-../RFM69.c:176: warning: conflicting types for 'promiscuous'
-../RFM69.c:99: warning: previous implicit declaration of 'promiscuous' was here
-make: *** [RFM69.o] Error 1
-19:06:19 **** Incremental Build of configuration Debug for project master ****
-make all 
-Building file: ../RFM69.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"RFM69.d" -MT"RFM69.d" -c -o "RFM69.o" "../RFM69.c"
-In file included from ../RFM69.c:32:
-c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
-../RFM69.c: In function 'init_RFM69':
-../RFM69.c:99: warning: implicit declaration of function 'promiscuous'
-../RFM69.c: At top level:
-../RFM69.c:176: warning: conflicting types for 'promiscuous'
-../RFM69.c:99: warning: previous implicit declaration of 'promiscuous' was here
-Finished building: ../RFM69.c
- 
-Building target: master.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./RFM69.o ./communication.o ./init.o ./main.o   
-Finished building target: master.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S master.elf  >"master.lss"
-Finished building: master.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
-Finished building: master.hex
- 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 master.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    6454 bytes (78.8% Full)
-(.text + .data + .bootloader)
-
-Data:        219 bytes (21.4% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-19:06:47 **** Incremental Build of configuration Debug for project master ****
-make all 
-Building file: ../RFM69.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"RFM69.d" -MT"RFM69.d" -c -o "RFM69.o" "../RFM69.c"
-In file included from ../RFM69.c:32:
-c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
-Finished building: ../RFM69.c
- 
-Building file: ../main.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
-In file included from ../main.c:10:
-c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
-../main.c: In function 'main':
-../main.c:68: warning: unused variable 'counter'
-../main.c:67: warning: unused variable 'data'
-Finished building: ../main.c
- 
-Building target: master.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./RFM69.o ./communication.o ./init.o ./main.o   
-Finished building target: master.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S master.elf  >"master.lss"
-Finished building: master.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
-Finished building: master.hex
- 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 master.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    6452 bytes (78.8% Full)
-(.text + .data + .bootloader)
-
-Data:        219 bytes (21.4% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-19:07:54 **** Incremental Build of configuration Debug for project Slave ****
-make all 
-Building file: ../RFM69.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"RFM69.d" -MT"RFM69.d" -c -o "RFM69.o" "../RFM69.c"
-../RFM69.c: In function 'init_RFM69':
-../RFM69.c:99: warning: implicit declaration of function 'promiscuous'
-../RFM69.c: At top level:
-../RFM69.c:140: warning: conflicting types for 'promiscuous'
-../RFM69.c:99: warning: previous implicit declaration of 'promiscuous' was here
-Finished building: ../RFM69.c
- 
-Building target: Slave.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./RFM69.o ./communication.o ./init.o ./main.o   
-Finished building target: Slave.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S Slave.elf  >"Slave.lss"
-Finished building: Slave.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
-Finished building: Slave.hex
- 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 Slave.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    2398 bytes (29.3% Full)
-(.text + .data + .bootloader)
-
-Data:         85 bytes (8.3% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-19:07:55 **** Incremental Build of configuration Debug for project master ****
-make all 
-Building file: ../RFM69.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=1000000UL -MMD -MP -MF"RFM69.d" -MT"RFM69.d" -c -o "RFM69.o" "../RFM69.c"
-In file included from ../RFM69.c:32:
-c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
-Finished building: ../RFM69.c
- 
-Building target: master.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,master.map -mmcu=atmega8 -o "master.elf"  ./RFM69.o ./communication.o ./init.o ./main.o   
-Finished building target: master.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S master.elf  >"master.lss"
-Finished building: master.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -O ihex master.elf  "master.hex"
-Finished building: master.hex
- 
-Invoking: Print Size
-avr-size --format=avr --mcu=atmega8 master.elf
-AVR Memory Usage
-----------------
-Device: atmega8
-
-Program:    6452 bytes (78.8% Full)
-(.text + .data + .bootloader)
-
-Data:        219 bytes (21.4% Full)
-(.data + .bss + .noinit)
-
-
-Finished building: sizedummy
- 
-19:08:12 **** Incremental Build of configuration Debug for project Slave ****
-make all 
-Building file: ../RFM69.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"RFM69.d" -MT"RFM69.d" -c -o "RFM69.o" "../RFM69.c"
-Finished building: ../RFM69.c
- 
-Building file: ../init.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"init.d" -MT"init.d" -c -o "init.o" "../init.c"
-Finished building: ../init.c
+avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"communication.d" -MT"communication.d" -c -o "communication.o" "../communication.c"
+../communication.c: In function 'checkButtons':
+../communication.c:68: warning: implicit declaration of function 'setAddress'
+Finished building: ../communication.c
  
 Building file: ../main.c
 Invoking: AVR Compiler
@@ -1253,16 +259,16 @@ AVR Memory Usage
 ----------------
 Device: atmega8
 
-Program:    2396 bytes (29.2% Full)
+Program:    2588 bytes (31.6% Full)
 (.text + .data + .bootloader)
 
-Data:         85 bytes (8.3% Full)
+Data:        147 bytes (14.4% Full)
 (.data + .bss + .noinit)
 
 
 Finished building: sizedummy
  
-19:11:17 **** Incremental Build of configuration Debug for project Slave ****
+22:22:06 **** Incremental Build of configuration Debug for project Slave ****
 make all 
 Building file: ../main.c
 Invoking: AVR Compiler
@@ -1290,10 +296,208 @@ AVR Memory Usage
 ----------------
 Device: atmega8
 
-Program:    2384 bytes (29.1% Full)
+Program:    2582 bytes (31.5% Full)
 (.text + .data + .bootloader)
 
-Data:         85 bytes (8.3% Full)
+Data:        147 bytes (14.4% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+22:22:56 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+../main.c: In function 'main':
+../main.c:105: warning: unused variable 'counter'
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./RFM69.o ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    2586 bytes (31.6% Full)
+(.text + .data + .bootloader)
+
+Data:        147 bytes (14.4% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+22:23:14 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
+../main.c: In function 'main':
+../main.c:105: warning: unused variable 'counter'
+Finished building: ../main.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./RFM69.o ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    2582 bytes (31.5% Full)
+(.text + .data + .bootloader)
+
+Data:        147 bytes (14.4% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+22:23:57 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../communication.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"communication.d" -MT"communication.d" -c -o "communication.o" "../communication.c"
+../communication.c: In function 'checkButtons':
+../communication.c:68: warning: implicit declaration of function 'setAddress'
+Finished building: ../communication.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./RFM69.o ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    2578 bytes (31.5% Full)
+(.text + .data + .bootloader)
+
+Data:        147 bytes (14.4% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+22:24:40 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../communication.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"communication.d" -MT"communication.d" -c -o "communication.o" "../communication.c"
+Finished building: ../communication.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./RFM69.o ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    2576 bytes (31.4% Full)
+(.text + .data + .bootloader)
+
+Data:        147 bytes (14.4% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+22:27:24 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Building file: ../communication.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"communication.d" -MT"communication.d" -c -o "communication.o" "../communication.c"
+Finished building: ../communication.c
+ 
+Building target: Slave.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./RFM69.o ./communication.o ./init.o ./main.o   
+Finished building target: Slave.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Slave.elf  >"Slave.lss"
+Finished building: Slave.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
+Finished building: Slave.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    2578 bytes (31.5% Full)
+(.text + .data + .bootloader)
+
+Data:        147 bytes (14.4% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+22:28:28 **** Incremental Build of configuration Debug for project Slave ****
+make all 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 Slave.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:    2578 bytes (31.5% Full)
+(.text + .data + .bootloader)
+
+Data:        147 bytes (14.4% Full)
 (.data + .bss + .noinit)
 
 

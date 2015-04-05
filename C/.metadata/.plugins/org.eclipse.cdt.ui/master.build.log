@@ -1,4 +1,4 @@
-19:07:55 **** Incremental Build of configuration Debug for project master ****
+22:13:52 **** Incremental Build of configuration Debug for project master ****
 make all 
 Building file: ../RFM69.c
 Invoking: AVR Compiler
@@ -26,15 +26,15 @@ AVR Memory Usage
 ----------------
 Device: atmega8
 
-Program:    6452 bytes (78.8% Full)
+Program:    6344 bytes (77.4% Full)
 (.text + .data + .bootloader)
 
-Data:        219 bytes (21.4% Full)
+Data:         84 bytes (8.2% Full)
 (.data + .bss + .noinit)
 
 
 Finished building: sizedummy
  
 
-19:07:56 Build Finished (took 1s.81ms)
+22:13:58 Build Finished (took 5s.813ms)
 

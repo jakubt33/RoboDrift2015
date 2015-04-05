@@ -106,8 +106,6 @@ void sendFrame(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_t reque
 	  while ((readReg(REG_IRQFLAGS1) & RF_IRQFLAGS1_MODEREADY) == 0x00); // wait for ModeReady
 
 		  writeReg(REG_DIOMAPPING1, RF_DIOMAPPING1_DIO0_00); // DIO0 is "Packet Sent"
-
-		  writeReg(REG_SYNCVALUE3, toAddress);
 	  if (bufferSize > RF69_MAX_DATA_LEN) bufferSize = RF69_MAX_DATA_LEN;
 
 	  // control byte
@@ -242,12 +240,14 @@ void setHighPower(uint8_t onOff) {
     writeReg(REG_PALEVEL, RF_PALEVEL_PA0_ON | RF_PALEVEL_PA1_OFF | RF_PALEVEL_PA2_OFF | powerLevel); // enable P0 only
 }
 
-void setAddress(uint8_t addr){
-	writeReg(REG_SYNCVALUE3, addr);
-}
-
 /*void sleep() {
   setMode(RF69_MODE_SLEEP);
+}
+
+void setAddress(uint8_t addr)
+{
+  address = addr;
+  writeReg(REG_NODEADRS, address);
 }
 
 void setNetwork(uint8_t networkID)

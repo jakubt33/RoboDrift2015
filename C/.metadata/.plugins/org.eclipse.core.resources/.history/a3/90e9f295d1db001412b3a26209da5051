@@ -90,8 +90,8 @@ ISR(TIMER2_OVF_vect){
 int main() {
 
 	init_IO();
-	//init_TSAL();
-	//init_TSOP();
+	init_TSAL();
+	init_TSOP();
 	init_batteries();
 	init_SPI_master();
 	init_RFM69();

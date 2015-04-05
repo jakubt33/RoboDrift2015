@@ -105,6 +105,8 @@ int main() {
 	uint8_t counter = 0;
 	uint8_t dataReceived=0;
 
+	writeReg(REG_SYNCVALUE3, SENSOR1);
+
 	while(1){
 
 		receiveBegin();
@@ -174,7 +176,7 @@ int main() {
 			//RSSI = readRSSI(); */
 		    writeReg(REG_IRQFLAGS2, RF_IRQFLAGS2_FIFOOVERRUN);
 		}
-		else checkButtons();
+		//else showID(1);
 	}
 
 

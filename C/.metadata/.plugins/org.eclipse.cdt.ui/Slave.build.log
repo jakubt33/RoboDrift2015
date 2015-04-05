@@ -1,40 +1,20 @@
-19:11:17 **** Incremental Build of configuration Debug for project Slave ****
+22:28:28 **** Incremental Build of configuration Debug for project Slave ****
 make all 
-Building file: ../main.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
-../main.c: In function 'main':
-../main.c:105: warning: unused variable 'counter'
-Finished building: ../main.c
- 
-Building target: Slave.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,Slave.map -mmcu=atmega8 -o "Slave.elf"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./RFM69.o ./communication.o ./init.o ./main.o   
-Finished building target: Slave.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S Slave.elf  >"Slave.lss"
-Finished building: Slave.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -O ihex Slave.elf  "Slave.hex"
-Finished building: Slave.hex
- 
 Invoking: Print Size
 avr-size --format=avr --mcu=atmega8 Slave.elf
 AVR Memory Usage
 ----------------
 Device: atmega8
 
-Program:    2384 bytes (29.1% Full)
+Program:    2578 bytes (31.5% Full)
 (.text + .data + .bootloader)
 
-Data:         85 bytes (8.3% Full)
+Data:        147 bytes (14.4% Full)
 (.data + .bss + .noinit)
 
 
 Finished building: sizedummy
  
 
-19:11:18 Build Finished (took 897ms)
+22:28:29 Build Finished (took 357ms)
 

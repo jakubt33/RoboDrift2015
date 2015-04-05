@@ -15,5 +15,6 @@ void init_SPI();
 void init_TSAL();
 void init_TSOP();
 void init_SPI_master();
+void init_SPI_slave();
 
 #endif /* INIT_H_ */
