@@ -16,7 +16,8 @@
 #include "RFM69registers.h"
 #include "RFM69.h"
 
-ISR(SPI_STC_vect){
+ISR(SPI_STC_vect)
+{
 	/*
 	cli();
     char dataReceived = SPDR; //Pobieramy wartoœæ wys³an¹ przez Master
@@ -34,7 +35,7 @@ ISR(SPI_STC_vect){
 
 volatile unsigned char dataFromPC=0;
 ISR(USART_RXC_vect){
-	cli();
+	/*cli();
     dataFromPC=UDR;
     if(dataFromPC&0b10000000){ //if 0b1xxx xxxx  //ping
     	LED_RED_ON;
@@ -51,13 +52,13 @@ ISR(USART_RXC_vect){
     	;//next sensor()
     }
     dataFromPC=0;
-    sei();
+    sei();*/
 }
 
 int main() {
 
 	init_LED();
-	init_USART(MYUBRR);
+	//init_USART(MYUBRR);
 	init_SPI_master();
 	init_RFM69();
 	sei();
@@ -68,11 +69,11 @@ int main() {
 
 	char buffer;
 	while(1){
-		_delay_ms(100);
+		_delay_ms(1500);
 		buffer = '1';
 		if( sendWithRetry(SENSOR1, buffer, 1, 1) ) sensorPreview(1);
 		else sensorPreview(3);
-		_delay_ms(100);
+		_delay_ms(1500);
 		buffer = '2';
 		if( sendWithRetry(SENSOR1, buffer, 1, 1) ) sensorPreview(2);
 		else sensorPreview(4);

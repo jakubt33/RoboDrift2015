@@ -109,7 +109,7 @@ uint8_t sendWithRetry(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_
 	for (i = 0; i < retries; i++) {
 		sendFrame(toAddress, buffer, bufferSize, true, false);
 		receiveBegin();
-		for(j=0;j<255;j++){ //cant be while - infinite loop(is sth goes wrng)
+		for(j=0;j<=255;j++){ //cant be while - infinite loop(is sth goes wrng)
 			if( receiveDone(toAddress) ){
 				return true;
 			}
@@ -201,7 +201,8 @@ void sendFrame(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_t reque
 	  setMode(RF69_MODE_STANDBY);
 }
 
-void setMode(uint8_t newMode) {
+void setMode(uint8_t newMode)
+{
   if (newMode == mode)
     return;
 

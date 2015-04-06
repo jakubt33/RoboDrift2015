@@ -68,11 +68,11 @@ int main() {
 
 	char buffer;
 	while(1){
-		_delay_ms(100);
+		_delay_ms(200);
 		buffer = '1';
 		if( sendWithRetry(SENSOR1, buffer, 1, 1) ) sensorPreview(1);
 		else sensorPreview(3);
-		_delay_ms(100);
+		_delay_ms(200);
 		buffer = '2';
 		if( sendWithRetry(SENSOR1, buffer, 1, 1) ) sensorPreview(2);
 		else sensorPreview(4);

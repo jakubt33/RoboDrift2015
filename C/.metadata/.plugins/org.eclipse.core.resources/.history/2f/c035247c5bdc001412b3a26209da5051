@@ -109,7 +109,7 @@ uint8_t sendWithRetry(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_
 	for (i = 0; i < retries; i++) {
 		sendFrame(toAddress, buffer, bufferSize, true, false);
 		receiveBegin();
-		for(j=0;j<255;j++){ //cant be while - infinite loop(is sth goes wrng)
+		for(j=0;j<=255;j++){ //cant be while - infinite loop(is sth goes wrng)
 			if( receiveDone(toAddress) ){
 				return true;
 			}
@@ -120,6 +120,7 @@ uint8_t sendWithRetry(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_
 }
 
 uint8_t receiveDone(uint8_t fromNodeID) {
+	LED_GO_ON;
 	if ( (mode == RF69_MODE_RX) && (readReg(REG_IRQFLAGS2) & RF_IRQFLAGS2_PAYLOADREADY) ) {
 
 		setMode(RF69_MODE_STANDBY);
@@ -136,6 +137,7 @@ uint8_t receiveDone(uint8_t fromNodeID) {
 		dataReceived = 0; //clear, safety reasons
 		dataReceived = spi_send(0);
 
+		LED_GO_OFF;
 		if(ACK_RECEIVED){
 			if(SENDERID==fromNodeID ){
 				return true;
@@ -201,7 +203,8 @@ void sendFrame(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_t reque
 	  setMode(RF69_MODE_STANDBY);
 }
 
-void setMode(uint8_t newMode) {
+void setMode(uint8_t newMode)
+{
   if (newMode == mode)
     return;
 
@@ -225,8 +228,8 @@ void setMode(uint8_t newMode) {
       writeReg(REG_OPMODE, (readReg(REG_OPMODE) & 0xE3) | RF_OPMODE_SLEEP);
       break;
     default:
+    	sei();
         return;
-    sei();
   }
 
   // we are using packet mode, so this check is not really needed

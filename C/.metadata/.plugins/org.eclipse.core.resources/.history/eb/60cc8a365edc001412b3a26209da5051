@@ -57,7 +57,7 @@ ISR(USART_RXC_vect){
 int main() {
 
 	init_LED();
-	init_USART(MYUBRR);
+	//init_USART(MYUBRR);
 	init_SPI_master();
 	init_RFM69();
 	sei();
@@ -68,11 +68,11 @@ int main() {
 
 	char buffer;
 	while(1){
-		_delay_ms(100);
+		_delay_ms(200);
 		buffer = '1';
 		if( sendWithRetry(SENSOR1, buffer, 1, 1) ) sensorPreview(1);
 		else sensorPreview(3);
-		_delay_ms(100);
+		_delay_ms(200);
 		buffer = '2';
 		if( sendWithRetry(SENSOR1, buffer, 1, 1) ) sensorPreview(2);
 		else sensorPreview(4);
