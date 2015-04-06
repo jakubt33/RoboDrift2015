@@ -93,12 +93,74 @@ uint8_t init_RFM69(){
 	  encrypt(0);
 
 	  setHighPower(isRFM69HW); // called regardless if it's a RFM69W or RFM69HW
+	  if(isMASTER){
+		  setAddress(MASTER);
+	  }
 	  setMode(RF69_MODE_STANDBY);
 	  while ((readReg(REG_IRQFLAGS1) & RF_IRQFLAGS1_MODEREADY) == 0x00); // wait for ModeReady
 
 	  encrypt(KEY);
 	  promiscuous(true);
 	  return true;
+}
+
+uint8_t sendWithRetry(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_t retries) {
+	uint8_t i, j;
+	for (i = 0; i < retries; i++) {
+		sendFrame(toAddress, buffer, bufferSize, true, false);
+		receiveBegin();
+		for(j=0;j<=255;j++){ //cant be while - infinite loop(is sth goes wrng)
+			if( receiveDone(toAddress) ){
+				return true;
+			}
+			_delay_us(50); //		VIN - VERY IMPORTANT NUMBER! cant be too low
+		}
+	}
+	return false;
+}
+
+uint8_t receiveDone(uint8_t fromNodeID) {
+	if ( (mode == RF69_MODE_RX) && (readReg(REG_IRQFLAGS2) & RF_IRQFLAGS2_PAYLOADREADY) ) {
+
+		setMode(RF69_MODE_STANDBY);
+		select();
+		spi_send(REG_FIFO & 0x7F);
+		TARGETID = spi_send(0);
+
+		SENDERID = spi_send(0);
+		uint8_t CTLbyte = spi_send(0);
+
+		ACK_RECEIVED = CTLbyte & 0x80; // extract ACK-received flag
+		ACK_REQUESTED = CTLbyte & 0x40; // extract ACK-requested flag
+
+		dataReceived = 0; //clear, safety reasons
+		dataReceived = spi_send(0);
+
+		if(ACK_RECEIVED){
+			if(SENDERID==fromNodeID ){
+				return true;
+			}
+			else return false;
+		}
+		if(ACK_REQUESTED){
+			sendFrame(SENDERID, 1, 1, false, true);
+		}
+		return true;
+	}
+	return false;
+}
+
+void receiveBegin() {
+	writeReg(REG_SYNCVALUE3, myAddress);
+	dataReceived=0;
+	SENDERID=0;
+	TARGETID=0; // should match _address
+	ACK_REQUESTED=0;
+	ACK_RECEIVED=0;
+  if (readReg(REG_IRQFLAGS2) & RF_IRQFLAGS2_PAYLOADREADY)
+    writeReg(REG_PACKETCONFIG2, (readReg(REG_PACKETCONFIG2) & 0xFB) | RF_PACKET2_RXRESTART); // avoid RX deadlocks
+  //writeReg(REG_DIOMAPPING1, RF_DIOMAPPING1_DIO0_01); // set DIO0 to "PAYLOADREADY" in receive mode
+  setMode(RF69_MODE_RX);
 }
 
 void sendFrame(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_t requestACK, uint8_t sendACK){
@@ -123,7 +185,7 @@ void sendFrame(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_t reque
 	  spi_send(REG_FIFO | 0x80);
 	  //spi_send(bufferSize + 4);
 	  spi_send(toAddress);
-	  spi_send(NODEID);
+	  spi_send(myAddress);
 	  spi_send(CTLbyte);
 
 	  spi_send((uint8_t) buffer);
@@ -132,9 +194,8 @@ void sendFrame(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_t reque
 		  spi_send(((uint8_t*) buffer)[i]); */
 	  unselect();
 
-	  // no need to wait for transmit mode to be ready since its handled by the radio
 	  setMode(RF69_MODE_TX);
-	  _delay_ms(5);
+	  _delay_ms(1);
 	  //while (digitalRead(_interruptPin) == 0); // wait for DIO0 to turn HIGH signalling transmission finish
 	  while ( (readReg(REG_IRQFLAGS2) & RF_IRQFLAGS2_PACKETSENT) == 0x00); // wait for ModeReady
 	  setMode(RF69_MODE_STANDBY);
@@ -243,6 +304,7 @@ void setHighPower(uint8_t onOff) {
 }
 
 void setAddress(uint8_t addr){
+	myAddress=addr;
 	writeReg(REG_SYNCVALUE3, addr);
 }
 
@@ -283,43 +345,6 @@ void send(uint8_t toAddress, const void* buffer, uint8_t bufferSize, uint8_t req
   sendFrame(toAddress, buffer, bufferSize, requestACK, false);
 } */
 
-// to increase the chance of getting a packet across, call this function instead of send
-// and it handles all the ACK requesting/retrying for you :)
-// The only twist is that you have to manually listen to ACK requests on the other side and send back the ACKs
-// The reason for the semi-automaton is that the lib is interrupt driven and
-// requires user action to read the received data and decide what to do with it
-// replies usually take only 5..8ms at 50kbps@915MHz
-
-/*
-uint8_t sendWithRetry(uint8_t toAddress, const void* buffer, uint8_t bufferSize, uint8_t retries, uint8_t retryWaitTime) {
-  uint32_t sentTime;
-  for (uint8_t i = 0; i <= retries; i++)
-  {
-    send(toAddress, buffer, bufferSize, true);
-    sentTime = millis();
-    while (millis() - sentTime < retryWaitTime)
-    {
-      if (ACKReceived(toAddress))
-      {
-        //Serial.print(" ~ms:"); Serial.print(millis() - sentTime);
-        return true;
-      }
-    }
-    //Serial.print(" RETRY#"); Serial.println(i + 1);
-  }
-  return false;
-}
-*/
-
-/*
-// should be polled immediately after sending a packet with ACK request
-uint8_t ACKReceived(uint8_t fromNodeID) {
-  if (receiveDone())
-    return (SENDERID == fromNodeID || fromNodeID == RF69_BROADCAST_ADDR) && ACK_RECEIVED;
-  return false;
-}*/
-
-
 /*
 // check whether an ACK was requested in the last received packet (non-broadcasted packet)
 uint8_t ACKRequested() {
@@ -339,83 +364,6 @@ void sendACK(const void* buffer, uint8_t bufferSize) {
   //RSSI = _RSSI; // restore payload RSSI
 }*/
 
-/*void interruptHandler() {
-  //pinMode(4, OUTPUT);
-  //digitalWrite(4, 1);
-  if (mode == RF69_MODE_RX && (readReg(REG_IRQFLAGS2) & RF_IRQFLAGS2_PAYLOADREADY))
-  {
-    //RSSI = readRSSI();
-    setMode(RF69_MODE_STANDBY);
-    select();
-    spi_send(REG_FIFO & 0x7F);
-    PAYLOADLEN = spi_send(0);
-    PAYLOADLEN = PAYLOADLEN > 66 ? 66 : PAYLOADLEN; // precaution
-    TARGETID = spi_send(0);
-    if(!(promiscuousMode || TARGETID == address || TARGETID == RF69_BROADCAST_ADDR) // match this node's address, or broadcast address or anything in promiscuous mode
-       || PAYLOADLEN < 3) // address situation could receive packets that are malformed and don't fit this libraries extra fields
-    {
-      PAYLOADLEN = 0;
-      unselect();
-      receiveBegin();
-      //digitalWrite(4, 0);
-      return;
-    }
-
-    DATALEN = PAYLOADLEN - 3;
-    SENDERID = spi_send(0);
-    uint8_t CTLbyte = spi_send(0);
-
-    ACK_RECEIVED = CTLbyte & 0x80; // extract ACK-received flag
-    ACK_REQUESTED = CTLbyte & 0x40; // extract ACK-requested flag
-
-    for (uint8_t i = 0; i < DATALEN; i++)
-    {
-      DATA[i] = spi_send(0);
-    }
-    if (DATALEN < RF69_MAX_DATA_LEN) DATA[DATALEN] = 0; // add null at end of string
-    unselect();
-    setMode(RF69_MODE_RX);
-  }
-  RSSI = readRSSI();
-  //digitalWrite(4, 0);
-}*/
-
-//void isr0() { selfPointer->interruptHandler(); }
-
-/*
-void receiveBegin() {
-  DATALEN = 0;
-  SENDERID = 0;
-  TARGETID = 0;
-  PAYLOADLEN = 0;
-  ACK_REQUESTED = 0;
-  ACK_RECEIVED = 0;
-  //RSSI = 0;
-  if (readReg(REG_IRQFLAGS2) & RF_IRQFLAGS2_PAYLOADREADY)
-    writeReg(REG_PACKETCONFIG2, (readReg(REG_PACKETCONFIG2) & 0xFB) | RF_PACKET2_RXRESTART); // avoid RX deadlocks
-  writeReg(REG_DIOMAPPING1, RF_DIOMAPPING1_DIO0_01); // set DIO0 to "PAYLOADREADY" in receive mode
-  setMode(RF69_MODE_RX);
-}*/
-
-/*
-uint8_t receiveDone() {
-//ATOMIC_BLOCK(ATOMIC_FORCEON)
-//{
-  cli();//noInterrupts(); // re-enabled in unselect() via setMode() or via receiveBegin()
-  if (mode == RF69_MODE_RX && PAYLOADLEN > 0)
-  {
-    setMode(RF69_MODE_STANDBY); // enables interrupts
-    return true;
-  }
-  else if (mode == RF69_MODE_RX) // already in RX no payload yet
-  {
-    sei();//interrupts(); // explicitly re-enable interrupts
-    return false;
-  }
-  receiveBegin();
-  return false;
-//}
-}*/
 
 /*
 int16_t readRSSI(*/ /*uint8_t forceTrigger*/ /*) {

@@ -11,9 +11,9 @@
 
 //------------------------------------
 #define DDR_LED_Y DDRC
-#define DDR_LED_FALSTART DDRC
+#define DDR_LED_GO DDRC
 #define PORT_LED_Y PORTC
-#define PORT_LED_FALSTART PORTC
+#define PORT_LED_GO PORTC
 #define DDR_LED_RED DDRD
 #define PORT_LED_RED PORTD
 
@@ -22,17 +22,17 @@
 #define PORT_LED_S35 PORTB
 #define PORT_LED_S124 PORTD
 
-#define DDR_LED_GO DDRD
+#define DDR_LED_FALSTART DDRD
 #define PORT_LED_S PORTD
-#define PORT_LED_GO PORTD
+#define PORT_LED_FALSTART PORTD
 
 #define LED1Y PC3
 #define LED2Y PC4
 #define LED3Y PC2
 #define LED4Y PC5
 #define LED5Y PC1
-#define LED_FALSTART PC0
-#define LED_GO PD3
+#define LED_GO PC0
+#define LED_FALSTART PD3
 #define LED_RED PD4
 
 #define LED1S PD5

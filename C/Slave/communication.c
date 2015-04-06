@@ -12,7 +12,26 @@
 #include "main.h"
 #include "communication.h"
 #include "RFM69.h"
+#include "RFM69registers.h"
 
+
+uint8_t checkPayload(){
+	if ( receiveDone(0) ) { //0 because its not an answer to ACKrequest and there's no senderID yet
+		if(dataReceived == '1'){
+			showID(1);
+		}
+		else if(dataReceived=='2'){
+			showID(2);
+		}
+		else showID(6);
+
+		writeReg(REG_IRQFLAGS2, RF_IRQFLAGS2_FIFOOVERRUN);
+		return true;
+	}
+	else{
+		return false;
+	}
+}
 uint8_t spi_send(uint8_t data)
 {
     SPDR = (unsigned char)data;  //Wysy³amy zawartoœæ zmiennej bajt

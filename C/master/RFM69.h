@@ -49,7 +49,7 @@
 #define RF69_915MHZ            91
 
 #define KEY         "Robo_Drift_2015"
-#define NODEID      50
+#define MASTER      50
 #define NETWORKID   100
 #define GATEWAYID   1
 #define FREQUENCY   RF69_433MHZ //Match this with the version of your Moteino! (others: RF69_433MHZ, RF69_868MHZ)
@@ -59,6 +59,7 @@
 #define SENSOR4 	54
 #define SENSOR5 	55
 #define isRFM69HW	true
+#define isMASTER	true
 
 
 
@@ -71,32 +72,31 @@
 #define RF69_TX_LIMIT_MS   1000
 //#define RF69_FSTEP  61.03515625 // == FXOSC / 2^19 = 32MHz / 2^19 (p13 in datasheet)
 
-/*
-static volatile uint8_t DATA[RF69_MAX_DATA_LEN]; // recv/xmit buf, including header & crc bytes
-static volatile uint8_t DATALEN;
-static volatile uint8_t SENDERID;
-static volatile uint8_t TARGETID; // should match _address
-static volatile uint8_t PAYLOADLEN;
-static volatile uint8_t ACK_REQUESTED;
-static volatile uint8_t ACK_RECEIVED; // should be polled immediately after sending a packet with ACK request
-//static volatile int16_t RSSI; // most accurate RSSI during reception (closest to the reception)
-*/
+volatile uint8_t myAddress;
+volatile uint8_t dataReceived;
 volatile uint8_t mode; // should be protected?
-
 volatile uint8_t slaveSelectPin;
 volatile uint8_t interruptPin;
-
 volatile uint8_t interruptNum;
 volatile uint8_t promiscuousMode;
 volatile uint8_t powerLevel;
+volatile unsigned char DATA[RF69_MAX_DATA_LEN]; // recv/xmit buf, including header & crc bytes
+volatile uint8_t DATALEN;
+volatile uint8_t SENDERID;
+volatile uint8_t TARGETID; // should match _address
+volatile uint8_t PAYLOADLEN;
+volatile uint8_t ACK_REQUESTED;
+volatile uint8_t ACK_RECEIVED; // should be polled immediately after sending a packet with ACK request
+volatile int16_t RSSI; // most accurate RSSI during reception (closest to the reception)
+
 
 void setAddress(uint8_t addr);
 void setNetwork(uint8_t networkID);
 uint8_t canSend();
 void send(uint8_t toAddress, const void* buffer, uint8_t bufferSize, uint8_t requestACK);
-//uint8_t sendWithRetry(uint8_t toAddress, const void* buffer, uint8_t bufferSize, uint8_t retries, uint8_t retryWaitTime); // 40ms roundtrip req for 61byte packets
-uint8_t receiveDone();
-//uint8_t ACKReceived(uint8_t fromNodeID);
+uint8_t sendWithRetry(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_t retries);
+uint8_t receiveDone(uint8_t fromNodeID);
+uint8_t ACKReceived(uint8_t fromNodeID);
 //uint8_t ACKRequested();
 //void sendACK(const void* buffer, uint8_t bufferSize);
 //uint32_t getFrequency();

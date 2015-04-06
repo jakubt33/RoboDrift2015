@@ -1,4 +1,4 @@
-22:28:28 **** Incremental Build of configuration Debug for project Slave ****
+02:43:11 **** Incremental Build of configuration Debug for project Slave ****
 make all 
 Invoking: Print Size
 avr-size --format=avr --mcu=atmega8 Slave.elf
@@ -6,7 +6,7 @@ AVR Memory Usage
 ----------------
 Device: atmega8
 
-Program:    2578 bytes (31.5% Full)
+Program:    2546 bytes (31.1% Full)
 (.text + .data + .bootloader)
 
 Data:        147 bytes (14.4% Full)
@@ -16,5 +16,5 @@ Data:        147 bytes (14.4% Full)
 Finished building: sizedummy
  
 
-22:28:29 Build Finished (took 357ms)
+02:43:12 Build Finished (took 283ms)
 

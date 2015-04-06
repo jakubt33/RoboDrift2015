@@ -11,5 +11,5 @@
 uint8_t spi_send(uint8_t);
 void showID(uint8_t);
 void checkButtons();
-
+uint8_t checkPayload();
 #endif /* COMMUNICATION_H_ */
