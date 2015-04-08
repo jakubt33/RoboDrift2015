@@ -56,7 +56,7 @@ ISR(TIMER1_COMPA_vect){
 }
 
 ISR(INT0_vect){
-	_delay_ms(1); //wait to be sure
+	_delay_us(10); //wait to be sure
 	if(bit_is_set(PIN_TSOP, TSOP)){ 	//TSAL----||----TSOP
 		;//LED1_ON;
 		//LED2_OFF;
@@ -68,7 +68,6 @@ ISR(INT0_vect){
 }
 
 ISR(TIMER2_OVF_vect){
-	cli();
 	if( ovf < (ADC_level-ADC_min+4) ) { //getting result from 4 to 42;
 		LED_BATT_GR_OFF;
 		LED_BATT_RED_OFF;
@@ -84,7 +83,6 @@ ISR(TIMER2_OVF_vect){
 		ovf=0;
 	}
 	ovf++;
-	sei();
 }
 
 int main() {
@@ -101,14 +99,20 @@ int main() {
 	SensorID=0;
 	sei();
 
-	uint8_t counter = 0;
-
 	while(1){
-
 		receiveBegin();
 		ADC_level=check_ADC();
-		_delay_ms(30);
-		if(!checkPayload()){
+		_delay_ms(1);
+		if ( receiveDone(0) ) { //0 because its not an answer to ACKrequest and there's no senderID yet
+			if(dataReceived == '1'){
+				showID(1);
+			}
+			else if(dataReceived=='2'){
+				showID(2);
+			}
+			else showID(6);
+		}
+		else {
 			checkButtons();
 		}
 	}

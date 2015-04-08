@@ -17,9 +17,7 @@
 #include "RFM69.h"
 
 ISR(SPI_STC_vect){
-	/*
-	cli();
-    char dataReceived = SPDR; //Pobieramy wartoœæ wys³an¹ przez Master
+	/*char dataReceived = SPDR; //Pobieramy wartoœæ wys³an¹ przez Master
     //spiDataReceived = dataReceived;
     if(dataReceived==0){
     	LED_FALSTART_ON;
@@ -27,14 +25,11 @@ ISR(SPI_STC_vect){
     else LED_FALSTART_OFF;
 
     sensorPreview(dataReceived);
-    //do sth
-
-    sei();*/
+    //do sth */
 }
 
 volatile unsigned char dataFromPC=0;
 ISR(USART_RXC_vect){
-	cli();
     dataFromPC=UDR;
     if(dataFromPC&0b10000000){ //if 0b1xxx xxxx  //ping
     	LED_RED_ON;
@@ -51,7 +46,6 @@ ISR(USART_RXC_vect){
     	;//next sensor()
     }
     dataFromPC=0;
-    sei();
 }
 
 int main() {
@@ -63,18 +57,23 @@ int main() {
 	sei();
 
 	race=0;
-	unsigned char data=0;
-	uint8_t counter=1;
 
 	char buffer;
 	while(1){
-		_delay_ms(100);
+		_delay_ms(50);
 		buffer = '1';
-		if( sendWithRetry(SENSOR1, buffer, 1, 1) ) sensorPreview(1);
+		sendFrame(SENSOR1, buffer, 1, false, false);
+		if( sendWithRetry(SENSOR1, buffer, 1, 3) ){
+			sensorPreview(1);
+		}
 		else sensorPreview(3);
-		_delay_ms(100);
+
+		_delay_ms(50);
 		buffer = '2';
-		if( sendWithRetry(SENSOR1, buffer, 1, 1) ) sensorPreview(2);
+		sendFrame(SENSOR1, buffer, 1, false, false);
+		if( sendWithRetry(SENSOR1, buffer, 1, 3) )	{
+			sensorPreview(2);
+		}
 		else sensorPreview(4);
 
 		/*if(raceFlag){

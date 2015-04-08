@@ -66,7 +66,7 @@ uint8_t init_RFM69(){
 	    /* 0x25 */ { REG_DIOMAPPING1, RF_DIOMAPPING1_DIO0_01 }, // DIO0 is the only IRQ we're using
 	    /* 0x26 */ { REG_DIOMAPPING2, RF_DIOMAPPING2_CLKOUT_OFF }, // DIO5 ClkOut disable for power saving
 	    /* 0x28 */ { REG_IRQFLAGS2, RF_IRQFLAGS2_FIFOOVERRUN }, // writing to this bit ensures that the FIFO & status flags are reset
-	    /* 0x29 */ { REG_RSSITHRESH, 220 }, // must be set to dBm = (-Sensitivity / 2), default is 0xE4 = 228 so -114dBm
+	    /* 0x29 */ { REG_RSSITHRESH, 228 }, // must be set to dBm = (-Sensitivity / 2), default is 0xE4 = 228 so -114dBm
 	    /* 0x2D */ { REG_PREAMBLELSB, RF_PREAMBLESIZE_LSB_VALUE }, // default 3 preamble bytes 0xAAAAAA
 	    /* 0x2E */ { REG_SYNCCONFIG, RF_SYNC_ON | RF_SYNC_FIFOFILL_AUTO | RF_SYNC_SIZE_3 | RF_SYNC_TOL_0 },
 	    /* 0x2F */ { REG_SYNCVALUE1, 0x2D },      // attempt to make this compatible with sync1 byte of RFM12B lib
@@ -106,22 +106,26 @@ uint8_t init_RFM69(){
 
 uint8_t sendWithRetry(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_t retries) {
 	uint8_t i, j;
+	cli();
 	for (i = 0; i < retries; i++) {
+
+		writeReg(REG_PACKETCONFIG2, (readReg(REG_PACKETCONFIG2) & 0xFB) | RF_PACKET2_RXRESTART); // avoid RX deadlocks
 		sendFrame(toAddress, buffer, bufferSize, true, false);
 		receiveBegin();
 		for(j=0;j<255;j++){ //cant be while - infinite loop(is sth goes wrng)
 			if( receiveDone(toAddress) ){
+				sei();
 				return true;
 			}
 			_delay_us(50); //		VIN - VERY IMPORTANT NUMBER! cant be too low
 		}
 	}
+	sei();
 	return false;
 }
 
 uint8_t receiveDone(uint8_t fromNodeID) {
-	if ( (mode == RF69_MODE_RX) && (readReg(REG_IRQFLAGS2) & RF_IRQFLAGS2_PAYLOADREADY) ) {
-
+	if ( (mode == RF69_MODE_RX) && bit_is_set(PIN_DIO, DIO0) ) {
 		setMode(RF69_MODE_STANDBY);
 		select();
 		spi_send(REG_FIFO & 0x7F);
@@ -135,6 +139,8 @@ uint8_t receiveDone(uint8_t fromNodeID) {
 
 		dataReceived = 0; //clear, safety reasons
 		dataReceived = spi_send(0);
+
+		writeReg(REG_IRQFLAGS2, RF_IRQFLAGS2_FIFOOVERRUN); //clear buffer
 
 		if(ACK_RECEIVED){
 			if(SENDERID==fromNodeID ){
@@ -152,25 +158,26 @@ uint8_t receiveDone(uint8_t fromNodeID) {
 
 void receiveBegin() {
 	writeReg(REG_SYNCVALUE3, myAddress);
-	dataReceived=0;
 	SENDERID=0;
 	TARGETID=0; // should match _address
 	ACK_REQUESTED=0;
 	ACK_RECEIVED=0;
   if (readReg(REG_IRQFLAGS2) & RF_IRQFLAGS2_PAYLOADREADY)
     writeReg(REG_PACKETCONFIG2, (readReg(REG_PACKETCONFIG2) & 0xFB) | RF_PACKET2_RXRESTART); // avoid RX deadlocks
-  //writeReg(REG_DIOMAPPING1, RF_DIOMAPPING1_DIO0_01); // set DIO0 to "PAYLOADREADY" in receive mode
+  writeReg(REG_DIOMAPPING1, RF_DIOMAPPING1_DIO0_01); // set DIO0 to "PAYLOADREADY" in receive mode
   setMode(RF69_MODE_RX);
 }
 
 void sendFrame(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_t requestACK, uint8_t sendACK){
 	  setMode(RF69_MODE_STANDBY); // turn off receiver to prevent reception while filling fifo
+
+	  //_delay_ms(1);
 	  while ((readReg(REG_IRQFLAGS1) & RF_IRQFLAGS1_MODEREADY) == 0x00); // wait for ModeReady
 
-		  writeReg(REG_DIOMAPPING1, RF_DIOMAPPING1_DIO0_00); // DIO0 is "Packet Sent"
+	  writeReg(REG_DIOMAPPING1, RF_DIOMAPPING1_DIO0_00); // DIO0 is "Packet Sent"
 
-		  writeReg(REG_SYNCVALUE3, toAddress);
-	  if (bufferSize > RF69_MAX_DATA_LEN) bufferSize = RF69_MAX_DATA_LEN;
+	  writeReg(REG_SYNCVALUE3, toAddress);
+	  //if (bufferSize > RF69_MAX_DATA_LEN) bufferSize = RF69_MAX_DATA_LEN;
 
 	  // control byte
 	  uint8_t CTLbyte = 0x00;
@@ -194,11 +201,11 @@ void sendFrame(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_t reque
 		  spi_send(((uint8_t*) buffer)[i]); */
 	  unselect();
 
+	  cli();
 	  setMode(RF69_MODE_TX);
-	  _delay_ms(1);
-	  //while (digitalRead(_interruptPin) == 0); // wait for DIO0 to turn HIGH signalling transmission finish
-	  while ( (readReg(REG_IRQFLAGS2) & RF_IRQFLAGS2_PACKETSENT) == 0x00); // wait for ModeReady
+	  while (bit_is_clear(PIN_DIO, DIO0)); // wait for DIO0 to turn HIGH signalling transmission finish
 	  setMode(RF69_MODE_STANDBY);
+	  sei();
 }
 
 void setMode(uint8_t newMode) {

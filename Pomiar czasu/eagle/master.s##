@@ -18257,11 +18257,11 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <wire x1="25.4" y1="119.38" x2="17.78" y2="116.84" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="DIO1" class="0">
+<net name="DIO0" class="0">
 <segment>
-<pinref part="U2" gate="G$1" pin="DIO1"/>
-<wire x1="55.88" y1="127" x2="58.42" y2="127" width="0.1524" layer="91"/>
-<label x="58.42" y="127" size="1.27" layer="95" xref="yes"/>
+<pinref part="U2" gate="G$1" pin="DIO0"/>
+<wire x1="55.88" y1="129.54" x2="58.42" y2="129.54" width="0.1524" layer="91"/>
+<label x="58.42" y="129.54" size="1.27" layer="95" xref="yes"/>
 </segment>
 <segment>
 <pinref part="IC1" gate="G$1" pin="PD2(INT0)"/>

@@ -11,14 +11,6 @@
 #include "RFM69registers.h"
 #include "RFM69.h"
 
-void init_SPI_slave(){/*
-	DDR_SPI |= (1<<MISO);
-	DDR_SPI &= ~(1 << SS);
-	DDR_SPI &= ~(1 << SCK);
-	DDR_SPI &= ~(1 << MOSI);
-	SPCR = (1 << SPIE)|(1 << SPE); //spi interrupt enable*/
-}
-
 void init_SPI_master(){
 	DDR_SPI |= (1 << SCK)|(1 << SS)|(1 << MOSI); // wyjcie na tych pinach
 	SPCR = ( 1 << SPE ) | ( 1 << MSTR ) | ( 1 << SPR0 ); //spi enable, atmega = master, Prescaler 16
@@ -44,6 +36,7 @@ void init_IO() {
 
 	DDR_TSOP &= ~(_BV(TSOP));
 
+	DDR_DIO &= ~(1<<DIO0);
 
 	SensorID=0;
 	RaceStart=0;

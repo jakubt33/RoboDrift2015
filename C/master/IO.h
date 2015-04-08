@@ -80,4 +80,8 @@
 #define MOSI PB3
 #define MISO PB4
 
+#define PORT_DIO PORTD
+#define DDR_DIO DDRD
+#define PIN_DIO PIND
+#define DIO0 PD2
 #endif /* IO_H_ */

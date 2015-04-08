@@ -83,6 +83,10 @@
 #define SCK PB5
 #define MOSI PB3
 #define MISO PB4
+#define DIO0 PD3
+#define	PORT_DIO PORTD
+#define PIN_DIO PIND
+#define DDR_DIO DDRD
 //------------------------------------
 
 #endif /* IO_H_ */
