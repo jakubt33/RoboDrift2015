@@ -144,21 +144,19 @@ uint8_t receiveDone(uint8_t fromNodeID) {
 		writeReg(REG_IRQFLAGS2, RF_IRQFLAGS2_FIFOOVERRUN); //clear buffer
 
 		if( (dataReceived == COMMAND_PING) && ACK_REQUESTED){
-			TSAL_OnOff(true);
-			TSAL_ON;
+			TSAL_interrput_OnOff(true);
 			RaceStart = true;
 			_delay_ms(5);
 			if(bit_is_clear(PIN_TSOP, TSOP)){
-				TSAL_OnOff(false);
+				TSAL_interrput_OnOff(false);
 				RaceStart = false;
-
 				sendFrame(SENDERID, COMMAND_PING_OK, 1, false, true);
 				showID(6);
 				_delay_ms(150);
 			}
 			else {
 				RaceStart = false;
-				TSAL_OnOff(false);
+				TSAL_interrput_OnOff(false);
 				sendFrame(SENDERID, COMMAND_PING_NO_OK, 1, false, true);
 			}
 		}

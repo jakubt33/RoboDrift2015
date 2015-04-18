@@ -95,7 +95,7 @@ int main() {
 
 	init_IO();
 	init_TSAL();
-	TSAL_OnOff(false);
+	TSAL_interrput_OnOff(true);
 	init_TSOP();
 	init_batteries();
 	init_SPI_master();

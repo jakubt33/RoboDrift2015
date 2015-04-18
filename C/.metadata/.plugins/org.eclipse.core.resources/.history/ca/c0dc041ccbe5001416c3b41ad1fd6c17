@@ -55,15 +55,13 @@ void init_TSAL(){
 	TCNT1 = 0;
 }
 
-void TSAL_OnOff(uint8_t OnOff){
+void TSAL_interrput_OnOff(uint8_t OnOff){
 	if(OnOff){
-		TCCR1A |= (1<<COM1A0);
-		//TSAL_ON;
+		TCCR1A &= ~(1<<COM1A0);
 	    TIMSK |= (1<<OCIE1A); //Interrupt enable on comapre match
 	}
 	else{
-		TCCR1A &= ~(1<<COM1A0);
-		TSAL_OFF;
+		TCCR1A |= (1<<COM1A0);
 		TIMSK &= ~(1<<OCIE1A);
 	}
 }

@@ -16,6 +16,6 @@ void init_TSAL();
 void init_TSOP();
 void init_SPI_master();
 void init_SPI_slave();
-void TSAL_interrput_OnOff(uint8_t OnOff);
+void TSAL_OnOff(uint8_t OnOff);
 
 #endif /* INIT_H_ */
