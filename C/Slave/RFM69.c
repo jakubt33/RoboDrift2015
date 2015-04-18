@@ -48,9 +48,9 @@ uint8_t init_RFM69(){
 	    /* 0x05 */ { REG_FDEVMSB, RF_FDEVMSB_5000}, // default: 5KHz, (FDEV + BitRate / 2 <= 500KHz)
 	    /* 0x06 */ { REG_FDEVLSB, RF_FDEVLSB_5000},
 
-	    /* 0x07 */ { REG_FRFMSB, (uint8_t) (RF_FRFMSB_433) },
-	    /* 0x08 */ { REG_FRFMID, (uint8_t) (RF_FRFMID_433) },
-	    /* 0x09 */ { REG_FRFLSB, (uint8_t) (RF_FRFLSB_433) },
+	    /* 0x07 */ { REG_FRFMSB, (uint8_t) (RF_FRFMSB_442) },
+	    /* 0x08 */ { REG_FRFMID, (uint8_t) (RF_FRFMID_442) },
+	    /* 0x09 */ { REG_FRFLSB, (uint8_t) (RF_FRFLSB_442) },
 
 	    // looks like PA1 and PA2 are not implemented on RFM69W, hence the max output power is 13dBm
 	    // +17dBm and +20dBm are possible on RFM69HW
@@ -106,29 +106,22 @@ uint8_t init_RFM69(){
 
 uint8_t sendWithRetry(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_t retries) {
 	uint8_t i, j;
+	cli();
 	for (i = 0; i < retries; i++) {
+
+		writeReg(REG_PACKETCONFIG2, (readReg(REG_PACKETCONFIG2) & 0xFB) | RF_PACKET2_RXRESTART); // avoid RX deadlocks
 		sendFrame(toAddress, buffer, bufferSize, true, false);
 		receiveBegin();
 		for(j=0;j<255;j++){ //cant be while - infinite loop(is sth goes wrng)
 			if( receiveDone(toAddress) ){
+				sei();
 				return true;
 			}
 			_delay_us(50); //		VIN - VERY IMPORTANT NUMBER! cant be too low
 		}
 	}
+	sei();
 	return false;
-}
-
-void receiveBegin() {
-	writeReg(REG_SYNCVALUE3, myAddress);
-	SENDERID=0;
-	TARGETID=0; // should match _address
-	ACK_REQUESTED=0;
-	ACK_RECEIVED=0;
-	if (readReg(REG_IRQFLAGS2) & RF_IRQFLAGS2_PAYLOADREADY)
-		writeReg(REG_PACKETCONFIG2, (readReg(REG_PACKETCONFIG2) & 0xFB) | RF_PACKET2_RXRESTART); // avoid RX deadlocks
-	setMode(RF69_MODE_RX);
-	writeReg(REG_DIOMAPPING1, RF_DIOMAPPING1_DIO0_01); // set DIO0 to "PAYLOADREADY" in receive mode
 }
 
 uint8_t receiveDone(uint8_t fromNodeID) {
@@ -149,6 +142,18 @@ uint8_t receiveDone(uint8_t fromNodeID) {
 
 		writeReg(REG_IRQFLAGS2, RF_IRQFLAGS2_FIFOOVERRUN); //clear buffer
 
+		if( (dataReceived == COMMAND_PING) && ACK_REQUESTED){
+			RaceStart = true;
+			_delay_ms(5);
+			if(bit_is_clear(PIN_TSOP, TSOP)){
+				sendFrame(SENDERID, COMMAND_PING_OK, 1, false, true);
+				showID(6);
+				_delay_ms(150);
+			}
+			else {
+				sendFrame(SENDERID, COMMAND_PING_NO_OK, 1, false, true);
+			}
+		}
 		if(ACK_RECEIVED){
 			if(SENDERID==fromNodeID ){
 				return true;
@@ -163,10 +168,24 @@ uint8_t receiveDone(uint8_t fromNodeID) {
 	return false;
 }
 
+void receiveBegin() {
+	writeReg(REG_SYNCVALUE3, myAddress);
+	SENDERID=0;
+	TARGETID=0; // should match _address
+	ACK_REQUESTED=0;
+	ACK_RECEIVED=0;
+  if (readReg(REG_IRQFLAGS2) & RF_IRQFLAGS2_PAYLOADREADY)
+    writeReg(REG_PACKETCONFIG2, (readReg(REG_PACKETCONFIG2) & 0xFB) | RF_PACKET2_RXRESTART); // avoid RX deadlocks
+  writeReg(REG_DIOMAPPING1, RF_DIOMAPPING1_DIO0_01); // set DIO0 to "PAYLOADREADY" in receive mode
+  setMode(RF69_MODE_RX);
+}
+
 void sendFrame(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_t requestACK, uint8_t sendACK){
 	  setMode(RF69_MODE_STANDBY); // turn off receiver to prevent reception while filling fifo
-	  while ((readReg(REG_IRQFLAGS1) & RF_IRQFLAGS1_MODEREADY) == 0x00); // wait for ModeReady
+
 	  //_delay_ms(1);
+	  while ((readReg(REG_IRQFLAGS1) & RF_IRQFLAGS1_MODEREADY) == 0x00); // wait for ModeReady
+
 	  writeReg(REG_DIOMAPPING1, RF_DIOMAPPING1_DIO0_00); // DIO0 is "Packet Sent"
 
 	  writeReg(REG_SYNCVALUE3, toAddress);
@@ -201,8 +220,7 @@ void sendFrame(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_t reque
 	  sei();
 }
 
-void setMode(uint8_t newMode)
-{
+void setMode(uint8_t newMode) {
   if (newMode == mode)
     return;
 
@@ -226,8 +244,8 @@ void setMode(uint8_t newMode)
       writeReg(REG_OPMODE, (readReg(REG_OPMODE) & 0xE3) | RF_OPMODE_SLEEP);
       break;
     default:
-    	sei();
         return;
+    sei();
   }
 
   // we are using packet mode, so this check is not really needed
@@ -304,7 +322,7 @@ void setHighPower(uint8_t onOff) {
 }
 
 void setAddress(uint8_t addr){
-	myAddress = addr;
+	myAddress=addr;
 	writeReg(REG_SYNCVALUE3, addr);
 }
 
@@ -363,6 +381,7 @@ void sendACK(const void* buffer, uint8_t bufferSize) {
   sendFrame(sender, buffer, bufferSize, false, true);
   //RSSI = _RSSI; // restore payload RSSI
 }*/
+
 
 /*
 int16_t readRSSI(*/ /*uint8_t forceTrigger*/ /*) {

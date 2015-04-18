@@ -87,14 +87,14 @@ volatile uint8_t TARGETID; // should match _address
 volatile uint8_t PAYLOADLEN;
 volatile uint8_t ACK_REQUESTED;
 volatile uint8_t ACK_RECEIVED; // should be polled immediately after sending a packet with ACK request
-volatile int16_t RSSI; // most accurate RSSI during reception (closest to the reception)
+//volatile int16_t RSSI; // most accurate RSSI during reception (closest to the reception)
 
 
 void setAddress(uint8_t addr);
 void setNetwork(uint8_t networkID);
 uint8_t canSend();
 void send(uint8_t toAddress, const void* buffer, uint8_t bufferSize, uint8_t requestACK);
-uint8_t sendWithRetry(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_t retries);
+uint8_t sendWithRetry(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_t retries); // 40ms roundtrip req for 61byte packets
 uint8_t receiveDone(uint8_t fromNodeID);
 uint8_t ACKReceived(uint8_t fromNodeID);
 //uint8_t ACKRequested();

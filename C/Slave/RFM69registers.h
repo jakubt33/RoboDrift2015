@@ -314,6 +314,9 @@
 #define RF_FRFMSB_435             0x6C
 #define RF_FRFMID_435             0xC0
 #define RF_FRFLSB_435             0x00
+#define RF_FRFMSB_442             0x6E
+#define RF_FRFMID_442             0x90
+#define RF_FRFLSB_442             0x00
 // 868Mhz band
 #define RF_FRFMSB_863             0xD7
 #define RF_FRFMID_863             0xC0

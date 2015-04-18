@@ -94,7 +94,7 @@ void setAddress(uint8_t addr);
 void setNetwork(uint8_t networkID);
 uint8_t canSend();
 void send(uint8_t toAddress, const void* buffer, uint8_t bufferSize, uint8_t requestACK);
-//uint8_t sendWithRetry(uint8_t toAddress, const void* buffer, uint8_t bufferSize, uint8_t retries, uint8_t retryWaitTime); // 40ms roundtrip req for 61byte packets
+uint8_t sendWithRetry(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_t retries); // 40ms roundtrip req for 61byte packets
 uint8_t receiveDone(uint8_t fromNodeID);
 uint8_t ACKReceived(uint8_t fromNodeID);
 //uint8_t ACKRequested();

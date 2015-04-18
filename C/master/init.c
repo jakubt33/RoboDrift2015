@@ -7,8 +7,6 @@
 
 #include "io.h"
 #include <avr/io.h>
-#include <util/delay.h>
-
 
 void init_SPI_master(){
 	DDR_SPI |= (1 << SCK)|(1 << SS)|(1 << MOSI); // wyjcie na tych pinach
@@ -38,7 +36,6 @@ void init_LED() {
 	LED_FALSTART_OFF;
 
 	DDR_DIO &= ~(1<<DIO0);
-
 }
 
 
@@ -49,7 +46,7 @@ void init_USART( unsigned char ubrr){
 
     // W³¹czenie odbiornika i nadajnika
     UCSRB |= (1 << RXEN) | (1 << TXEN);
-    UCSRB |= (1 << RXCIE); //interrupt na receive
+    //UCSRB |= (1 << RXCIE); //interrupt na receive
 
     // Ustawienie formatu ramki: 8 bitów danych, 2 bit stopu
     UCSRC = (1 << URSEL) | (1 << USBS) | (3<<UCSZ0);

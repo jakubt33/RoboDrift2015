@@ -10,23 +10,30 @@
 #include <util/delay.h>
 #include "io.h"
 #include "communication.h"
+#include "RFM69.h"
 
 void ping(uint8_t numberOfSensors){
-	/*
 	uint8_t counter=1;
 	for(counter=1;counter<=numberOfSensors;counter++){
-		_delay_ms(500);
-		if( ((counter==3)&&((race+1)==3)) || ((counter==4)&&((race+1)==3)) ){
-			;
+		_delay_ms(200);
+		_delay_ms(200);
+		_delay_ms(200);
+		_delay_ms(200);
+		_delay_ms(200);
+		sensorPreview(counter);
+		if( sendWithRetry(counter+MASTER, COMMAND_PING,1,3) ){
+			numberPreview(counter);
+			_delay_ms(100);
+			numberPreview(0);
 		}
 		else{
-			sensorPreview(counter);
-			USART_Transmit(counter);
+			LED_FALSTART_ON;
+			_delay_ms(100);
+			LED_FALSTART_OFF;
 		}
 	}
-	_delay_ms(500);
 	sensorPreview(0);
-	USART_Transmit(0b11111111);*/
+	USART_Transmit(0b11111111);
 }
 
 void stopRace(){
@@ -89,6 +96,59 @@ void sensorPreview(uint8_t SensorNumber){
 		break;
 	}
 
+}
+void numberPreview(uint8_t SensorNumber){
+	switch(SensorNumber){
+	case 0:
+		LED1Y_OFF;
+		LED2Y_OFF;
+		LED3Y_OFF;
+		LED4Y_OFF;
+		LED5Y_OFF;
+		break;
+	case 1:
+		LED1Y_ON;
+		LED2Y_OFF;
+		LED3Y_OFF;
+		LED4Y_OFF;
+		LED5Y_OFF;
+		break;
+	case 2:
+		LED1Y_OFF;
+		LED2Y_ON;
+		LED3Y_OFF;
+		LED4Y_OFF;
+		LED5Y_OFF;
+		break;
+	case 3:
+		LED1Y_OFF;
+		LED2Y_OFF;
+		LED3Y_ON;
+		LED4Y_OFF;
+		LED5Y_OFF;
+		break;
+	case 4:
+		LED1Y_OFF;
+		LED2Y_OFF;
+		LED3Y_OFF;
+		LED4Y_ON;
+		LED5Y_OFF;
+		break;
+	case 5:
+		LED1Y_OFF;
+		LED2Y_OFF;
+		LED3Y_OFF;
+		LED4Y_OFF;
+		LED5Y_ON;
+		break;
+	default:
+		LED1Y_ON;
+		LED2Y_ON;
+		LED3Y_ON;
+		LED4Y_ON;
+		LED5Y_ON;
+		break;
+	}
 }
 
 void startCounter(uint8_t number){

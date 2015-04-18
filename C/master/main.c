@@ -31,21 +31,6 @@ ISR(SPI_STC_vect){
 volatile unsigned char dataFromPC=0;
 ISR(USART_RXC_vect){
     dataFromPC=UDR;
-    if(dataFromPC&0b10000000){ //if 0b1xxx xxxx  //ping
-    	LED_RED_ON;
-    	ping(0b00001111&dataFromPC); //get how many sensors to ping
-    }
-    else if(dataFromPC&0b01000000){ //if 0bx1xx xxxx  //countdown
-    	LED_RED_OFF;
-    	startCounter(dataFromPC&0b00001111);
-    }
-    else if(dataFromPC&0b00100000){ //stop
-    	stopRace();//disable sensors()
-    }
-    else if(dataFromPC&0b00010000){ //next sensor
-    	;//next sensor()
-    }
-    dataFromPC=0;
 }
 
 int main() {
@@ -58,23 +43,50 @@ int main() {
 
 	race=0;
 
+	setAddress(51);
 	char buffer;
 	while(1){
-		_delay_ms(50);
-		buffer = '1';
-		sendFrame(SENSOR1, buffer, 1, false, false);
-		if( sendWithRetry(SENSOR1, buffer, 1, 3) ){
+		ping(5);
+		_delay_ms(200);
+		_delay_ms(200);
+		_delay_ms(200);
+		_delay_ms(200);
+		_delay_ms(200);
+
+		/*
+	    if(dataFromPC&0b10000000){ //if 0b1xxx xxxx  //ping
+	    	LED_RED_ON;
+	    	ping(0b00001111&dataFromPC); //get how many sensors to ping
+	    }
+	    else if(dataFromPC&0b01000000){ //if 0bx1xx xxxx  //countdown
+	    	LED_RED_OFF;
+	    	startCounter(dataFromPC&0b00001111);
+	    }
+	    else if(dataFromPC&0b00100000){ //stop
+	    	stopRace();//disable sensors()
+	    }
+	    else if(dataFromPC&0b00010000){ //next sensor
+	    	;//next sensor()
+	    }
+	    dataFromPC=0;*/
+
+		/*
+	    _delay_ms(200);
+		//sendFrame(SENSOR2, '1', 1, false, false);
+		if( sendWithRetry(SENSOR1, '1', 1, 3) ){
 			sensorPreview(1);
 		}
 		else sensorPreview(3);
 
-		_delay_ms(50);
-		buffer = '2';
-		sendFrame(SENSOR1, buffer, 1, false, false);
-		if( sendWithRetry(SENSOR1, buffer, 1, 3) )	{
+		_delay_ms(200);
+		//sendFrame(SENSOR2, '2', 1, false, false);
+		if( sendWithRetry(SENSOR2, '1', 1, 3) ){
 			sensorPreview(2);
 		}
 		else sensorPreview(4);
+		*/
+
+
 
 		/*if(raceFlag){
 			_delay_ms(200);

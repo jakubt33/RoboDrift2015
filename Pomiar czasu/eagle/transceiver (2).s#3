@@ -21974,13 +21974,6 @@ Grid 2.54 mm&lt;p&gt;
 <junction x="299.72" y="58.42"/>
 </segment>
 </net>
-<net name="N$3" class="0">
-<segment>
-<pinref part="TSAL6200" gate="G$1" pin="A"/>
-<pinref part="JP2" gate="G$1" pin="RIGHT"/>
-<wire x1="182.88" y1="167.64" x2="175.26" y2="167.64" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="N$19" class="0">
 <segment>
 <pinref part="U$1" gate="G$1" pin="P$POS"/>
@@ -22198,6 +22191,14 @@ Grid 2.54 mm&lt;p&gt;
 <segment>
 <pinref part="S1" gate="G$1" pin="8"/>
 <pinref part="R21" gate="G$1" pin="1"/>
+</segment>
+</net>
+<net name="N$3" class="0">
+<segment>
+<pinref part="JP2" gate="G$1" pin="LEFT"/>
+<pinref part="TSAL6200" gate="G$1" pin="A"/>
+<wire x1="175.26" y1="165.1" x2="182.88" y2="165.1" width="0.1524" layer="91"/>
+<wire x1="182.88" y1="165.1" x2="182.88" y2="167.64" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>

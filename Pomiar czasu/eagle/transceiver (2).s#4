@@ -21219,8 +21219,8 @@ Grid 2.54 mm&lt;p&gt;
 <part name="JP2" library="SparkFun-Connectors" deviceset="AUDIO-JACK" device="PTH"/>
 <part name="JP3" library="SparkFun-Connectors" deviceset="AUDIO-JACK" device="PTH"/>
 <part name="X1" library="con-phoenix-254" deviceset="MPT2" device=""/>
-<part name="R20" library="rcl" deviceset="R-EU_" device="R1206"/>
-<part name="R21" library="rcl" deviceset="R-EU_" device="R1206"/>
+<part name="R20" library="rcl" deviceset="R-EU_" device="R1206" value="0R"/>
+<part name="R21" library="rcl" deviceset="R-EU_" device="R1206" value="0R"/>
 </parts>
 <sheets>
 <sheet>

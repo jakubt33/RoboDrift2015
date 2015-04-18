@@ -48,9 +48,9 @@ uint8_t init_RFM69(){
 	    /* 0x05 */ { REG_FDEVMSB, RF_FDEVMSB_5000}, // default: 5KHz, (FDEV + BitRate / 2 <= 500KHz)
 	    /* 0x06 */ { REG_FDEVLSB, RF_FDEVLSB_5000},
 
-	    /* 0x07 */ { REG_FRFMSB, (uint8_t) (RF_FRFMSB_433) },
-	    /* 0x08 */ { REG_FRFMID, (uint8_t) (RF_FRFMID_433) },
-	    /* 0x09 */ { REG_FRFLSB, (uint8_t) (RF_FRFLSB_433) },
+	    /* 0x07 */ { REG_FRFMSB, (uint8_t) (RF_FRFMSB_442) },
+	    /* 0x08 */ { REG_FRFMID, (uint8_t) (RF_FRFMID_442) },
+	    /* 0x09 */ { REG_FRFLSB, (uint8_t) (RF_FRFLSB_442) },
 
 	    // looks like PA1 and PA2 are not implemented on RFM69W, hence the max output power is 13dBm
 	    // +17dBm and +20dBm are possible on RFM69HW
@@ -114,10 +114,19 @@ uint8_t sendWithRetry(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_
 		receiveBegin();
 		for(j=0;j<255;j++){ //cant be while - infinite loop(is sth goes wrng)
 			if( receiveDone(toAddress) ){
+				if( (dataReceived == COMMAND_PING_OK) && (buffer == COMMAND_PING)){
+					sei();
+					return true;
+				}
+				else if (buffer == COMMAND_PING){
+					sei();
+					return false;
+				}
 				sei();
 				return true;
 			}
-			_delay_us(50); //		VIN - VERY IMPORTANT NUMBER! cant be too low
+			_delay_us(200);
+			_delay_us(200); //		VIN - VERY IMPORTANT NUMBER! cant be too low
 		}
 	}
 	sei();

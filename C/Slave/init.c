@@ -51,16 +51,22 @@ void init_IO() {
 void init_TSAL(){
 	TCCR1B |= (1<<WGM12)|(1<<CS10); //CTC max OCR1A, prescaler1
 	TCCR1A |= (1<<COM1A0); //toggle PB1 on compare match
-	OCR1A = 12; //to get f~38khz 12
+	OCR1A = 104; //to get f~37khz 12
 	TCNT1 = 0;
+}
 
-    TIMSK |= (1<<OCIE1A); //Interrupt enable on comapre match
-    //TIFR |= (1<<OCF1A);
+void TSAL_interrput_OnOff(uint8_t OnOff){
+	if(OnOff){
+	    TIMSK |= (1<<OCIE1A); //Interrupt enable on comapre match
+	}
+	else{
+		TIMSK &= ~(1<<OCIE1A);
+	}
 }
 
 void init_batteries() {
 	ADMUX |= (1<<MUX2)|(1<<MUX1); //ADC6
-	ADCSRA |= (1<<ADPS1) | (1<<ADPS0); //prescaler 8  100000/8=125khz adc
+	ADCSRA |= (1<<ADPS1) | (1<<ADPS2); //prescaler 8  100000/8=125khz adc
 	ADMUX |= (1<<ADLAR); //left adjutment
 	ADMUX |= (1<<REFS0); //avcc with external capacitor at AREF pin
 
