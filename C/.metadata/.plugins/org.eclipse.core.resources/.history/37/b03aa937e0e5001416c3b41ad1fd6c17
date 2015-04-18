@@ -115,12 +115,15 @@ int main() {
 		ADC_level=check_ADC();
 		_delay_ms(3);
 		if ( receiveDone(0) ) { //0 because its not an answer to ACKrequest and there's no senderID yet
-			if(dataReceived == '1'){
+			if(dataReceived == COMMAND_PING){
+				RaceStart = true;
+				RaceStart=false;
 				showID(myAddress-MASTER);
 			}
 			else if(dataReceived=='2'){
 				showID(2);
 			}
+			else showID(3);
 			receiveBegin();
 		}
 		else {

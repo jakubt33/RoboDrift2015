@@ -35,12 +35,12 @@ void checkButtons(){
 		LED4_OFF;
 		LED5_OFF;
 		showID(SensorID);
-		_delay_ms(200);
+		_delay_ms(150);
 
 		uint8_t wait=1;
 		while(wait){
 			if(bit_is_clear(PIN_SWITCH, SWITCH_UP)){
-				_delay_ms(200);
+				_delay_ms(150);
 				SensorID++;
 				if(SensorID>5){
 					SensorID=1;
@@ -48,7 +48,7 @@ void checkButtons(){
 				showID(SensorID);
 			}
 			if(bit_is_clear(PIN_SWITCH, SWITCH_DOWN)){
-				_delay_ms(200);
+				_delay_ms(150);
 				SensorID--;
 				if(SensorID==255){
 					SensorID=5;

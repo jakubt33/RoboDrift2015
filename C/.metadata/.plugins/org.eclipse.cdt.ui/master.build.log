@@ -1,16 +1,9 @@
-14:14:28 **** Incremental Build of configuration Debug for project master ****
+17:12:24 **** Incremental Build of configuration Debug for project master ****
 make all 
-Building file: ../RFM69.c
+Building file: ../communication.c
 Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"RFM69.d" -MT"RFM69.d" -c -o "RFM69.o" "../RFM69.c"
-Finished building: ../RFM69.c
- 
-Building file: ../main.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
-../main.c: In function 'main':
-../main.c:47: warning: unused variable 'buffer'
-Finished building: ../main.c
+avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"communication.d" -MT"communication.d" -c -o "communication.o" "../communication.c"
+Finished building: ../communication.c
  
 Building target: master.elf
 Invoking: AVR C Linker
@@ -31,7 +24,7 @@ AVR Memory Usage
 ----------------
 Device: atmega8
 
-Program:    2692 bytes (32.9% Full)
+Program:    2678 bytes (32.7% Full)
 (.text + .data + .bootloader)
 
 Data:        145 bytes (14.2% Full)
@@ -41,5 +34,5 @@ Data:        145 bytes (14.2% Full)
 Finished building: sizedummy
  
 
-14:14:29 Build Finished (took 1s.76ms)
+17:12:25 Build Finished (took 1s.121ms)
 

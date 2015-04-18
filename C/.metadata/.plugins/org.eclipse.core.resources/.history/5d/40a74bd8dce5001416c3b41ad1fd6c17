@@ -152,26 +152,19 @@ uint8_t receiveDone(uint8_t fromNodeID) {
 				TSAL_OnOff(false);
 				RaceStart = false;
 
-				//sendFrame(SENDERID, COMMAND_PING_OK, 1, false, true);
-				sendWithRetry(SENDERID, COMMAND_PING_OK, 1, 10);
-
+				sendFrame(SENDERID, COMMAND_PING_OK, 1, false, true);
 				showID(6);
 				_delay_ms(150);
-				showID(myAddress-MASTER);
-				return false;
 			}
 			else {
 				RaceStart = false;
 				TSAL_OnOff(false);
 				sendFrame(SENDERID, COMMAND_PING_NO_OK, 1, false, true);
 				showID(6); //need to be hashed
-				_delay_ms(50);//too
+				_delay_ms(30);//too
 				showID(0); //need to be hashed
-				_delay_ms(50);//too
 				showID(6); //need to be hashed
-				_delay_ms(50);//too
-				showID(myAddress-MASTER);
-				return false;
+				_delay_ms(30);//too
 			}
 		}
 		if(ACK_RECEIVED){

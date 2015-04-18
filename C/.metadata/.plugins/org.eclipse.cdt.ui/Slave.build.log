@@ -1,9 +1,9 @@
-15:02:46 **** Incremental Build of configuration Debug for project Slave ****
+17:39:19 **** Incremental Build of configuration Debug for project Slave ****
 make all 
-Building file: ../main.c
+Building file: ../RFM69.c
 Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"main.d" -MT"main.d" -c -o "main.o" "../main.c"
-Finished building: ../main.c
+avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"RFM69.d" -MT"RFM69.d" -c -o "RFM69.o" "../RFM69.c"
+Finished building: ../RFM69.c
  
 Building target: Slave.elf
 Invoking: AVR C Linker
@@ -24,7 +24,7 @@ AVR Memory Usage
 ----------------
 Device: atmega8
 
-Program:    2900 bytes (35.4% Full)
+Program:    2940 bytes (35.9% Full)
 (.text + .data + .bootloader)
 
 Data:        147 bytes (14.4% Full)
@@ -34,5 +34,5 @@ Data:        147 bytes (14.4% Full)
 Finished building: sizedummy
  
 
-15:02:47 Build Finished (took 780ms)
+17:39:20 Build Finished (took 1s.154ms)
 

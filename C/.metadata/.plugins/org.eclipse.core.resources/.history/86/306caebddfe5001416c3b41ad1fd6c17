@@ -153,12 +153,10 @@ uint8_t receiveDone(uint8_t fromNodeID) {
 				RaceStart = false;
 
 				//sendFrame(SENDERID, COMMAND_PING_OK, 1, false, true);
-				sendWithRetry(SENDERID, COMMAND_PING_OK, 1, 10);
+				sendWithRetry(SENDERID, COMMAND_PING_OK, 1, 3);
 
 				showID(6);
 				_delay_ms(150);
-				showID(myAddress-MASTER);
-				return false;
 			}
 			else {
 				RaceStart = false;
@@ -170,8 +168,6 @@ uint8_t receiveDone(uint8_t fromNodeID) {
 				_delay_ms(50);//too
 				showID(6); //need to be hashed
 				_delay_ms(50);//too
-				showID(myAddress-MASTER);
-				return false;
 			}
 		}
 		if(ACK_RECEIVED){

@@ -17,8 +17,6 @@ void ping(uint8_t numberOfSensors){
 	for(counter=1;counter<=numberOfSensors;counter++){
 		_delay_ms(200);
 		_delay_ms(200);
-		_delay_ms(200);
-		_delay_ms(200);
 		sensorPreview(counter);
 		if( sendWithRetry(counter+MASTER, COMMAND_PING,1,3) ){
 			numberPreview(counter);

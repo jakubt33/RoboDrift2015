@@ -157,7 +157,6 @@ uint8_t receiveDone(uint8_t fromNodeID) {
 
 				showID(6);
 				_delay_ms(150);
-				showID(myAddress-MASTER);
 				return false;
 			}
 			else {
@@ -170,7 +169,6 @@ uint8_t receiveDone(uint8_t fromNodeID) {
 				_delay_ms(50);//too
 				showID(6); //need to be hashed
 				_delay_ms(50);//too
-				showID(myAddress-MASTER);
 				return false;
 			}
 		}

@@ -170,7 +170,7 @@ uint8_t receiveDone(uint8_t fromNodeID) {
 				_delay_ms(50);//too
 				showID(6); //need to be hashed
 				_delay_ms(50);//too
-				showID(myAddress-MASTER);
+				showID(0); //need to be hashed
 				return false;
 			}
 		}
