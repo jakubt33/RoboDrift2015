@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.05" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -21210,11 +21210,10 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <part name="JP3" library="SparkFun-Connectors" deviceset="AUDIO-JACK" device="PTH"/>
 <part name="X1" library="con-phoenix-254" deviceset="MPT2" device=""/>
 <part name="R20" library="rcl" deviceset="R-EU_" device="R1206" value="0R"/>
-<part name="R22" library="resistor" deviceset="R-EU_" device="R0805" value="330k"/>
+<part name="R40" library="resistor" deviceset="R-EU_" device="R0805" value="220R"/>
 <part name="GND9" library="supply1" deviceset="GND" device=""/>
 <part name="R21" library="resistor" deviceset="R-EU_" device="R0805" value="220R"/>
 <part name="GND10" library="supply1" deviceset="GND" device=""/>
-<part name="R23" library="resistor" deviceset="R-EU_" device="R0805" value="820k"/>
 <part name="GND11" library="supply1" deviceset="GND" device=""/>
 <part name="R28" library="rcl" deviceset="R-EU_" device="R1206" value="0R"/>
 <part name="R31" library="rcl" deviceset="R-EU_" device="R1206" value="0R"/>
@@ -21229,6 +21228,7 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <part name="S1" library="smd-special" deviceset="SWS004" device=""/>
 <part name="R24" library="rcl" deviceset="R-EU_" device="R1206" value="0R"/>
 <part name="R25" library="rcl" deviceset="R-EU_" device="R1206" value="0R"/>
+<part name="D7" library="diode" deviceset="ZENER-DIODE" device="SOD80C"/>
 </parts>
 <sheets>
 <sheet>
@@ -21273,10 +21273,10 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <instance part="+3V2" gate="G$1" x="27.94" y="88.9"/>
 <instance part="+3V3" gate="G$1" x="33.02" y="45.72"/>
 <instance part="GND3" gate="1" x="35.56" y="48.26"/>
-<instance part="TSAL6200" gate="G$1" x="185.42" y="165.1" rot="R90"/>
+<instance part="TSAL6200" gate="G$1" x="193.04" y="165.1" rot="R90"/>
 <instance part="P+2" gate="1" x="210.82" y="142.24"/>
 <instance part="GND4" gate="1" x="198.12" y="109.22"/>
-<instance part="R1" gate="G$1" x="154.94" y="139.7" rot="R90"/>
+<instance part="R1" gate="G$1" x="182.88" y="165.1" rot="R180"/>
 <instance part="GND5" gate="1" x="154.94" y="106.68"/>
 <instance part="U1" gate="G$1" x="182.88" y="55.88"/>
 <instance part="U$2" gate="G$1" x="325.12" y="63.5" rot="R180"/>
@@ -21426,11 +21426,10 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <instance part="X1" gate="-1" x="40.64" y="157.48" rot="R270"/>
 <instance part="X1" gate="-2" x="35.56" y="157.48" rot="R270"/>
 <instance part="R20" gate="G$1" x="12.7" y="40.64" rot="R90"/>
-<instance part="R22" gate="G$1" x="205.74" y="121.92"/>
+<instance part="R40" gate="G$1" x="205.74" y="121.92"/>
 <instance part="GND9" gate="1" x="215.9" y="109.22"/>
 <instance part="R21" gate="G$1" x="210.82" y="132.08" rot="R90"/>
 <instance part="GND10" gate="1" x="193.04" y="134.62"/>
-<instance part="R23" gate="G$1" x="215.9" y="116.84" rot="R90"/>
 <instance part="GND11" gate="1" x="160.02" y="63.5" smashed="yes">
 <attribute name="VALUE" x="161.29" y="63.5" size="1.778" layer="96"/>
 </instance>
@@ -21455,6 +21454,7 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <instance part="S1" gate="G$1" x="160.02" y="55.88" rot="R90"/>
 <instance part="R24" gate="G$1" x="215.9" y="68.58" rot="R180"/>
 <instance part="R25" gate="G$1" x="205.74" y="68.58" rot="R180"/>
+<instance part="D7" gate="G$1" x="215.9" y="116.84" rot="R90"/>
 </instances>
 <busses>
 </busses>
@@ -21464,11 +21464,6 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <pinref part="P+5" gate="1" pin="+5V"/>
 <pinref part="R19" gate="G$1" pin="2"/>
 <wire x1="332.74" y1="142.24" x2="332.74" y2="144.78" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="P+3" gate="1" pin="+5V"/>
-<pinref part="R1" gate="G$1" pin="2"/>
-<wire x1="154.94" y1="144.78" x2="154.94" y2="147.32" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="C14" gate="G$1" pin="+"/>
@@ -21488,6 +21483,11 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <pinref part="R21" gate="G$1" pin="2"/>
 <pinref part="P+2" gate="1" pin="+5V"/>
 <wire x1="210.82" y1="139.7" x2="210.82" y2="137.16" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="P+3" gate="1" pin="+5V"/>
+<pinref part="JP1" gate="G$1" pin="LEFT"/>
+<wire x1="154.94" y1="147.32" x2="154.94" y2="129.54" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="+3V3" class="0">
@@ -21561,10 +21561,11 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <net name="TSOP_OUT" class="0">
 <segment>
 <label x="215.9" y="124.46" size="1.27" layer="95" rot="R90" xref="yes"/>
-<pinref part="R22" gate="G$1" pin="2"/>
+<pinref part="R40" gate="G$1" pin="2"/>
 <wire x1="215.9" y1="121.92" x2="215.9" y2="124.46" width="0.1524" layer="91"/>
 <wire x1="215.9" y1="121.92" x2="210.82" y2="121.92" width="0.1524" layer="91"/>
-<pinref part="R23" gate="G$1" pin="2"/>
+<pinref part="D7" gate="G$1" pin="C"/>
+<wire x1="215.9" y1="119.38" x2="215.9" y2="121.92" width="0.1524" layer="91"/>
 <junction x="215.9" y="121.92"/>
 </segment>
 <segment>
@@ -21846,10 +21847,10 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 </net>
 <net name="N$22" class="0">
 <segment>
-<wire x1="175.26" y1="170.18" x2="193.04" y2="170.18" width="0.1524" layer="91"/>
-<wire x1="193.04" y1="170.18" x2="193.04" y2="165.1" width="0.1524" layer="91"/>
+<wire x1="175.26" y1="170.18" x2="200.66" y2="170.18" width="0.1524" layer="91"/>
+<wire x1="200.66" y1="170.18" x2="200.66" y2="165.1" width="0.1524" layer="91"/>
 <pinref part="TSAL6200" gate="G$1" pin="C"/>
-<wire x1="193.04" y1="165.1" x2="190.5" y2="165.1" width="0.1524" layer="91"/>
+<wire x1="200.66" y1="165.1" x2="198.12" y2="165.1" width="0.1524" layer="91"/>
 <pinref part="JP2" gate="G$1" pin="SLEEVE"/>
 </segment>
 </net>
@@ -21968,13 +21969,6 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <pinref part="U$1" gate="G$1" pin="P$POS"/>
 <pinref part="X1" gate="-2" pin="1"/>
 <wire x1="30.48" y1="160.02" x2="35.56" y2="160.02" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$8" class="0">
-<segment>
-<pinref part="R1" gate="G$1" pin="1"/>
-<pinref part="JP1" gate="G$1" pin="LEFT"/>
-<wire x1="154.94" y1="134.62" x2="154.94" y2="129.54" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$14" class="0">
@@ -22119,10 +22113,6 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <junction x="198.12" y="137.16"/>
 </segment>
 <segment>
-<pinref part="R23" gate="G$1" pin="1"/>
-<pinref part="GND9" gate="1" pin="GND"/>
-</segment>
-<segment>
 <wire x1="284.48" y1="45.72" x2="287.02" y2="43.18" width="0.1524" layer="91"/>
 <pinref part="GND8" gate="1" pin="GND"/>
 <wire x1="287.02" y1="43.18" x2="292.1" y2="43.18" width="0.1524" layer="91"/>
@@ -22159,6 +22149,11 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <wire x1="160.02" y1="66.04" x2="162.56" y2="66.04" width="0.1524" layer="91"/>
 <junction x="160.02" y="66.04"/>
 </segment>
+<segment>
+<pinref part="D7" gate="G$1" pin="A"/>
+<pinref part="GND9" gate="1" pin="GND"/>
+<wire x1="215.9" y1="114.3" x2="215.9" y2="111.76" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="N$15" class="0">
 <segment>
@@ -22176,17 +22171,10 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <wire x1="332.74" y1="129.54" x2="332.74" y2="132.08" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$3" class="0">
-<segment>
-<pinref part="JP2" gate="G$1" pin="LEFT"/>
-<pinref part="TSAL6200" gate="G$1" pin="A"/>
-<wire x1="175.26" y1="165.1" x2="182.88" y2="165.1" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="N$1" class="0">
 <segment>
 <pinref part="TSOP" gate="G$1" pin="OUT"/>
-<pinref part="R22" gate="G$1" pin="1"/>
+<pinref part="R40" gate="G$1" pin="1"/>
 <wire x1="200.66" y1="121.92" x2="198.12" y2="121.92" width="0.1524" layer="91"/>
 </segment>
 </net>
@@ -22323,6 +22311,20 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <pinref part="U1" gate="G$1" pin="DIO0"/>
 <wire x1="198.12" y1="68.58" x2="200.66" y2="68.58" width="0.1524" layer="91"/>
 <pinref part="R25" gate="G$1" pin="2"/>
+</segment>
+</net>
+<net name="N$3" class="0">
+<segment>
+<pinref part="JP2" gate="G$1" pin="LEFT"/>
+<pinref part="R1" gate="G$1" pin="2"/>
+<wire x1="177.8" y1="165.1" x2="175.26" y2="165.1" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$8" class="0">
+<segment>
+<pinref part="TSAL6200" gate="G$1" pin="A"/>
+<pinref part="R1" gate="G$1" pin="1"/>
+<wire x1="187.96" y1="165.1" x2="190.5" y2="165.1" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>

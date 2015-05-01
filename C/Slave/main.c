@@ -10,21 +10,26 @@
 #include "RFM69.h"
 #include "RFM69registers.h"
 
-#define BURST 8 //1 BURST~=103us //30: 15cycles/burst
-#define GAP 8	//1 GAP~=103us
-#define BURST_L 3 //1 BURST_L=(BURST+GAP)*103us
-#define GAP_L 3
+
+#define BURST 30 //1 BURST~=103us //30: 15cycles/burst
+#define GAP 20	//1 GAP~=103us
+#define BURST_L 20 //1 BURST_L=(BURST+GAP)*103us
+#define GAP_L 1
+volatile uint8_t time_counter_coarse;
+volatile uint8_t time_counter_fine;
+volatile uint8_t logical_change;
+volatile uint8_t vehicle_ready;
 ISR(TIMER1_COMPA_vect){
 	if(RaceStart){
+		time_counter_fine++;
 		if(TsalGapCounter<BURST_L){//no gap
 			//LED5_ON;
-			//........................600us tsal is set, 600us tsal is down
 			if(TsalCounter<BURST){
-				TSAL_ON;
+				TSAL_OnOff(true);
 				//LED4_ON;
 				TsalCounter++;
 			}else if(TsalCounter<BURST+GAP){
-				TSAL_OFF;
+				TSAL_OnOff(false);
 				//LED4_OFF;
 				TsalCounter++;
 				if(TsalCounter>=BURST+GAP){
@@ -35,11 +40,10 @@ ISR(TIMER1_COMPA_vect){
 					}
 				}
 			}
-			//........................600us tsal is set, 600us tsal is down
 		}
 		else if(TsalGapCounter<BURST_L+GAP_L){//gap
 			//LED5_OFF;
-			TSAL_OFF;
+			TSAL_OnOff(false);
 			if(TsalCounter<BURST){
 				TsalCounter++;
 				//LED4_ON;
@@ -55,21 +59,41 @@ ISR(TIMER1_COMPA_vect){
 				}
 			}
 		}
+
+		if(vehicle_ready){
+			if(time_counter_fine>=75){
+				time_counter_fine=0;
+				time_counter_coarse++;
+				if(time_counter_coarse>=2){ //after 6
+					vehicle_in_flag = true;
+					vehicle_ready = false;
+					RaceStart=false;
+					time_counter_fine=0;
+					time_counter_coarse=0;
+				}
+			}
+		}
+
 	}
 	else{
-		TSAL_OFF;
+		TSAL_OnOff(false);
+		//LED5_OFF;
+		//LED4_OFF;
 	}
 }
 
 ISR(INT0_vect){
-	_delay_us(10); //wait to be sure
-	if(bit_is_set(PIN_TSOP, TSOP)){ 	//TSAL----||----TSOP
-		;//LED1_ON;
-		//LED2_OFF;
-	}
-	else{ 								//TSAL -------- TSOP
-		;//LED2_ON;
-		//LED1_OFF;
+	if(RaceStart){
+		if(bit_is_set(PIN_TSOP, TSOP)){ 	//TSAL----||----TSOP
+			time_counter_coarse=0;
+			time_counter_fine=0; //start time measuring
+			logical_change=0;
+		}
+		else {
+			logical_change++;
+			vehicle_ready = true;
+			vehicle_in_flag = false;
+		}
 	}
 }
 
@@ -92,10 +116,10 @@ ISR(TIMER2_OVF_vect){
 }
 
 int main() {
-
+	//10ms with TSAL modulation = 600ms without
 	init_IO();
 	init_TSAL();
-	TSAL_OnOff(false);
+	race_OnOff(0);
 	init_TSOP();
 	init_batteries();
 	init_SPI_master();
@@ -104,52 +128,63 @@ int main() {
 	_delay_ms(5);
 	ADC_level=check_ADC();
 	SensorID=0;
-	sei();
 
-	setAddress(SENSOR1);
+	setAddress(SENSOR5);
 	showID(myAddress-MASTER);
-	RaceStart = false;
+	receiveBegin();
+
+	time_counter_coarse=0;
+	time_counter_fine=0;
+	vehicle_in_flag = false;
+	logical_change=1;
+	vehicle_ready = true;
+	sei();
 	while(1){
-		///*
-		receiveBegin();
-		ADC_level=check_ADC();
-		_delay_ms(3);
-		if ( receiveDone(0) ) { //0 because its not an answer to ACKrequest and there's no senderID yet
-			if(dataReceived == '1'){
-				showID(myAddress-MASTER);
-			}
-			else if(dataReceived=='2'){
-				showID(2);
-			}
+		if(mode != RF69_MODE_RX){
 			receiveBegin();
 		}
-		else {
+		//cli();
+		ADC_level=check_ADC();
+		//sei();
+		//_delay_us(20);
+
+		if(vehicle_in_flag){
+			cli();
+			showID(6);
+			sendWithRetry(MASTER, VEHICLE_IN, false, 5);
+			logical_change=1;
+			time_counter_fine=0;
+			time_counter_coarse=0;
+			_delay_ms(200);
+			_delay_ms(200);
+			_delay_ms(200);
+			_delay_ms(200);
+			_delay_ms(200);
+			_delay_ms(200);
+			vehicle_in_flag=false;
+			RaceStart=true;
+			showID(myAddress-MASTER);
+			sei();
+		}
+		cli();
+		if ( receiveDone(0) ) { //0 because its not an answer to ACKrequest and there's no senderID yet
+			if(dataReceived == BEACTIVE_TRUE){
+				race_OnOff(true);
+			}
+			else if(dataReceived == 0){
+				showID(6);
+				_delay_ms(200);
+				showID(myAddress-MASTER);
+				race_OnOff(false);
+			}
+			receiveBegin();
+			vehicle_in_flag=false;
+		}
+		sei();
+		if(!RaceStart) {
+			cli();
 			checkButtons();
+			sei();
 		}
-		//*/
-		/*
-	    _delay_ms(200);
-		//sendFrame(SENSOR2, '1', 1, false, false);
-		if( sendWithRetry(SENSOR2, '1', 1, 3) ){
-			showID(1);
-		}
-		else showID(3);
-
-		_delay_ms(200);
-		//sendFrame(SENSOR2, '2', 1, false, false);
-		if( sendWithRetry(SENSOR2, '2', 1, 3) ){
-			showID(2);
-		}
-		else showID(4);
-		*/
-
-		/*
-		if(bit_is_clear(PIN_TSOP, TSOP)){
-			showID(1);
-		}
-		else{
-			showID(3);
-		}
-		*/
 	}
 }

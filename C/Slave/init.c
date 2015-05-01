@@ -6,10 +6,12 @@
  */
 
 #include <avr/io.h>
+#include <avr/interrupt.h>
 #include "io.h"
 #include "main.h"
 #include "RFM69registers.h"
 #include "RFM69.h"
+#include "init.h"
 
 void init_SPI_master(){
 	DDR_SPI |= (1 << SCK)|(1 << SS)|(1 << MOSI); // wyjcie na tych pinach
@@ -28,7 +30,6 @@ void init_IO() {
 	DDR_LED_BATT |= (1 << LED_BATT_RED);
 
 	DDR_STRIPE |= (1 << LED_STRIPE);
-	DDR_TSAL |= (1 <<  TSAL_ENABLE);
 
 	DDR_SWITCH &= ~(1 << SWITCH_DOWN);
 	DDR_SWITCH &= ~(1 << SWITCH_OK);
@@ -49,22 +50,34 @@ void init_IO() {
 }
 
 void init_TSAL(){
+	DDR_TSAL |= (1<<TSAL_ENABLE);
 	TCCR1B |= (1<<WGM12)|(1<<CS10); //CTC max OCR1A, prescaler1
 	TCCR1A |= (1<<COM1A0); //toggle PB1 on compare match
 	OCR1A = 104; //to get f~37khz 12
 	TCNT1 = 0;
+	TIMSK |= (1<<OCIE1A);
 }
 
-void TSAL_OnOff(uint8_t OnOff){
+void race_OnOff(uint8_t OnOff){
+	//cli();
 	if(OnOff){
-		TCCR1A |= (1<<COM1A0);
-		//TSAL_ON;
 	    TIMSK |= (1<<OCIE1A); //Interrupt enable on comapre match
 	}
 	else{
-		TCCR1A &= ~(1<<COM1A0);
-		TSAL_OFF;
 		TIMSK &= ~(1<<OCIE1A);
+	}
+	RaceStart = OnOff;
+	TSAL_OnOff(OnOff);
+	//sei();
+}
+void TSAL_OnOff(uint8_t OnOff){
+	if(OnOff){
+		TSAL_ON_CTC;
+		TSAL_ON_DDR;
+	}
+	else{
+		TSAL_OFF_CTC;
+		TSAL_OFF_DDR;
 	}
 }
 
@@ -91,6 +104,7 @@ uint8_t check_ADC(){
 }
 void init_TSOP(){
 	DDRD &= ~(1<<PD2);
-	MCUCR |= (0<<ISC01)|(1<<ISC00); //any logical change generates interrupt request
+	PORTD |= (1<<PD2);
+	MCUCR |= (0<<ISC01)|(1<<ISC00); //any change generates interrupt request
 	GICR |= (1<<INT0);
 }

@@ -11,35 +11,43 @@
 #include "io.h"
 #include "communication.h"
 #include "RFM69.h"
+#include "main.h"
+
 
 void ping(uint8_t numberOfSensors){
 	uint8_t counter=1;
+	numberPreview(0);
 	for(counter=1;counter<=numberOfSensors;counter++){
-		_delay_ms(200);
-		_delay_ms(200);
-		_delay_ms(200);
-		_delay_ms(200);
 		sensorPreview(counter);
-		if( sendWithRetry(counter+MASTER, COMMAND_PING,1,3) ){
-			numberPreview(counter);
-			_delay_ms(100);
-			numberPreview(0);
-		}
-		else{
-			LED_FALSTART_ON;
-			_delay_ms(100);
-			LED_FALSTART_OFF;
-		}
+		PingTARGET = counter+MASTER;
+		sendWithRetry(counter+MASTER, COMMAND_PING,1,5);
+		sensorPreview(0);
+		_delay_ms(200);
 	}
+	cli();
+	PingTARGET = 0;
 	sensorPreview(0);
+	_delay_ms(50);
 	USART_Transmit(0b11111111);
+	sei();
+
 }
 
 void stopRace(){
-	raceFlag=0;//stop sensors
+	setMode(RF69_MODE_STANDBY);
 	LED_RED_OFF;
 	LED_FALSTART_OFF;
 	LED_GO_OFF;
+	sensorPreview(6);
+	numberPreview(0);
+	uint8_t i=0;
+	SPI_receiveFlag=false;
+	for(i=1; i<=5; i++){
+		sendWithRetry(i+MASTER, BEACTIVE_FALSE, 1, 5); //wy³¹cz tsala
+		_delay_ms(100);
+	}
+	LED_GO_ON;
+	receiveBegin();
 }
 
 void sensorPreview(uint8_t SensorNumber){
@@ -107,37 +115,17 @@ void numberPreview(uint8_t SensorNumber){
 		break;
 	case 1:
 		LED1Y_ON;
-		LED2Y_OFF;
-		LED3Y_OFF;
-		LED4Y_OFF;
-		LED5Y_OFF;
 		break;
 	case 2:
-		LED1Y_OFF;
 		LED2Y_ON;
-		LED3Y_OFF;
-		LED4Y_OFF;
-		LED5Y_OFF;
 		break;
 	case 3:
-		LED1Y_OFF;
-		LED2Y_OFF;
 		LED3Y_ON;
-		LED4Y_OFF;
-		LED5Y_OFF;
 		break;
 	case 4:
-		LED1Y_OFF;
-		LED2Y_OFF;
-		LED3Y_OFF;
 		LED4Y_ON;
-		LED5Y_OFF;
 		break;
 	case 5:
-		LED1Y_OFF;
-		LED2Y_OFF;
-		LED3Y_OFF;
-		LED4Y_OFF;
 		LED5Y_ON;
 		break;
 	default:
@@ -154,23 +142,38 @@ void startCounter(uint8_t number){
 	switch (number){
 	case 1:
 		LED1Y_ON;
-		raceFlag=0;
+		LED2Y_OFF;
+		LED3Y_OFF;
+		LED4Y_OFF;
+		LED5Y_OFF;
 		break;
 	case 2:
+		LED1Y_ON;
 		LED2Y_ON;
-		raceFlag=0;
+		LED3Y_OFF;
+		LED4Y_OFF;
+		LED5Y_OFF;
 		break;
 	case 3:
+		LED1Y_ON;
+		LED2Y_ON;
 		LED3Y_ON;
-		raceFlag=0;
+		LED4Y_OFF;
+		LED5Y_OFF;
 		break;
 	case 4:
+		LED1Y_ON;
+		LED2Y_ON;
+		LED3Y_ON;
 		LED4Y_ON;
-		raceFlag=0;
+		LED5Y_OFF;
 		break;
 	case 5:
+		LED1Y_ON;
+		LED2Y_ON;
+		LED3Y_ON;
+		LED4Y_ON;
 		LED5Y_ON;
-		raceFlag=0;
 		break;
 	case 0:
 		LED1Y_OFF;
@@ -180,9 +183,6 @@ void startCounter(uint8_t number){
 		LED5Y_OFF;
 		LED_GO_ON;
 		LED_FALSTART_OFF;
-		raceFlag=1;
-		race++;
-		if(race>3) race=1;
 		break;
 	case 15:
 		LED1Y_OFF;
@@ -192,7 +192,6 @@ void startCounter(uint8_t number){
 		LED5Y_OFF;
 		LED_GO_OFF;
 		LED_FALSTART_ON;
-		raceFlag=0;
 		break;
 	}
 }
@@ -206,9 +205,11 @@ char spi_send(char data)
 
 void USART_Transmit(unsigned char data)
 {
+	cli();
     //wait for empty transmit buffer
     while ( !(UCSRA & (1<<UDRE)) );
 
     //put data into buffer, sends data
     UDR = data;
+    sei();
 }

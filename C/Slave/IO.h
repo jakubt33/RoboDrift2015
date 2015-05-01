@@ -10,6 +10,7 @@
 
 //------------------------------------
 #define DDR_LED DDRC
+#define PORT_LED PORTC
 
 #define LED1 PC1
 #define LED2 PC2
@@ -54,8 +55,10 @@
 #define TSAL_ENABLE PB1
 #define LED_STRIPE PB0
 
-#define TSAL_OFF PORT_TSAL &= ~_BV(TSAL_ENABLE);
-#define TSAL_ON PORT_TSAL |= _BV(TSAL_ENABLE);
+#define TSAL_OFF_CTC    TCCR1A &= ~(1<<COM1A0); //
+#define TSAL_OFF_DDR PORT_TSAL &= ~(1<<TSAL_ENABLE);
+#define TSAL_ON_CTC     TCCR1A |=  (1<<COM1A0);   //
+#define TSAL_ON_DDR  PORT_TSAL |=  (1<<TSAL_ENABLE);
 #define LED_STRIPE_OFF PORT_STRIPE &= ~_BV(LED_STRIPE);
 #define LED_STRIPE_ON PORT_STRIPE |= _BV(LED_STRIPE);
 

@@ -21227,6 +21227,8 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <part name="D5" library="diode" deviceset="ZENER-DIODE" device="SOD80C"/>
 <part name="D6" library="diode" deviceset="ZENER-DIODE" device="SOD80C"/>
 <part name="S1" library="smd-special" deviceset="SWS004" device=""/>
+<part name="R24" library="rcl" deviceset="R-EU_" device="R1206" value="0R"/>
+<part name="R25" library="rcl" deviceset="R-EU_" device="R1206" value="0R"/>
 </parts>
 <sheets>
 <sheet>
@@ -21451,6 +21453,8 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <instance part="D5" gate="G$1" x="294.64" y="48.26" rot="R90"/>
 <instance part="D6" gate="G$1" x="299.72" y="48.26" rot="R90"/>
 <instance part="S1" gate="G$1" x="160.02" y="55.88" rot="R90"/>
+<instance part="R24" gate="G$1" x="215.9" y="68.58" rot="R180"/>
+<instance part="R25" gate="G$1" x="205.74" y="68.58" rot="R180"/>
 </instances>
 <busses>
 </busses>
@@ -22294,6 +22298,31 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <pinref part="U1" gate="G$1" pin="SCK"/>
 <pinref part="S1" gate="G$1" pin="4"/>
 <wire x1="167.64" y1="55.88" x2="165.1" y2="60.96" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="DIO0" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="PD3(INT1)"/>
+<wire x1="106.68" y1="50.8" x2="111.76" y2="50.8" width="0.1524" layer="91"/>
+<label x="111.76" y="50.8" size="1.27" layer="95" xref="yes"/>
+</segment>
+<segment>
+<pinref part="R24" gate="G$1" pin="1"/>
+<wire x1="220.98" y1="68.58" x2="223.52" y2="68.58" width="0.1524" layer="91"/>
+<label x="223.52" y="68.58" size="1.27" layer="95" xref="yes"/>
+</segment>
+</net>
+<net name="N$24" class="0">
+<segment>
+<pinref part="R25" gate="G$1" pin="1"/>
+<pinref part="R24" gate="G$1" pin="2"/>
+</segment>
+</net>
+<net name="N$45" class="0">
+<segment>
+<pinref part="U1" gate="G$1" pin="DIO0"/>
+<wire x1="198.12" y1="68.58" x2="200.66" y2="68.58" width="0.1524" layer="91"/>
+<pinref part="R25" gate="G$1" pin="2"/>
 </segment>
 </net>
 </nets>

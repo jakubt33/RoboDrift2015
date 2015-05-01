@@ -12,6 +12,11 @@
 #define COMMAND_PING_OK 0b00111111
 #define COMMAND_PING_NO_OK 0b00110000
 
+#define BEACTIVE_TRUE 4
+#define VEHICLE_IN 5
+
+volatile uint8_t vehicle_in_flag;
+
 uint8_t spi_send(uint8_t);
 void showID(uint8_t);
 void checkButtons();

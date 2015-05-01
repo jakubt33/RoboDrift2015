@@ -38,7 +38,6 @@ void init_LED() {
 	DDR_DIO &= ~(1<<DIO0);
 }
 
-
 void init_USART( unsigned char ubrr){
     // Ustawienie prêdkoœci transmisji
     UBRRH = (uint8_t)(ubrr >> 8);
@@ -46,8 +45,13 @@ void init_USART( unsigned char ubrr){
 
     // W³¹czenie odbiornika i nadajnika
     UCSRB |= (1 << RXEN) | (1 << TXEN);
-    //UCSRB |= (1 << RXCIE); //interrupt na receive
+    UCSRB |= (1 << RXCIE); //interrupt na receive
 
     // Ustawienie formatu ramki: 8 bitów danych, 2 bit stopu
     UCSRC = (1 << URSEL) | (1 << USBS) | (3<<UCSZ0);
+}
+void init_RFM_RX_INT(){
+	DDR_DIO &= ~(1<<DIO0);
+	MCUCR |= (1<<ISC01)|(1<<ISC00); //rising egde generates interrupt request
+	GICR |= (1<<INT0);
 }

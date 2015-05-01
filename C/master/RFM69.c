@@ -106,14 +106,23 @@ uint8_t init_RFM69(){
 
 uint8_t sendWithRetry(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_t retries) {
 	uint8_t i, j;
-	cli();
 	for (i = 0; i < retries; i++) {
 
-		writeReg(REG_PACKETCONFIG2, (readReg(REG_PACKETCONFIG2) & 0xFB) | RF_PACKET2_RXRESTART); // avoid RX deadlocks
+		if(readReg(REG_IRQFLAGS2) & RF_IRQFLAGS2_PAYLOADREADY)
+			writeReg(REG_PACKETCONFIG2, (readReg(REG_PACKETCONFIG2) & 0xFB) | RF_PACKET2_RXRESTART); // avoid RX deadlocks
+
 		sendFrame(toAddress, buffer, bufferSize, true, false);
+		SPI_receiveFlag=false;
 		receiveBegin();
+		TARGETID = toAddress;
 		for(j=0;j<255;j++){ //cant be while - infinite loop(is sth goes wrng)
-			if( receiveDone(toAddress) ){
+			if( (dataReceived==COMMAND_PING_OK) && (SENDERID==toAddress) ){
+				return true;
+			}
+			if(ACK_RECEIVED && (SENDERID==toAddress) ){
+				return true;
+			}
+			/*if( receiveDone(toAddress) ){
 				if( (dataReceived == COMMAND_PING_OK) && (buffer == COMMAND_PING)){
 					sei();
 					return true;
@@ -124,12 +133,11 @@ uint8_t sendWithRetry(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_
 				}
 				sei();
 				return true;
-			}
-			_delay_us(200);
-			_delay_us(200); //		VIN - VERY IMPORTANT NUMBER! cant be too low
+			}*/
+			_delay_us(500);
+			_delay_us(500); //		VIN - VERY IMPORTANT NUMBER! cant be too low
 		}
 	}
-	sei();
 	return false;
 }
 
@@ -151,15 +159,15 @@ uint8_t receiveDone(uint8_t fromNodeID) {
 
 		writeReg(REG_IRQFLAGS2, RF_IRQFLAGS2_FIFOOVERRUN); //clear buffer
 
-		if(ACK_RECEIVED){
+		/*if(ACK_RECEIVED){
 			if(SENDERID==fromNodeID ){
 				return true;
 			}
 			else return false;
-		}
-		if(ACK_REQUESTED){
+		}*/
+		/*if(ACK_REQUESTED){
 			sendFrame(SENDERID, 1, 1, false, true);
-		}
+		}*/
 		return true;
 	}
 	return false;
@@ -171,13 +179,15 @@ void receiveBegin() {
 	TARGETID=0; // should match _address
 	ACK_REQUESTED=0;
 	ACK_RECEIVED=0;
-  if (readReg(REG_IRQFLAGS2) & RF_IRQFLAGS2_PAYLOADREADY)
-    writeReg(REG_PACKETCONFIG2, (readReg(REG_PACKETCONFIG2) & 0xFB) | RF_PACKET2_RXRESTART); // avoid RX deadlocks
-  writeReg(REG_DIOMAPPING1, RF_DIOMAPPING1_DIO0_01); // set DIO0 to "PAYLOADREADY" in receive mode
-  setMode(RF69_MODE_RX);
+	dataReceived=0;
+	if (readReg(REG_IRQFLAGS2) & RF_IRQFLAGS2_PAYLOADREADY)
+		writeReg(REG_PACKETCONFIG2, (readReg(REG_PACKETCONFIG2) & 0xFB) | RF_PACKET2_RXRESTART); // avoid RX deadlocks
+	writeReg(REG_DIOMAPPING1, RF_DIOMAPPING1_DIO0_01); // set DIO0 to "PAYLOADREADY" in receive mode
+	setMode(RF69_MODE_RX);
 }
 
 void sendFrame(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_t requestACK, uint8_t sendACK){
+	  cli();
 	  setMode(RF69_MODE_STANDBY); // turn off receiver to prevent reception while filling fifo
 
 	  //_delay_ms(1);
@@ -221,7 +231,6 @@ void setMode(uint8_t newMode) {
   if (newMode == mode)
     return;
 
-  cli();
   switch (newMode) {
     case RF69_MODE_TX:
       writeReg(REG_OPMODE, (readReg(REG_OPMODE) & 0xE3) | RF_OPMODE_TRANSMITTER);
@@ -242,7 +251,6 @@ void setMode(uint8_t newMode) {
       break;
     default:
         return;
-    sei();
   }
 
   // we are using packet mode, so this check is not really needed
@@ -250,7 +258,6 @@ void setMode(uint8_t newMode) {
   while (mode == RF69_MODE_SLEEP && (readReg(REG_IRQFLAGS1) & RF_IRQFLAGS1_MODEREADY) == 0x00); // wait for ModeReady
 
   mode = newMode;
-  sei();
 }
 
 uint8_t readReg(uint8_t addr)

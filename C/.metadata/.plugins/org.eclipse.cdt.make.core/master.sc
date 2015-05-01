@@ -247,7 +247,7 @@
 <definedSymbol symbol="__AVR_ENHANCED__=1"/>
 <definedSymbol symbol="__AVR_HAVE_MUL__=1"/>
 <definedSymbol symbol="__AVR_2_BYTE_PC__=1"/>
-<definedSymbol symbol="F_CPU=4000000UL"/>
+<definedSymbol symbol="F_CPU=8000000UL"/>
 </collector>
 </instance>
 <instance id="de.innot.avreclipse.configuration.app.debug.1703087204;de.innot.avreclipse.configuration.app.debug.1703087204.;de.innot.avreclipse.tool.compiler.winavr.app.debug.1932309411;de.innot.avreclipse.compiler.winavr.input.1755623170">
@@ -370,7 +370,7 @@
 <definedSymbol symbol="__AVR_ENHANCED__=1"/>
 <definedSymbol symbol="__AVR_HAVE_MUL__=1"/>
 <definedSymbol symbol="__AVR_2_BYTE_PC__=1"/>
-<definedSymbol symbol="F_CPU=4000000UL"/>
+<definedSymbol symbol="F_CPU=8000000UL"/>
 </collector>
 </instance>
 </scannerInfo>

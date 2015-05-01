@@ -106,22 +106,23 @@ uint8_t init_RFM69(){
 }
 
 uint8_t sendWithRetry(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_t retries) {
-	uint8_t i, j;
-	cli();
+	uint8_t i;//, j;
+	//cli();
 	for (i = 0; i < retries; i++) {
-
-		writeReg(REG_PACKETCONFIG2, (readReg(REG_PACKETCONFIG2) & 0xFB) | RF_PACKET2_RXRESTART); // avoid RX deadlocks
-		sendFrame(toAddress, buffer, bufferSize, true, false);
-		receiveBegin();
-		for(j=0;j<255;j++){ //cant be while - infinite loop(is sth goes wrng)
-			if( receiveDone(toAddress) ){
+		if (readReg(REG_IRQFLAGS2) & RF_IRQFLAGS2_PAYLOADREADY)
+			writeReg(REG_PACKETCONFIG2, (readReg(REG_PACKETCONFIG2) & 0xFB) | RF_PACKET2_RXRESTART); // avoid RX deadlocks
+		sendFrame(toAddress, buffer, bufferSize, false, false);
+		_delay_us(200);
+		//receiveBegin();
+		//for(j=0;j<100;j++){ //cant be while - infinite loop(is sth goes wrng)
+			/*if(receiveDone(toAddress) ){
 				sei();
 				return true;
-			}
-			_delay_us(50); //		VIN - VERY IMPORTANT NUMBER! cant be too low
-		}
+			}*/
+			//_delay_us(1); //		VIN - VERY IMPORTANT NUMBER! cant be too low. not any more
+		//}
 	}
-	sei();
+	//sei();
 	return false;
 }
 
@@ -143,33 +144,19 @@ uint8_t receiveDone(uint8_t fromNodeID) {
 
 		writeReg(REG_IRQFLAGS2, RF_IRQFLAGS2_FIFOOVERRUN); //clear buffer
 
-		if( (dataReceived == COMMAND_PING) && ACK_REQUESTED){
-			TSAL_OnOff(true);
-			TSAL_ON;
-			RaceStart = true;
-			_delay_ms(5);
+		if( dataReceived == COMMAND_PING ){
+			LED1_ON;
+			race_OnOff(true);
+			_delay_ms(1);
 			if(bit_is_clear(PIN_TSOP, TSOP)){
-				TSAL_OnOff(false);
-				RaceStart = false;
-
-				//sendFrame(SENDERID, COMMAND_PING_OK, 1, false, true);
-				sendWithRetry(SENDERID, COMMAND_PING_OK, 1, 10);
-
+				sendWithRetry(SENDERID, COMMAND_PING_OK, 1, 5);
 				showID(6);
 				_delay_ms(150);
 				showID(myAddress-MASTER);
 				return false;
 			}
 			else {
-				RaceStart = false;
-				TSAL_OnOff(false);
 				sendFrame(SENDERID, COMMAND_PING_NO_OK, 1, false, true);
-				showID(6); //need to be hashed
-				_delay_ms(50);//too
-				showID(0); //need to be hashed
-				_delay_ms(50);//too
-				showID(6); //need to be hashed
-				_delay_ms(50);//too
 				showID(myAddress-MASTER);
 				return false;
 			}
@@ -178,7 +165,9 @@ uint8_t receiveDone(uint8_t fromNodeID) {
 			if(SENDERID==fromNodeID ){
 				return true;
 			}
-			else return false;
+			else{
+				return false;
+			}
 		}
 		if(ACK_REQUESTED){
 			sendFrame(SENDERID, 1, 1, false, true);
@@ -194,10 +183,11 @@ void receiveBegin() {
 	TARGETID=0; // should match _address
 	ACK_REQUESTED=0;
 	ACK_RECEIVED=0;
-  if (readReg(REG_IRQFLAGS2) & RF_IRQFLAGS2_PAYLOADREADY)
-    writeReg(REG_PACKETCONFIG2, (readReg(REG_PACKETCONFIG2) & 0xFB) | RF_PACKET2_RXRESTART); // avoid RX deadlocks
-  writeReg(REG_DIOMAPPING1, RF_DIOMAPPING1_DIO0_01); // set DIO0 to "PAYLOADREADY" in receive mode
-  setMode(RF69_MODE_RX);
+	dataReceived=0;
+	if (readReg(REG_IRQFLAGS2) & RF_IRQFLAGS2_PAYLOADREADY)
+		writeReg(REG_PACKETCONFIG2, (readReg(REG_PACKETCONFIG2) & 0xFB) | RF_PACKET2_RXRESTART); // avoid RX deadlocks
+	writeReg(REG_DIOMAPPING1, RF_DIOMAPPING1_DIO0_01); // set DIO0 to "PAYLOADREADY" in receive mode
+	setMode(RF69_MODE_RX);
 }
 
 void sendFrame(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_t requestACK, uint8_t sendACK){
@@ -205,11 +195,9 @@ void sendFrame(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_t reque
 
 	  //_delay_ms(1);
 	  while ((readReg(REG_IRQFLAGS1) & RF_IRQFLAGS1_MODEREADY) == 0x00); // wait for ModeReady
-
 	  writeReg(REG_DIOMAPPING1, RF_DIOMAPPING1_DIO0_00); // DIO0 is "Packet Sent"
 
 	  writeReg(REG_SYNCVALUE3, toAddress);
-	  //if (bufferSize > RF69_MAX_DATA_LEN) bufferSize = RF69_MAX_DATA_LEN;
 
 	  // control byte
 	  uint8_t CTLbyte = 0x00;
@@ -233,18 +221,19 @@ void sendFrame(uint8_t toAddress, char buffer, uint8_t bufferSize, uint8_t reque
 		  spi_send(((uint8_t*) buffer)[i]); */
 	  unselect();
 
-	  cli();
+	  //cli();
 	  setMode(RF69_MODE_TX);
+	  //_delay_ms(1);
 	  while (bit_is_clear(PIN_DIO, DIO0)); // wait for DIO0 to turn HIGH signalling transmission finish
 	  setMode(RF69_MODE_STANDBY);
-	  sei();
+	  //sei();
 }
 
 void setMode(uint8_t newMode) {
   if (newMode == mode)
     return;
 
-  cli();
+  //cli();
   switch (newMode) {
     case RF69_MODE_TX:
       writeReg(REG_OPMODE, (readReg(REG_OPMODE) & 0xE3) | RF_OPMODE_TRANSMITTER);
@@ -265,7 +254,7 @@ void setMode(uint8_t newMode) {
       break;
     default:
         return;
-    sei();
+    //sei();
   }
 
   // we are using packet mode, so this check is not really needed
@@ -273,7 +262,7 @@ void setMode(uint8_t newMode) {
   while (mode == RF69_MODE_SLEEP && (readReg(REG_IRQFLAGS1) & RF_IRQFLAGS1_MODEREADY) == 0x00); // wait for ModeReady
 
   mode = newMode;
-  sei();
+  //sei();
 }
 
 uint8_t readReg(uint8_t addr)
@@ -295,14 +284,14 @@ void writeReg(uint8_t addr, uint8_t value)
 
 // select the transceiver
 void select() {
-	cli();
+	//cli();
 	PORT_SPI &= ~(1<<SS);
 }
 
 // UNselect the transceiver chip
 void unselect() {
 	PORT_SPI |= (1<<SS);
-    sei();
+    //sei();
 }
 
 void setHighPowerRegs(uint8_t onOff) {

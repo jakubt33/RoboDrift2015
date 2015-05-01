@@ -1,0 +1,199 @@
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
+#include <stdio.h>
+
+#include "main.h"
+#include "io.h"
+#include "init.h"
+#include "communication.h"
+#include "RFM69.h"
+#include "RFM69registers.h"
+
+
+#define BURST 30 //1 BURST~=103us //30: 15cycles/burst
+#define GAP 20	//1 GAP~=103us
+#define BURST_L 20 //1 BURST_L=(BURST+GAP)*103us
+#define GAP_L 3
+volatile uint8_t time_counter_coarse;
+volatile uint8_t time_counter_fine;
+volatile uint8_t logical_change;
+volatile uint8_t vehicle_ready;
+ISR(TIMER1_COMPA_vect){
+	if(RaceStart){
+		time_counter_fine++;
+		if(TsalGapCounter<BURST_L){//no gap
+			//LED5_ON;
+			if(TsalCounter<BURST){
+				TSAL_OnOff(true);
+				//LED4_ON;
+				TsalCounter++;
+			}else if(TsalCounter<BURST+GAP){
+				TSAL_OnOff(false);
+				//LED4_OFF;
+				TsalCounter++;
+				if(TsalCounter>=BURST+GAP){
+					TsalCounter=0;
+					TsalGapCounter++;
+					if(TsalGapCounter>=BURST_L+GAP_L){
+						TsalGapCounter=0;
+					}
+				}
+			}
+		}
+		else if(TsalGapCounter<BURST_L+GAP_L){//gap
+			//LED5_OFF;
+			TSAL_OnOff(false);
+			if(TsalCounter<BURST){
+				TsalCounter++;
+				//LED4_ON;
+			}else if(TsalCounter<BURST+GAP){
+				TsalCounter++;
+				//LED4_OFF;
+				if(TsalCounter>=BURST+GAP){
+					TsalGapCounter++;
+					TsalCounter=0;
+					if(TsalGapCounter>=BURST_L+GAP_L){
+						TsalGapCounter=0;
+					}
+				}
+			}
+		}
+
+		if(vehicle_ready){
+			if(time_counter_fine>=150){
+				time_counter_fine=0;
+				time_counter_coarse++;
+				if(time_counter_coarse>=2){ //after 6
+					vehicle_in_flag = true;
+					vehicle_ready = false;
+					RaceStart=false;
+					time_counter_fine=0;
+					time_counter_coarse=0;
+				}
+			}
+		}
+
+	}
+	else{
+		TSAL_OnOff(false);
+		//LED5_OFF;
+		//LED4_OFF;
+	}
+}
+
+ISR(INT0_vect){
+	/*if(RaceStart){
+		_delay_us(10); //wait to be sure
+		if(bit_is_set(PIN_TSOP, TSOP)){ 	//TSAL----||----TSOP
+			vehicle_in_flag = true;
+			race_OnOff(false);
+			showID(6);
+
+			//sendWithRetry(MASTER, VEHICLE_IN, false, 5);
+			_delay_ms(100);
+			showID(myAddress-MASTER);
+		}
+		else{ 								//TSAL -------- TSOP
+			vehicle_in_flag = false;
+		}
+	}*/
+	if(RaceStart){
+		if(bit_is_set(PIN_TSOP, TSOP)){ 	//TSAL----||----TSOP
+			time_counter_coarse=0;
+			time_counter_fine=0; //start time measuring
+			logical_change=0;
+		}
+		else {
+			logical_change++;
+			vehicle_ready = true;
+			vehicle_in_flag = false;
+		}
+	}
+}
+
+ISR(TIMER2_OVF_vect){
+	if( ovf < ((ADC_level-ADC_min+4)<<2) ) { //getting result from 4 to 42;<<2
+		LED_BATT_GR_OFF;
+		LED_BATT_RED_OFF;
+	}
+	else {
+		if( ovf >= (16)){
+			LED_BATT_GR_ON;
+		}
+		else{
+			LED_BATT_GR_OFF;
+			LED_BATT_RED_ON;
+		}
+		ovf=0;
+	}
+	ovf++;
+}
+
+int main() {
+	//10ms with TSAL modulation = 600ms without
+	init_IO();
+	init_TSAL();
+	race_OnOff(true);
+	init_TSOP();
+	init_batteries();
+	init_SPI_master();
+	init_RFM69();
+
+	_delay_ms(5);
+	ADC_level=check_ADC();
+	SensorID=0;
+
+	setAddress(SENSOR5);
+	showID(myAddress-MASTER);
+	receiveBegin();
+
+	time_counter_coarse=0;
+	time_counter_fine=0;
+	vehicle_in_flag = false;
+	logical_change=1;
+	vehicle_ready = true;
+	sei();
+
+	while(1){
+		if(mode != RF69_MODE_RX){
+			receiveBegin();
+		}
+		cli();
+		ADC_level=check_ADC();
+		sei();
+		//_delay_us(20);
+
+		if(vehicle_in_flag){
+			cli();
+			showID(6);
+			sendWithRetry(MASTER, VEHICLE_IN, false, 5);
+			logical_change=1;
+			time_counter_fine=0;
+			time_counter_coarse=0;
+			_delay_ms(200);
+			_delay_ms(200);
+			_delay_ms(200);
+			_delay_ms(200);
+			_delay_ms(200);
+			_delay_ms(200);
+			vehicle_in_flag=false;
+			RaceStart=true;
+			showID(myAddress-MASTER);
+			sei();
+		}
+		if ( receiveDone(0) ) { //0 because its not an answer to ACKrequest and there's no senderID yet
+			if(dataReceived == BEACTIVE_TRUE){
+				race_OnOff(true);
+			}
+			else if(dataReceived == 0){
+				race_OnOff(false);
+			}
+			receiveBegin();
+			vehicle_in_flag=false;
+		}
+		if(!RaceStart) {
+			checkButtons();
+		}
+	}
+}

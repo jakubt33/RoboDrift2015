@@ -8,6 +8,7 @@
 #ifndef MAIN_H_
 #define MAIN_H_
 
-
+volatile uint8_t SPI_handled;
+volatile uint8_t SPI_receiveFlag;
 
 #endif /* MAIN_H_ */

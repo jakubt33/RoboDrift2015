@@ -1,8 +1,8 @@
-17:12:24 **** Incremental Build of configuration Debug for project master ****
+14:31:24 **** Incremental Build of configuration Debug for project master ****
 make all 
 Building file: ../communication.c
 Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=4000000UL -MMD -MP -MF"communication.d" -MT"communication.d" -c -o "communication.o" "../communication.c"
+avr-gcc -Wall -g2 -gstabs -O1 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega8 -DF_CPU=8000000UL -MMD -MP -MF"communication.d" -MT"communication.d" -c -o "communication.o" "../communication.c"
 Finished building: ../communication.c
  
 Building target: master.elf
@@ -24,15 +24,15 @@ AVR Memory Usage
 ----------------
 Device: atmega8
 
-Program:    2678 bytes (32.7% Full)
+Program:    2926 bytes (35.7% Full)
 (.text + .data + .bootloader)
 
-Data:        145 bytes (14.2% Full)
+Data:        147 bytes (14.4% Full)
 (.data + .bss + .noinit)
 
 
 Finished building: sizedummy
  
 
-17:12:25 Build Finished (took 1s.121ms)
+14:31:25 Build Finished (took 859ms)
 

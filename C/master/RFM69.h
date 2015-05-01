@@ -72,6 +72,7 @@
 #define RF69_TX_LIMIT_MS   1000
 //#define RF69_FSTEP  61.03515625 // == FXOSC / 2^19 = 32MHz / 2^19 (p13 in datasheet)
 
+volatile uint8_t PingTARGET;
 volatile uint8_t myAddress;
 volatile uint8_t dataReceived;
 volatile uint8_t mode; // should be protected?
